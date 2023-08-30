@@ -140,7 +140,7 @@ def homepage():
 
     @st.cache(allow_output_mutation=True)
     def load_data():
-        gdf = gpd.read_file("panden_2133.gpkg")
+        gdf = gpd.read_file("companies.gpkg")
         # Convert to EPSG:4326
         gdf = gdf.to_crs(epsg=4326)
         gdf["lon"] = gdf["geometry"].x
