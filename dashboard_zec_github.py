@@ -266,7 +266,7 @@ def homepage():
 
 def bsg_page():
     st.title('Brons, Zilver of Goud')
-    
+    st.write('1233456')
     # The user can select a year
     year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
 
