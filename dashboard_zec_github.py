@@ -152,7 +152,7 @@ def homepage():
     df_map = df.groupby("Bedrijf")[usage_column].sum()
     data = data.merge(df_map, on = "Bedrijf", how = "left")
     data[usage_column] = (data[usage_column] - data[usage_column].min()) / (data[usage_column].max() - data[usage_column].min())
-    
+    st.data_editor(data)
 
     # Set the map's initial center to the mean of all points
     initial_view_state = pdk.ViewState(
