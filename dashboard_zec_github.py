@@ -152,8 +152,8 @@ def homepage():
     df_map = df.groupby("Bedrijf")[usage_column].sum()
     data = data.merge(df_map, on = "Bedrijf", how = "left")
     data[usage_column] = (data[usage_column] - data[usage_column].min()) / (data[usage_column].max() - data[usage_column].min())
-    df = pd.DataFrame([{"command": "st.selectbox", "rating": 4, "is_widget": True}, {"command": "st.balloons", "rating": 5, "is_widget": False},{"command": "st.time_input", "rating": 3, "is_widget": True}])
-    edited_df = st.data_editor(df)
+    test = pd.DataFrame([{"command": "st.selectbox", "rating": 4, "is_widget": True}, {"command": "st.balloons", "rating": 5, "is_widget": False},{"command": "st.time_input", "rating": 3, "is_widget": True}])
+    edited_df = st.data_editor(test)
 
     favorite_command = edited_df.loc[edited_df["rating"].idxmax()]["command"]
     st.markdown(f"Your favorite command is **{favorite_command}** 🎈")
