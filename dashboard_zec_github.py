@@ -122,151 +122,151 @@ df = df[df['Year'] == 2022]
 df = df.rename(columns = {'Gem verbruik in kWh 2025':'gem verbruik in kWh 2025','Gem verbruik in kWh 2030':'gem verbruik in kWh 2030', 'Gem verbruik in kWh 2035':'gem verbruik in kWh 2035', 'Gem verbruik in kWh 2040':'gem verbruik in kWh 2040', 'Max verbruik in kWh 2025':'max verbruik in kWh 2025', 'Max verbruik in kWh 2030':'max verbruik in kWh 2030', 'Max verbruik in kWh 2035':'max verbruik in kWh 2035', 'Max verbruik in kWh 2040':'max verbruik in kWh 2040'})
 
 def homepage():
-    st.title('ZEC Mobility Dashboard')
-    st.write('Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.')
+         st.title('ZEC Mobility Dashboard')
+         st.write('Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.')
+         
+         # The user can select a year
+         year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
+         
+         # The user can select between maximum and average
+         value_type = st.radio('Choose a value type', options=['max', 'gem'])
+         
+         # Based on the user's selections, choose the appropriate column
+         if value_type:
+                  usage_column = f'max verbruik in kWh {year}'
+         else:
+                  usage_column = f'gem verbruik in kWh {year}'
     
-    # The user can select a year
-    year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
 
-    # The user can select between maximum and average
-    value_type = st.radio('Choose a value type', options=['max', 'gem'])
+         @st.cache(allow_output_mutation=True)
+         def load_data():
+                  gdf = gpd.read_file("companies.gpkg")
+                  # Convert to EPSG:4326
+                  gdf = gdf.to_crs(epsg=4326)
+                  gdf["lon"] = gdf["geometry"].x
+                  gdf["lat"] = gdf["geometry"].y
+                  return gdf
 
-    # Based on the user's selections, choose the appropriate column
-    if value_type:
-        usage_column = f'max verbruik in kWh {year}'
-    else:
-        usage_column = f'gem verbruik in kWh {year}'
-    
-
-    @st.cache(allow_output_mutation=True)
-    def load_data():
-        gdf = gpd.read_file("companies.gpkg")
-        # Convert to EPSG:4326
-        gdf = gdf.to_crs(epsg=4326)
-        gdf["lon"] = gdf["geometry"].x
-        gdf["lat"] = gdf["geometry"].y
-        return gdf
-
-    data = load_data()
-    
-    df_map = df.groupby("Bedrijf")[usage_column].sum()
-    data = data.merge(df_map, on = "Bedrijf", how = "left")
-    data[usage_column] = (data[usage_column] - data[usage_column].min()) / (data[usage_column].max() - data[usage_column].min())
-    
-    test = pd.DataFrame([{"command": "st.selectbox", "rating": 4, "is_widget": True}, {"command": "st.balloons", "rating": 5, "is_widget": False},{"command": "st.time_input", "rating": 3, "is_widget": True}])
-    edited_df = st.data_editor(test)
-
-    favorite_command = edited_df.loc[edited_df["rating"].idxmax()]["command"]
-    st.markdown(f"Your favorite command is **{favorite_command}** 🎈")
+         data = load_data()
+         
+         df_map = df.groupby("Bedrijf")[usage_column].sum()
+         data = data.merge(df_map, on = "Bedrijf", how = "left")
+         data[usage_column] = (data[usage_column] - data[usage_column].min()) / (data[usage_column].max() - data[usage_column].min())
+         
+         test = pd.DataFrame([{"command": "st.selectbox", "rating": 4, "is_widget": True}, {"command": "st.balloons", "rating": 5, "is_widget": False},{"command": "st.time_input", "rating": 3, "is_widget": True}])
+         edited_df = st.data_editor(test)
+         
+         favorite_command = edited_df.loc[edited_df["rating"].idxmax()]["command"]
+         st.markdown(f"Your favorite command is **{favorite_command}** 🎈")
 
     # Set the map's initial center to the mean of all points
-    initial_view_state = pdk.ViewState(
-        latitude=data["lat"].mean(),
-        longitude=data["lon"].mean(),
-        zoom=13,
-    )
+         initial_view_state = pdk.ViewState(
+                  latitude=data["lat"].mean(),
+                  longitude=data["lon"].mean(),
+                  zoom=13,
+                  )
 
     # Create the scatter plot layer
-    layer = pdk.Layer(
-        "ScatterplotLayer",
-        data,
-        get_position=["lon", "lat"],
-        get_radius= [usage_column],
-        radiusScale=10,
-        radiusUnits = "pixels",
-        get_fill_color=[180, 0, 200, 140],
-    )
+         layer = pdk.Layer(
+                  "ScatterplotLayer",
+                  data,
+                  get_position=["lon", "lat"],
+                  get_radius= [usage_column],
+                  radiusScale=10,
+                  radiusUnits = "pixels",
+                  get_fill_color=[180, 0, 200, 140],
+                  )
 
     # Render the map
-    st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=initial_view_state, map_style="mapbox://styles/mapbox/light-v9"))
+         st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=initial_view_state, map_style="mapbox://styles/mapbox/light-v9"))
 
     
     #### DATA
     
-    #### YEAR
-    df_yearly = df.groupby(['Year', 'Month'])[usage_column].sum()
-    
-    
-    #### MONTH
-    # Group by year, month and calculate the sum of 'Max verbruik in kWh 2040'
-    df_monthly_total = df.groupby(['Year', 'Month'])[usage_column].sum().reset_index()
-
-    # Find the month with the highest total usage
-    highest_month = df_monthly_total[df_monthly_total[usage_column] == df_monthly_total[usage_column].max()]
-
-    # Extract the year and month
-    highest_year_month = highest_month[['Year', 'Month']].values[0]
-
-    # Select data for the highest usage month
-    df_highest_month = df[(df['Year'] == highest_year_month[0]) & (df['Month'] == highest_year_month[1])]
-
-    # Group by day and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-    df_monthly = df_highest_month.groupby('Day')[usage_column].sum()
-    
-    
-    #### WEEK
-    # Group by year, week and calculate the sum of 'Max verbruik in kWh 2040'
-    df_weekly_total = df.groupby(['Year', 'Week'])[usage_column].sum().reset_index()
-
-    # Find the week with the highest total usage
-    highest_week = df_weekly_total[df_weekly_total[usage_column] == df_weekly_total[usage_column].max()]
-
-    # Extract the year and week
-    highest_year_week = highest_week[['Year', 'Week']].values[0]
-
-    # Select data for the highest usage week
-    df_highest_week = df[(df['Year'] == highest_year_week[0]) & (df['Week'] == highest_year_week[1])]
-
-    # Group by weekday and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-    df_weekly = df_highest_week.groupby('Weekday')[usage_column].sum()
-    
-    
-    #### DAY
-    # Group by year, month, day and calculate the sum of 'Max verbruik in kWh 2040'
-    df_daily_total = df.groupby(['Year', 'Month', 'Day'])[usage_column].sum().reset_index()
-
-    # Find the day with the highest total usage
-    highest_day = df_daily_total[df_daily_total[usage_column] == df_daily_total[usage_column].max()]
-
-    # Extract the year, month and day
-    highest_year_month_day = highest_day[['Year', 'Month', 'Day']].values[0]
-
-    # Select data for the highest usage day
-    df_highest_day = df[(df['Year'] == highest_year_month_day[0]) & (df['Month'] == highest_year_month_day[1]) & (df['Day'] == highest_year_month_day[2])]
-
-    # Group by hour and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-    df_daily = df_highest_day.groupby('Hour')[usage_column].sum()
-
-    
-    
-    
-    
-    #### PLOT
-    # Create a 1x4 layout
-    cols = st.columns(4)
-
-    # Create the first chart
-    fig1, ax1 = plt.subplots()
-    df_yearly.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
-    cols[0].pyplot(fig1)
-
-    # Create the second chart
-    fig2, ax2 = plt.subplots()
-    df_monthly.plot(kind='area', stacked=True, 
+         #### YEAR
+         df_yearly = df.groupby(['Year', 'Month'])[usage_column].sum()
+         
+         
+         #### MONTH
+         # Group by year, month and calculate the sum of 'Max verbruik in kWh 2040'
+         df_monthly_total = df.groupby(['Year', 'Month'])[usage_column].sum().reset_index()
+         
+         # Find the month with the highest total usage
+         highest_month = df_monthly_total[df_monthly_total[usage_column] == df_monthly_total[usage_column].max()]
+         
+         # Extract the year and month
+         highest_year_month = highest_month[['Year', 'Month']].values[0]
+         
+         # Select data for the highest usage month
+         df_highest_month = df[(df['Year'] == highest_year_month[0]) & (df['Month'] == highest_year_month[1])]
+         
+         # Group by day and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
+         df_monthly = df_highest_month.groupby('Day')[usage_column].sum()
+         
+         
+         #### WEEK
+         # Group by year, week and calculate the sum of 'Max verbruik in kWh 2040'
+         df_weekly_total = df.groupby(['Year', 'Week'])[usage_column].sum().reset_index()
+         
+         # Find the week with the highest total usage
+         highest_week = df_weekly_total[df_weekly_total[usage_column] == df_weekly_total[usage_column].max()]
+         
+         # Extract the year and week
+         highest_year_week = highest_week[['Year', 'Week']].values[0]
+         
+         # Select data for the highest usage week
+         df_highest_week = df[(df['Year'] == highest_year_week[0]) & (df['Week'] == highest_year_week[1])]
+         
+         # Group by weekday and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
+         df_weekly = df_highest_week.groupby('Weekday')[usage_column].sum()
+         
+         
+         #### DAY
+         # Group by year, month, day and calculate the sum of 'Max verbruik in kWh 2040'
+         df_daily_total = df.groupby(['Year', 'Month', 'Day'])[usage_column].sum().reset_index()
+         
+         # Find the day with the highest total usage
+         highest_day = df_daily_total[df_daily_total[usage_column] == df_daily_total[usage_column].max()]
+         
+         # Extract the year, month and day
+         highest_year_month_day = highest_day[['Year', 'Month', 'Day']].values[0]
+         
+         # Select data for the highest usage day
+         df_highest_day = df[(df['Year'] == highest_year_month_day[0]) & (df['Month'] == highest_year_month_day[1]) & (df['Day'] == highest_year_month_day[2])]
+         
+         # Group by hour and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
+         df_daily = df_highest_day.groupby('Hour')[usage_column].sum()
+         
+         
+         
+         
+         
+         #### PLOT
+         # Create a 1x4 layout
+         cols = st.columns(4)
+         
+         # Create the first chart
+         fig1, ax1 = plt.subplots()
+         df_yearly.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
+         cols[0].pyplot(fig1)
+         
+         # Create the second chart
+         fig2, ax2 = plt.subplots()
+         df_monthly.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month[0]}-{highest_year_month[1]})', ax=ax2)
-    cols[1].pyplot(fig2)
-
-    # Create the third chart
-    fig3, ax3 = plt.subplots()
-    df_weekly.plot(kind='area', stacked=True, 
+         cols[1].pyplot(fig2)
+         
+         # Create the third chart
+         fig3, ax3 = plt.subplots()
+         df_weekly.plot(kind='area', stacked=True, 
                            title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week[0]}-Week {highest_year_week[1]})', ax=ax3)
-    cols[2].pyplot(fig3)
-
-    # Create the fourth chart
-    fig4, ax4 = plt.subplots()
-    df_daily.plot(kind='area', stacked=True, 
+         cols[2].pyplot(fig3)
+         
+         # Create the fourth chart
+         fig4, ax4 = plt.subplots()
+         df_daily.plot(kind='area', stacked=True, 
                           title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day[0]}-{highest_year_month_day[1]}-{highest_year_month_day[2]})', ax=ax4)
-    cols[3].pyplot(fig4)
+         cols[3].pyplot(fig4)
 
 
 def bsg_page():
