@@ -340,7 +340,7 @@ def bsg_page():
     df_highest_day_bet = df[(df['Year'] == highest_year_month_day_bet[0]) & (df['Month'] == highest_year_month_day_bet[1]) & (df['Day'] == highest_year_month_day_bet[2])]
 
     # Group by hour and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-    df_daily_bet = df_highest_day_bet.groupby(['Hour', 'werkt mee'])[usage_column].sum().unstack()
+         df_daily_bet = df_highest_day_bet.groupby(['Hour', 'werkt mee'])[usage_column].sum().unstack()
     
     
     
@@ -349,6 +349,12 @@ def bsg_page():
     cols = st.columns(4)
 
     # Create the first chart
+    show_line = st.checkbox('Show Horizontal Line')
+
+    if show_line:
+        y_value = <YOUR Y VALUE HERE>  # Replace with the y value where you want the horizontal line
+        ax1.axhline(y=y_value, color='red', linestyle='--')
+
     fig1, ax1 = plt.subplots()
     df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
     cols[0].pyplot(fig1)
