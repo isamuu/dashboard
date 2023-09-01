@@ -486,7 +486,7 @@ def vehicle_page():
          fig1, ax1 = plt.subplots()
          df_yearly_vehicle.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
          ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
-         cols[0].pyplot(fig1)
+         # cols[0].pyplot(fig1)
          
          
          # Create the second chart
@@ -495,23 +495,33 @@ def vehicle_page():
                             title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_vehicle[0]}-{highest_year_month_vehicle[1]})', ax=ax2)
          ax2.set_ylim([0, df_highest_week_vehicle.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
          
-         cols[1].pyplot(fig2)
+         # cols[1].pyplot(fig2)
          
          # Create the third chart
          fig3, ax3 = plt.subplots()
          df_weekly_highest_vehicle.plot(kind='area', stacked=True, 
                            title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_vehicle[0]}-Week {highest_year_week_vehicle[1]})', ax=ax3)
          ax2.set_ylim([0, df_highest_week_vehicle.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
-         cols[2].pyplot(fig3)
+
          
          # Create the fourth chart
          fig4, ax4 = plt.subplots()
          df_daily_highest_vehicle.plot(kind='area', stacked=True, 
                           title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_vehicle[0]}-{highest_year_month_day_vehicle[1]}-{highest_year_month_day_vehicle[2]})', ax=ax4)
          ax4.set_ylim([0, df_highest_day_vehicle.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
+
+
+         if show_line:
+                  ax1.axhline(y=1500000, color='red', linestyle='--')
+                  ax2.axhline(y=50000, color='red', linestyle='--')
+                  ax3.axhline(y=40000, color='red', linestyle='--')
+                  ax4.axhline(y=7500, color='red', linestyle='--')
+
+         # Display the plots
+         cols[0].pyplot(fig1)
+         cols[1].pyplot(fig2)
+         cols[2].pyplot(fig3)
          cols[3].pyplot(fig4)
-
-
     
 def company_page():
          st.title('Bedrijven')
