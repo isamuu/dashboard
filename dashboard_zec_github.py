@@ -512,10 +512,10 @@ def vehicle_page():
 
 
          if show_line:
-                  ax1.axhline(y=1500000, color='red', linestyle='--')
-                  ax2.axhline(y=50000, color='red', linestyle='--')
-                  ax3.axhline(y=40000, color='red', linestyle='--')
-                  ax4.axhline(y=7500, color='red', linestyle='--')
+                  ax1.axhline(y=1500000, color='black', linestyle='--')
+                  ax2.axhline(y=50000, color='black', linestyle='--')
+                  ax3.axhline(y=40000, color='black', linestyle='--')
+                  ax4.axhline(y=7500, color='black', linestyle='--')
 
          # Display the plots
          cols[0].pyplot(fig1)
