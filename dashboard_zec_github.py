@@ -351,6 +351,8 @@ def bsg_page():
          # Create the first chart  
          fig1, ax1 = plt.subplots()
          df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
+
+         ax1.set_ylim([0, 2000000])
          
          show_line = st.checkbox('Show Horizontal Line')
          
