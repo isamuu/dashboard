@@ -451,10 +451,15 @@ def vehicle_page():
     cols = st.columns(4)
 
     # Create the first chart
+    show_line = st.checkbox('Show Horizontal Line')
+         
+    if show_line:
+           y_value = <YOUR Y VALUE HERE>  # Replace with the y value where you want the horizontal line
+           ax1.axhline(y=y_value, color='red', linestyle='--')
+         
     fig1, ax1 = plt.subplots()
-    df_yearly_vehicle.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
+    df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
     cols[0].pyplot(fig1)
-
     # Create the second chart
     fig2, ax2 = plt.subplots()
     df_monthly_highest_vehicle.plot(kind='area', stacked=True, 
