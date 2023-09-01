@@ -340,7 +340,7 @@ def bsg_page():
     df_highest_day_bet = df[(df['Year'] == highest_year_month_day_bet[0]) & (df['Month'] == highest_year_month_day_bet[1]) & (df['Day'] == highest_year_month_day_bet[2])]
 
     # Group by hour and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-         df_daily_bet = df_highest_day_bet.groupby(['Hour', 'werkt mee'])[usage_column].sum().unstack()
+    df_daily_bet = df_highest_day_bet.groupby(['Hour', 'werkt mee'])[usage_column].sum().unstack()
     
     
     
