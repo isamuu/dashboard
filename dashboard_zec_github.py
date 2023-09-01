@@ -454,7 +454,7 @@ def vehicle_page():
     show_line = st.checkbox('Show Horizontal Line')
          
     if show_line:
-           y_value = <YOUR Y VALUE HERE>  # Replace with the y value where you want the horizontal line
+           y_value = 400000  # Replace with the y value where you want the horizontal line
            ax1.axhline(y=y_value, color='red', linestyle='--')
          
     fig1, ax1 = plt.subplots()
