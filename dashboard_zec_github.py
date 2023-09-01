@@ -493,7 +493,7 @@ def vehicle_page():
          fig2, ax2 = plt.subplots()
          df_monthly_highest_vehicle.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_vehicle[0]}-{highest_year_month_vehicle[1]})', ax=ax2)
-         ax2.set_ylim([0, df.groupby('Day')["max verbruik in kWh 2040"].sum().max()])
+         ax2.set_ylim([0, df_highest_week_vehicle.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
          
          cols[1].pyplot(fig2)
          
