@@ -360,7 +360,7 @@ def bsg_page():
                   y_value = 1250000  # Replace with the y value where you want the horizontal line
                   ax1.axhline(y=y_value, color='red', linestyle='--')
 
-         cols[0].pyplot(fig1)
+         #cols[0].pyplot(fig1)
          
          
          # Create the second chart
@@ -368,7 +368,7 @@ def bsg_page():
          df_monthly_bet.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_bet[0]}-{highest_year_month_bet[1]})', ax=ax2)
          ax2.set_ylim([0, df_highest_week_bet.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
-         cols[1].pyplot(fig2)
+         #cols[1].pyplot(fig2)
          
          # Create the third chart
          fig3, ax3 = plt.subplots()
@@ -376,7 +376,7 @@ def bsg_page():
                            title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_bet[0]}-Week {highest_year_week_bet[1]})', ax=ax3)
          ax3.set_ylim([0, df_highest_week_bet.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
          
-         cols[2].pyplot(fig3)
+         #cols[2].pyplot(fig3)
          
          # Create the fourth chart
          fig4, ax4 = plt.subplots()
