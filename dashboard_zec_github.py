@@ -367,6 +367,7 @@ def bsg_page():
          fig2, ax2 = plt.subplots()
          df_monthly_bet.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_bet[0]}-{highest_year_month_bet[1]})', ax=ax2)
+         ax2.set_ylim([0, df_monthly_bet.max()])
          cols[1].pyplot(fig2)
          
          # Create the third chart
