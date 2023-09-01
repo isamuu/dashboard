@@ -464,10 +464,6 @@ def vehicle_page():
          df_yearly_vehicle.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
          cols[0].pyplot(fig1)
          
-         fig2, ax2 = plt.subplots()
-         df_monthly_highest_vehicle.plot(kind='area', stacked=True, 
-                            title=f'Yearly Electricity Usage (Highest Usage Month: {highest_year_month_vehicle[0]}-{highest_year_month_vehicle[1]})', ax=ax2)
-         cols[0].pyplot(fig1)
          
          # Create the second chart
          fig2, ax2 = plt.subplots()
