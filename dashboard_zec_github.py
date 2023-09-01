@@ -354,7 +354,7 @@ def bsg_page():
 
          ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
          
-         show_line = st.checkbox('Show Horizontal Line')
+         show_line = st.checkbox('Capaciteit netwerk')
          
          # if show_line:
          #         y_value = 1250000   Replace with the y value where you want the horizontal line
@@ -387,7 +387,7 @@ def bsg_page():
 
 
          if show_line:
-                  ax1.axhline(y=500000, color='red', linestyle='--')
+                  ax1.axhline(y=1500000, color='red', linestyle='--')
                   ax2.axhline(y=50000, color='red', linestyle='--')
                   ax3.axhline(y=40000, color='red', linestyle='--')
                   ax4.axhline(y=7500, color='red', linestyle='--')
