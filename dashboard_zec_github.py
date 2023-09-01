@@ -356,11 +356,11 @@ def bsg_page():
          
          show_line = st.checkbox('Show Horizontal Line')
          
-         if show_line:
-                  y_value = 1250000  # Replace with the y value where you want the horizontal line
-                  ax1.axhline(y=y_value, color='red', linestyle='--')
+         # if show_line:
+         #         y_value = 1250000   Replace with the y value where you want the horizontal line
+         #         ax1.axhline(y=y_value, color='red', linestyle='--')
 
-         #cols[0].pyplot(fig1)
+         # cols[0].pyplot(fig1)
          
          
          # Create the second chart
