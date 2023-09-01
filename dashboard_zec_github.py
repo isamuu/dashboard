@@ -384,125 +384,125 @@ def bsg_page():
 
     
 def vehicle_page():
-    st.title('Voertuigen en pand')  
-    
-    # The user can select a year
-    year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
-
-    # The user can select between maximum and average
-    value_type = st.radio('Choose a value type', options=['max', 'gem'])
-
-    # Based on the user's selections, choose the appropriate columns
-    truck_usage_column = f'truck {value_type} verbruik {year} in kWh'
-    bakwagen_usage_column = f'bakwagen {value_type} verbruik {year} in kWh'
-    bestelwagen_usage_column = f'bestelwagen {value_type} verbruik {year} in kWh'
-    pand_usage_column = 'Verbruik pand in kWh'
-    
-    #### Year
-    df_yearly_vehicle = df.groupby(['Year', 'Month'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-    
-    
-    
-    #### MONTH
-    # Group by year, month and calculate the sum of all vehicle types
-    df_monthly_total_vehicle = df.groupby(['Year', 'Month'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-    df_monthly_total_vehicle['Total'] = df_monthly_total_vehicle.sum(axis=1)
-
-    # Find the month with the highest total usage
-    highest_month_vehicle = df_monthly_total_vehicle[df_monthly_total_vehicle['Total'] == df_monthly_total_vehicle['Total'].max()]
-    highest_year_month_vehicle = highest_month_vehicle[['Total']].idxmax()[0]
-
-    # Select data for the highest usage month
-    df_highest_month_vehicle = df[(df['Year'] == highest_year_month_vehicle[0]) & (df['Month'] == highest_year_month_vehicle[1])]
-
-    # Group by day and calculate the sum of the specified columns
-    df_monthly_highest_vehicle = df_highest_month_vehicle.groupby(['Day'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-    
-    
-    
-    #### WEEK
-    # Group by year, week and calculate the sum of all vehicle types
-    df_weekly_total_vehicle = df.groupby(['Year', 'Week'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-    df_weekly_total_vehicle['Total'] = df_weekly_total_vehicle.sum(axis=1)
-
-    # Find the week with the highest total usage
-    highest_week_vehicle = df_weekly_total_vehicle[df_weekly_total_vehicle['Total'] == df_weekly_total_vehicle['Total'].max()]
-    highest_year_week_vehicle = highest_week_vehicle[['Total']].idxmax()[0]
-
-    # Select data for the highest usage week
-    df_highest_week_vehicle = df[(df['Year'] == highest_year_week_vehicle[0]) & (df['Week'] == highest_year_week_vehicle[1])]
-
-    # Group by weekday and calculate the sum of the specified columns
-    df_weekly_highest_vehicle = df_highest_week_vehicle.groupby(['Weekday'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-    
-    
-    
-    #### DAY
-    # Group by year, month, day and calculate the sum of all vehicle types
-    df_daily_total_vehicle = df.groupby(['Year', 'Month', 'Day'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-    df_daily_total_vehicle['Total'] = df_daily_total_vehicle.sum(axis=1)
-
-    # Find the day with the highest total usage
-    highest_day_vehicle = df_daily_total_vehicle[df_daily_total_vehicle['Total'] == df_daily_total_vehicle['Total'].max()]
-    highest_year_month_day_vehicle = highest_day_vehicle[['Total']].idxmax()[0]
-
-    # Select data for the highest usage day
-    df_highest_day_vehicle = df[(df['Year'] == highest_year_month_day_vehicle[0]) & (df['Month'] == highest_year_month_day_vehicle[1]) & (df['Day'] == highest_year_month_day_vehicle[2])]
-
-    # Group by hour and calculate the sum of the specified columns
-    df_daily_highest_vehicle = df_highest_day_vehicle.groupby(['Hour'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-
-
-    
-    #### PLOT
-    # Create a 1x4 layout
-    cols = st.columns(4)
-
-
-    # Create the first chart
-    fig1, ax1 = plt.subplots()
-    df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
-    cols[0].pyplot(fig1)
+         st.title('Voertuigen en pand')  
          
-    fig1, ax1 = plt.subplots()
-    df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
-    cols[0].pyplot(fig1)
-    # Create the second chart
-    fig2, ax2 = plt.subplots()
-    df_monthly_highest_vehicle.plot(kind='area', stacked=True, 
+         # The user can select a year
+         year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
+         
+         # The user can select between maximum and average
+         value_type = st.radio('Choose a value type', options=['max', 'gem'])
+         
+         # Based on the user's selections, choose the appropriate columns
+         truck_usage_column = f'truck {value_type} verbruik {year} in kWh'
+         bakwagen_usage_column = f'bakwagen {value_type} verbruik {year} in kWh'
+         bestelwagen_usage_column = f'bestelwagen {value_type} verbruik {year} in kWh'
+         pand_usage_column = 'Verbruik pand in kWh'
+         
+         #### Year
+         df_yearly_vehicle = df.groupby(['Year', 'Month'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         
+         
+         
+         #### MONTH
+         # Group by year, month and calculate the sum of all vehicle types
+         df_monthly_total_vehicle = df.groupby(['Year', 'Month'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         df_monthly_total_vehicle['Total'] = df_monthly_total_vehicle.sum(axis=1)
+         
+         # Find the month with the highest total usage
+         highest_month_vehicle = df_monthly_total_vehicle[df_monthly_total_vehicle['Total'] == df_monthly_total_vehicle['Total'].max()]
+         highest_year_month_vehicle = highest_month_vehicle[['Total']].idxmax()[0]
+         
+         # Select data for the highest usage month
+         df_highest_month_vehicle = df[(df['Year'] == highest_year_month_vehicle[0]) & (df['Month'] == highest_year_month_vehicle[1])]
+         
+         # Group by day and calculate the sum of the specified columns
+         df_monthly_highest_vehicle = df_highest_month_vehicle.groupby(['Day'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         
+         
+         
+         #### WEEK
+         # Group by year, week and calculate the sum of all vehicle types
+         df_weekly_total_vehicle = df.groupby(['Year', 'Week'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         df_weekly_total_vehicle['Total'] = df_weekly_total_vehicle.sum(axis=1)
+         
+         # Find the week with the highest total usage
+         highest_week_vehicle = df_weekly_total_vehicle[df_weekly_total_vehicle['Total'] == df_weekly_total_vehicle['Total'].max()]
+         highest_year_week_vehicle = highest_week_vehicle[['Total']].idxmax()[0]
+         
+         # Select data for the highest usage week
+         df_highest_week_vehicle = df[(df['Year'] == highest_year_week_vehicle[0]) & (df['Week'] == highest_year_week_vehicle[1])]
+         
+         # Group by weekday and calculate the sum of the specified columns
+         df_weekly_highest_vehicle = df_highest_week_vehicle.groupby(['Weekday'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         
+         
+         
+         #### DAY
+         # Group by year, month, day and calculate the sum of all vehicle types
+         df_daily_total_vehicle = df.groupby(['Year', 'Month', 'Day'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         df_daily_total_vehicle['Total'] = df_daily_total_vehicle.sum(axis=1)
+         
+         # Find the day with the highest total usage
+         highest_day_vehicle = df_daily_total_vehicle[df_daily_total_vehicle['Total'] == df_daily_total_vehicle['Total'].max()]
+         highest_year_month_day_vehicle = highest_day_vehicle[['Total']].idxmax()[0]
+         
+         # Select data for the highest usage day
+         df_highest_day_vehicle = df[(df['Year'] == highest_year_month_day_vehicle[0]) & (df['Month'] == highest_year_month_day_vehicle[1]) & (df['Day'] == highest_year_month_day_vehicle[2])]
+         
+         # Group by hour and calculate the sum of the specified columns
+         df_daily_highest_vehicle = df_highest_day_vehicle.groupby(['Hour'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         
+         
+         
+         #### PLOT
+         # Create a 1x4 layout
+         cols = st.columns(4)
+         
+         
+         # Create the first chart
+         fig1, ax1 = plt.subplots()
+         df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
+         cols[0].pyplot(fig1)
+         
+         fig1, ax1 = plt.subplots()
+         df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
+         cols[0].pyplot(fig1)
+         # Create the second chart
+         fig2, ax2 = plt.subplots()
+         df_monthly_highest_vehicle.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_vehicle[0]}-{highest_year_month_vehicle[1]})', ax=ax2)
-    cols[1].pyplot(fig2)
-
-    # Create the third chart
-    fig3, ax3 = plt.subplots()
-    df_weekly_highest_vehicle.plot(kind='area', stacked=True, 
+         cols[1].pyplot(fig2)
+         
+         # Create the third chart
+         fig3, ax3 = plt.subplots()
+         df_weekly_highest_vehicle.plot(kind='area', stacked=True, 
                            title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_vehicle[0]}-Week {highest_year_week_vehicle[1]})', ax=ax3)
-    cols[2].pyplot(fig3)
-
-    # Create the fourth chart
-    fig4, ax4 = plt.subplots()
-    df_daily_highest_vehicle.plot(kind='area', stacked=True, 
+         cols[2].pyplot(fig3)
+         
+         # Create the fourth chart
+         fig4, ax4 = plt.subplots()
+         df_daily_highest_vehicle.plot(kind='area', stacked=True, 
                           title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_vehicle[0]}-{highest_year_month_day_vehicle[1]}-{highest_year_month_day_vehicle[2]})', ax=ax4)
-    cols[3].pyplot(fig4)
+         cols[3].pyplot(fig4)
 
 
     
 def company_page():
-    st.title('Bedrijven')
-    
+         st.title('Bedrijven')
+
 
 
 def main():
-    page = st.sidebar.selectbox('Navigation', options=['Homepage', 'Waar is de data op gebaseerd?', 'Wat gebruikt wat?', 'Wie gebruikt wat?'])
-
-    if page == 'Homepage':
-        homepage()
-    elif page == 'Waar is de data op gebaseerd?':
-        bsg_page()
-    elif page == 'Wat gebruikt wat?':
-        vehicle_page()
-    elif page == 'Wie gebruikt wat?':
-        company_page()
+         page = st.sidebar.selectbox('Navigation', options=['Homepage', 'Waar is de data op gebaseerd?', 'Wat gebruikt wat?', 'Wie gebruikt wat?'])
+         
+         if page == 'Homepage':
+                  homepage()
+         elif page == 'Waar is de data op gebaseerd?':
+                  bsg_page()
+         elif page == 'Wat gebruikt wat?':
+                  vehicle_page()
+         elif page == 'Wie gebruikt wat?':
+                  company_page()
         
-if __name__ == "__main__":
-    main()
+         if __name__ == "__main__":
+                  main()
