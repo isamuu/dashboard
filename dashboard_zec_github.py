@@ -348,16 +348,18 @@ def bsg_page():
     # Create a 1x4 layout
     cols = st.columns(4)
 
-    # Create the first chart
+    # Create the first chart  
+    fig1, ax1 = plt.subplots()
+    df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
+    
     show_line = st.checkbox('Show Horizontal Line')
-
-    if show_line:
+         
+     if show_line:
         y_value = 400000  # Replace with the y value where you want the horizontal line
         ax1.axhline(y=y_value, color='red', linestyle='--')
 
-    fig1, ax1 = plt.subplots()
-    df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
     cols[0].pyplot(fig1)
+    
 
     # Create the second chart
     fig2, ax2 = plt.subplots()
