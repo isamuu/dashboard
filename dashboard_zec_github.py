@@ -381,8 +381,9 @@ def bsg_page():
          fig4, ax4 = plt.subplots()
          df_daily_bet.plot(kind='area', stacked=True, 
                           title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_bet[0]}-{highest_year_month_day_bet[1]}-{highest_year_month_day_bet[2]})', ax=ax4)
-         ax4.set_ylim([0, df_highest_day_bet[usage_column].max()])
+         ax4.set_ylim([0, df_highest_day_bet.groupby('Hour')[usage_column].sum().max()])
          cols[3].pyplot(fig4)
+         
 
 
     
