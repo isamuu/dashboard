@@ -374,12 +374,14 @@ def bsg_page():
          fig3, ax3 = plt.subplots()
          df_weekly_bet.plot(kind='area', stacked=True, 
                            title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_bet[0]}-Week {highest_year_week_bet[1]})', ax=ax3)
+         ax3.set_ylim([0, df_daily_total_bet[usage_column].max()])
          cols[2].pyplot(fig3)
          
          # Create the fourth chart
          fig4, ax4 = plt.subplots()
          df_daily_bet.plot(kind='area', stacked=True, 
                           title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_bet[0]}-{highest_year_month_day_bet[1]}-{highest_year_month_day_bet[2]})', ax=ax4)
+         ax4.set_ylim([0, df_highest_day_bet[usage_column].max()])
          cols[3].pyplot(fig4)
 
 
