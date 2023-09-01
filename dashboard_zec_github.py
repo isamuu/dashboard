@@ -387,10 +387,10 @@ def bsg_page():
 
 
          if show_line:
-                  ax1.axhline(y=5000, color='red', linestyle='--')
+                  ax1.axhline(y=500000, color='red', linestyle='--')
                   ax2.axhline(y=50000, color='red', linestyle='--')
                   ax3.axhline(y=40000, color='red', linestyle='--')
-                  ax4.axhline(y=750000, color='red', linestyle='--')
+                  ax4.axhline(y=7500, color='red', linestyle='--')
 
          # Display the plots
          cols[0].pyplot(fig1)
