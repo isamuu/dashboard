@@ -414,6 +414,8 @@ def vehicle_page():
 
          # capacity line
          show_line = st.checkbox('Capaciteit netwerk')
+
+         adjustment_value = st.number_input('upgrade netwerk', value=0.0)
          
          # Based on the user's selections, choose the appropriate columns
          truck_usage_column = f'truck {value_type} verbruik {year} in kWh'
@@ -512,10 +514,10 @@ def vehicle_page():
 
 
          if show_line:
-                  ax1.axhline(y=1500000, color='black', linestyle='--')
-                  ax2.axhline(y=50000, color='black', linestyle='--')
-                  ax3.axhline(y=40000, color='black', linestyle='--')
-                  ax4.axhline(y=7500, color='black', linestyle='--')
+                  ax1.axhline(y=1500000 + adjustment_value, color='black', linestyle='--')
+                  ax2.axhline(y=50000 + adjustment_value, color='black', linestyle='--')
+                  ax3.axhline(y=40000 + adjustment_value, color='black', linestyle='--')
+                  ax4.axhline(y=7500 + adjustment_value, color='black', linestyle='--')
 
          # Display the plots
          cols[0].pyplot(fig1)
