@@ -464,6 +464,7 @@ def vehicle_page():
          # Create the first chart
          fig1, ax1 = plt.subplots()
          df_yearly_vehicle.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
+         ax1.set_ylim([0, 2000000])
          cols[0].pyplot(fig1)
          
          
