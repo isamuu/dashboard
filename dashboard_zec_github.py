@@ -383,6 +383,19 @@ def bsg_page():
          df_daily_bet.plot(kind='area', stacked=True, 
                           title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_bet[0]}-{highest_year_month_day_bet[1]}-{highest_year_month_day_bet[2]})', ax=ax4)
          ax4.set_ylim([0, df_highest_day_bet.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
+         #cols[3].pyplot(fig4)
+
+
+         if show_line:
+                  ax1.axhline(y=5000, color='red', linestyle='--')
+                  ax2.axhline(y=50000, color='red', linestyle='--')
+                  ax3.axhline(y=40000, color='red', linestyle='--')
+                  ax4.axhline(y=750000, color='red', linestyle='--')
+
+         # Display the plots
+         cols[0].pyplot(fig1)
+         cols[1].pyplot(fig2)
+         cols[2].pyplot(fig3)
          cols[3].pyplot(fig4)
          
 
