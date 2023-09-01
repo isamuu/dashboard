@@ -411,6 +411,9 @@ def vehicle_page():
          
          # The user can select between maximum and average
          value_type = st.radio('Choose a value type', options=['max', 'gem'])
+
+         # capacity line
+         show_line = st.checkbox('Capaciteit netwerk')
          
          # Based on the user's selections, choose the appropriate columns
          truck_usage_column = f'truck {value_type} verbruik {year} in kWh'
@@ -482,7 +485,7 @@ def vehicle_page():
          # Create the first chart
          fig1, ax1 = plt.subplots()
          df_yearly_vehicle.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
-         ax1.set_ylim([0, 2000000])
+         ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
          cols[0].pyplot(fig1)
          
          
@@ -490,18 +493,22 @@ def vehicle_page():
          fig2, ax2 = plt.subplots()
          df_monthly_highest_vehicle.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_vehicle[0]}-{highest_year_month_vehicle[1]})', ax=ax2)
+         ax2.set_ylim([0, df.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
+         
          cols[1].pyplot(fig2)
          
          # Create the third chart
          fig3, ax3 = plt.subplots()
          df_weekly_highest_vehicle.plot(kind='area', stacked=True, 
                            title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_vehicle[0]}-Week {highest_year_week_vehicle[1]})', ax=ax3)
+         ax3.set_ylim([0, df.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
          cols[2].pyplot(fig3)
          
          # Create the fourth chart
          fig4, ax4 = plt.subplots()
          df_daily_highest_vehicle.plot(kind='area', stacked=True, 
                           title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_vehicle[0]}-{highest_year_month_day_vehicle[1]}-{highest_year_month_day_vehicle[2]})', ax=ax4)
+         ax4.set_ylim([0, df.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
          cols[3].pyplot(fig4)
 
 
