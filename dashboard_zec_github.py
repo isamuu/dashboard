@@ -352,7 +352,7 @@ def bsg_page():
          fig1, ax1 = plt.subplots()
          df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
 
-         ax1.set_ylim([0, 2000000])
+         ax1.set_ylim([0, df_monthly_total_bet[usage_column].max()])
          
          show_line = st.checkbox('Show Horizontal Line')
          
@@ -367,7 +367,7 @@ def bsg_page():
          fig2, ax2 = plt.subplots()
          df_monthly_bet.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_bet[0]}-{highest_year_month_bet[1]})', ax=ax2)
-         ax2.set_ylim([0, df_monthly_total_bet[usage_column].max()])
+         ax2.set_ylim([0, df_daily_total_bet[usage_column].max()])
          cols[1].pyplot(fig2)
          
          # Create the third chart
