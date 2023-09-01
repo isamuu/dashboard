@@ -352,7 +352,7 @@ def bsg_page():
          fig1, ax1 = plt.subplots()
          df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
 
-         ax1.set_ylim([0, df_monthly_total_bet["max verbruik in kWh 2040"].max()])
+         #ax1.set_ylim([0, df_monthly_total_bet["max verbruik in kWh 2040"].max()])
          
          show_line = st.checkbox('Show Horizontal Line')
          
@@ -367,14 +367,14 @@ def bsg_page():
          fig2, ax2 = plt.subplots()
          df_monthly_bet.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_bet[0]}-{highest_year_month_bet[1]})', ax=ax2)
-         ax2.set_ylim([0, df_daily_total_bet["max verbruik in kWh 2040"].max()])
+         #ax2.set_ylim([0, df_daily_total_bet["max verbruik in kWh 2040"].max()])
          cols[1].pyplot(fig2)
          
          # Create the third chart
          fig3, ax3 = plt.subplots()
          df_weekly_bet.plot(kind='area', stacked=True, 
                            title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_bet[0]}-Week {highest_year_week_bet[1]})', ax=ax3)
-         ax3.set_ylim([0, df_daily_total_bet["max verbruik in kWh 2040"].max()])
+         #ax3.set_ylim([0, df_daily_total_bet["max verbruik in kWh 2040"].max()])
          cols[2].pyplot(fig3)
          
          # Create the fourth chart
