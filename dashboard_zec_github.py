@@ -501,14 +501,14 @@ def vehicle_page():
          fig3, ax3 = plt.subplots()
          df_weekly_highest_vehicle.plot(kind='area', stacked=True, 
                            title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_vehicle[0]}-Week {highest_year_week_vehicle[1]})', ax=ax3)
-         ax3.set_ylim([0, df.groupby('Day')["max verbruik in kWh 2040"].sum().max()])
+         ax2.set_ylim([0, df_highest_week_vehicle.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
          cols[2].pyplot(fig3)
          
          # Create the fourth chart
          fig4, ax4 = plt.subplots()
          df_daily_highest_vehicle.plot(kind='area', stacked=True, 
                           title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_vehicle[0]}-{highest_year_month_day_vehicle[1]}-{highest_year_month_day_vehicle[2]})', ax=ax4)
-         ax4.set_ylim([0, df.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
+         ax4.set_ylim([0, df_highest_day_vehicle.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
          cols[3].pyplot(fig4)
 
 
