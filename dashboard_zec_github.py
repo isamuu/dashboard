@@ -270,114 +270,114 @@ def homepage():
 
 
 def bsg_page():
-    st.title('Brons, Zilver of Goud')
-    st.write('1233456')
-    # The user can select a year
-    year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
-
-    # The user can select between maximum and average
-    value_type = st.radio('Choose a value type', options=['max', 'gem'])
-
-    # Based on the user's selections, choose the appropriate column
-    if value_type:
-        usage_column = f'max verbruik in kWh {year}'
-    else:
-        usage_column = f'gem verbruik in kWh {year}'    
-    
-    #### YEAR
-    # Group by year, month and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-    df_yearly_bet = df.groupby(['Year', 'Month', 'werkt mee'])[usage_column].sum().unstack()
-    
-    
-    
-    #### MONTH
-    # Group by year, month and calculate the sum of 'Max verbruik in kWh 2040'
-    df_monthly_total_bet = df.groupby(['Year', 'Month'])[usage_column].sum().reset_index()
-
-    # Find the month with the highest total usage
-    highest_month_bet = df_monthly_total_bet[df_monthly_total_bet[usage_column] == df_monthly_total_bet[usage_column].max()]
-
-    # Extract the year and month
-    highest_year_month_bet = highest_month_bet[['Year', 'Month']].values[0]
-
-    # Select data for the highest usage month
-    df_highest_month_bet = df[(df['Year'] == highest_year_month_bet[0]) & (df['Month'] == highest_year_month_bet[1])]
-
-    # Group by day and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-    df_monthly_bet = df_highest_month_bet.groupby(['Day', 'werkt mee'])[usage_column].sum().unstack()
-    
-    
-    
-    #### WEEK
-    # Group by year, week and calculate the sum of 'Max verbruik in kWh 2040'
-    df_weekly_total_bet = df.groupby(['Year', 'Week'])[usage_column].sum().reset_index()
-
-    # Find the week with the highest total usage
-    highest_week_bet = df_weekly_total_bet[df_weekly_total_bet[usage_column] == df_weekly_total_bet[usage_column].max()]
-
-    # Extract the year and week
-    highest_year_week_bet = highest_week_bet[['Year', 'Week']].values[0]
-
-    # Select data for the highest usage week
-    df_highest_week_bet = df[(df['Year'] == highest_year_week_bet[0]) & (df['Week'] == highest_year_week_bet[1])]
-
-    # Group by weekday and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-    df_weekly_bet = df_highest_week_bet.groupby(['Weekday', 'werkt mee'])[usage_column].sum().unstack()
-    
-    
-    
-    #### DAY
-    # Group by year, month, day and calculate the sum of 'Max verbruik in kWh 2040'
-    df_daily_total_bet = df.groupby(['Year', 'Month', 'Day'])[usage_column].sum().reset_index()
-
-    # Find the day with the highest total usage
-    highest_day_bet = df_daily_total_bet[df_daily_total_bet[usage_column] == df_daily_total_bet[usage_column].max()]
-
-    # Extract the year, month and day
-    highest_year_month_day_bet = highest_day_bet[['Year', 'Month', 'Day']].values[0]
-
-    # Select data for the highest usage day
-    df_highest_day_bet = df[(df['Year'] == highest_year_month_day_bet[0]) & (df['Month'] == highest_year_month_day_bet[1]) & (df['Day'] == highest_year_month_day_bet[2])]
-
-    # Group by hour and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-    df_daily_bet = df_highest_day_bet.groupby(['Hour', 'werkt mee'])[usage_column].sum().unstack()
-    
-    
-    
-    #### PLOT
-    # Create a 1x4 layout
-    cols = st.columns(4)
-
-    # Create the first chart  
-    fig1, ax1 = plt.subplots()
-    df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
-    
-    show_line = st.checkbox('Show Horizontal Line')
+         st.title('Brons, Zilver of Goud')
+         st.write('1233456')
+         # The user can select a year
+         year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
          
-    if show_line:
-        y_value = 400000  # Replace with the y value where you want the horizontal line
-        ax1.axhline(y=y_value, color='red', linestyle='--')
+         # The user can select between maximum and average
+         value_type = st.radio('Choose a value type', options=['max', 'gem'])
 
-    cols[0].pyplot(fig1)
+         # Based on the user's selections, choose the appropriate column
+         if value_type:
+                  usage_column = f'max verbruik in kWh {year}'
+         else:
+                  usage_column = f'gem verbruik in kWh {year}'  
     
+         #### YEAR
+         # Group by year, month and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
+         df_yearly_bet = df.groupby(['Year', 'Month', 'werkt mee'])[usage_column].sum().unstack()
+         
+         
+         
+         #### MONTH
+         # Group by year, month and calculate the sum of 'Max verbruik in kWh 2040'
+         df_monthly_total_bet = df.groupby(['Year', 'Month'])[usage_column].sum().reset_index()
+         
+         # Find the month with the highest total usage
+         highest_month_bet = df_monthly_total_bet[df_monthly_total_bet[usage_column] == df_monthly_total_bet[usage_column].max()]
+         
+         # Extract the year and month
+         highest_year_month_bet = highest_month_bet[['Year', 'Month']].values[0]
+         
+         # Select data for the highest usage month
+         df_highest_month_bet = df[(df['Year'] == highest_year_month_bet[0]) & (df['Month'] == highest_year_month_bet[1])]
+         
+         # Group by day and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
+         df_monthly_bet = df_highest_month_bet.groupby(['Day', 'werkt mee'])[usage_column].sum().unstack()
+         
+         
+         
+         #### WEEK
+         # Group by year, week and calculate the sum of 'Max verbruik in kWh 2040'
+         df_weekly_total_bet = df.groupby(['Year', 'Week'])[usage_column].sum().reset_index()
+         
+         # Find the week with the highest total usage
+         highest_week_bet = df_weekly_total_bet[df_weekly_total_bet[usage_column] == df_weekly_total_bet[usage_column].max()]
+         
+         # Extract the year and week
+         highest_year_week_bet = highest_week_bet[['Year', 'Week']].values[0]
+         
+         # Select data for the highest usage week
+         df_highest_week_bet = df[(df['Year'] == highest_year_week_bet[0]) & (df['Week'] == highest_year_week_bet[1])]
+         
+         # Group by weekday and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
+         df_weekly_bet = df_highest_week_bet.groupby(['Weekday', 'werkt mee'])[usage_column].sum().unstack()
+         
+         
+         
+         #### DAY
+         # Group by year, month, day and calculate the sum of 'Max verbruik in kWh 2040'
+         df_daily_total_bet = df.groupby(['Year', 'Month', 'Day'])[usage_column].sum().reset_index()
+         
+         # Find the day with the highest total usage
+         highest_day_bet = df_daily_total_bet[df_daily_total_bet[usage_column] == df_daily_total_bet[usage_column].max()]
+         
+         # Extract the year, month and day
+         highest_year_month_day_bet = highest_day_bet[['Year', 'Month', 'Day']].values[0]
+         
+         # Select data for the highest usage day
+         df_highest_day_bet = df[(df['Year'] == highest_year_month_day_bet[0]) & (df['Month'] == highest_year_month_day_bet[1]) & (df['Day'] == highest_year_month_day_bet[2])]
+         
+         # Group by hour and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
+         df_daily_bet = df_highest_day_bet.groupby(['Hour', 'werkt mee'])[usage_column].sum().unstack()
+         
+         
+         
+         #### PLOT
+         # Create a 1x4 layout
+         cols = st.columns(4)
+         
+         # Create the first chart  
+         fig1, ax1 = plt.subplots()
+         df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
+         
+         show_line = st.checkbox('Show Horizontal Line')
+         
+         if show_line:
+                  y_value = 400000  # Replace with the y value where you want the horizontal line
+                  ax1.axhline(y=y_value, color='red', linestyle='--')
 
-    # Create the second chart
-    fig2, ax2 = plt.subplots()
-    df_monthly_bet.plot(kind='area', stacked=True, 
+         cols[0].pyplot(fig1)
+         
+         
+         # Create the second chart
+         fig2, ax2 = plt.subplots()
+         df_monthly_bet.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_bet[0]}-{highest_year_month_bet[1]})', ax=ax2)
-    cols[1].pyplot(fig2)
-
-    # Create the third chart
-    fig3, ax3 = plt.subplots()
-    df_weekly_bet.plot(kind='area', stacked=True, 
+         cols[1].pyplot(fig2)
+         
+         # Create the third chart
+         fig3, ax3 = plt.subplots()
+         df_weekly_bet.plot(kind='area', stacked=True, 
                            title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_bet[0]}-Week {highest_year_week_bet[1]})', ax=ax3)
-    cols[2].pyplot(fig3)
-
-    # Create the fourth chart
-    fig4, ax4 = plt.subplots()
-    df_daily_bet.plot(kind='area', stacked=True, 
+         cols[2].pyplot(fig3)
+         
+         # Create the fourth chart
+         fig4, ax4 = plt.subplots()
+         df_daily_bet.plot(kind='area', stacked=True, 
                           title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_bet[0]}-{highest_year_month_day_bet[1]}-{highest_year_month_day_bet[2]})', ax=ax4)
-    cols[3].pyplot(fig4)
+         cols[3].pyplot(fig4)
 
 
     
