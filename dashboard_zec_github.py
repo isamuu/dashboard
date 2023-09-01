@@ -506,5 +506,5 @@ def main():
          elif page == 'Wie gebruikt wat?':
                   company_page()
         
-         if __name__ == "__main__":
-                  main()
+if __name__ == "__main__":
+         main()
