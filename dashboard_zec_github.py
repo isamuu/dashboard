@@ -298,7 +298,7 @@ def bsg_page():
          # Create the pie chart for the right column
          labels = 'Werk niet mee', 'Werkt mee'
          explode = (0.1, 0)  # only "explode" the 2nd slice
-         fig5, ax5 = plt.subplots()
+         fig5, ax5 = plt.subplots(figsize=(3.5, 3.5))
          ax5.pie(df["werkt mee"].value_counts(), explode=explode, labels=labels, autopct='%1.1f%%', 
                  shadow=True, startangle=90)
          col2.pyplot(fig5)
