@@ -463,6 +463,20 @@ def vehicle_page():
 
 
          # Create chart that show yearly growth
+         option = st.radio(
+             'Which data would you like to see?',
+             ('Voertuigen', 'Truck, Bakwagen, Bestelwagen'))
+         
+         fig, ax = plt.subplots(figsize=(10, 6))
+         
+         # Depending on the choice, plot the relevant data
+         if option == 'Voertuigen':
+             toename_df[['voertuigen', 'pand']].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax)
+         else:
+             toename_df[['truck', 'bakwagen', 'bestelwagen', 'pand']].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax)
+
+
+         
          toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
          toename_df = toename_df[['truck max verbruik 2025 in kWh', 'bakwagen max verbruik 2025 in kWh',
                 'bestelwagen max verbruik 2025 in kWh', 'voertuigen max verbruik 2025 in kWh', 'truck max verbruik 2030 in kWh',
@@ -485,7 +499,7 @@ def vehicle_page():
          toename_df = toename_df.sort_values(by = 'year')
          toename_df = toename_df.set_index('year')[['pand','truck','bakwagen', 'bestelwagen', 'voertuigen']]
 
-         fig5, ax5 = plt.subplots()
+         fig5, ax5 = plt.subplots(figsize=(2.5, 2.5))
          toename_df.plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax = ax5)
          col2.pyplot(fig5)
 
