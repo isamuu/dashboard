@@ -487,7 +487,7 @@ def vehicle_page():
          toename_df = toename_df.sort_values(by = 'year')
          toename_df = toename_df.set_index('year')[['pand','truck','bakwagen', 'bestelwagen', 'voertuigen']]
 
-         option = col2.selectbox('Weergave plot', ['Wagenpark', 'Per voertuig'])
+         option = col2.radio('Weergave plot', ['Wagenpark', 'Per voertuig'])
          
          if option == 'Wagenpark':
              columns_to_display = ['pand', 'voertuigen']
