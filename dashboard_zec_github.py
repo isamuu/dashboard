@@ -463,7 +463,7 @@ def vehicle_page():
 
 
          # Create chart that show yearly growth
-         option = st.radio(
+         option = col2.radio(
              'Which data would you like to see?',
              ('Voertuigen', 'Truck, Bakwagen, Bestelwagen'))
          
@@ -499,8 +499,16 @@ def vehicle_page():
          toename_df = toename_df.sort_values(by = 'year')
          toename_df = toename_df.set_index('year')[['pand','truck','bakwagen', 'bestelwagen', 'voertuigen']]
 
+         option = col2.selectbox('Choose data to display', ['Voertuigen', 'Individual Vehicle Types'])
+         
+         if option == 'Voertuigen':
+             columns_to_display = ['pand', 'voertuigen']
+         else:
+             columns_to_display = ['pand', 'truck', 'bakwagen', 'bestelwagen']
+         
+         # Plotting
          fig5, ax5 = plt.subplots(figsize=(2.5, 2.5))
-         toename_df.plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax = ax5)
+         toename_df[columns_to_display].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
          col2.pyplot(fig5)
 
 
