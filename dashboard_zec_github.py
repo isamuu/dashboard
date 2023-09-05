@@ -497,6 +497,18 @@ def vehicle_page():
          # Plotting
          fig5, ax5 = plt.subplots(figsize=(2,2))
          toename_df[columns_to_display].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
+         # Adjusting title font size
+         ax5.set_title(f'Toename piek stroomnet', fontsize=10)
+         
+         # Adjusting axis label font sizes
+         ax5.set_xlabel('Year', fontsize=8)
+         ax5.set_ylabel('Value', fontsize=8)
+         
+         # Adjusting tick font sizes
+         ax5.tick_params(axis='both', which='major', labelsize=8)
+         
+         # Adjusting legend font size
+         ax5.legend(fontsize=8)
          col2.pyplot(fig5)
 
 
