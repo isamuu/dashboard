@@ -460,6 +460,38 @@ def vehicle_page():
          value_type = col1.radio('Choose a value type', options=['max', 'gem'])
 
          adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
+
+
+         # Create chart that show yearly growth
+         toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
+         toename_df = toename_df[['truck max verbruik 2025 in kWh', 'bakwagen max verbruik 2025 in kWh',
+                'bestelwagen max verbruik 2025 in kWh', 'voertuigen max verbruik 2025 in kWh', 'truck max verbruik 2030 in kWh',
+                'bakwagen max verbruik 2030 in kWh', 'bestelwagen max verbruik 2030 in kWh', 'voertuigen max verbruik 2030 in kWh', 
+                'truck max verbruik 2035 in kWh', 'bakwagen max verbruik 2035 in kWh', 'bestelwagen max verbruik 2035 in kWh',
+                'voertuigen max verbruik 2035 in kWh', 'truck max verbruik 2040 in kWh', 'bakwagen max verbruik 2040 in kWh',
+                'bestelwagen max verbruik 2040 in kWh', 'voertuigen max verbruik 2040 in kWh']] 
+         toename_df.columns = toename_df.columns.str.replace(r'max verbruik ', '')
+         toename_df.columns = toename_df.columns.str.replace(r' in kWh', '')
+         toename_df = pd.DataFrame(toename_df.sum()).reset_index().rename(columns = {"index":"type_year", 0:"value"})
+         
+         # Split the 'type_year' column into 'type' and 'year'
+         toename_df[['type', 'year']] = toename_df['type_year'].str.split(' ', expand=True)
+         
+         # Pivot the DataFrame to the desired shape
+         toename_df = toename_df.pivot(index='year', columns='type', values='value').reset_index()
+         toename_df["pand"] = df[df["Datum"] == "2022-10-3 17:00:00"]['Verbruik pand in kWh'].sum()
+         toename_df.loc[4] = [2023,0,0,0,0,4257.813287]
+         toename_df['year'] = toename_df['year'].astype(int)
+         toename_df = toename_df.sort_values(by = 'year')
+         toename_df = toename_df.set_index('year')[['pand','truck','bakwagen', 'bestelwagen', 'voertuigen']]
+
+         fig5, ax5 = plt.subplots()
+         toename_df.plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax = ax5)
+         col2.pyplot(fig5)
+
+
+
+         
          
          # Based on the user's selections, choose the appropriate columns
          truck_usage_column = f'truck {value_type} verbruik {year} in kWh'
@@ -469,8 +501,6 @@ def vehicle_page():
          
          #### Year
          df_yearly_vehicle = df.groupby(['Year', 'Month'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-         
-         
          
          #### MONTH
          # Group by year, month and calculate the sum of all vehicle types
@@ -486,7 +516,6 @@ def vehicle_page():
          
          # Group by day and calculate the sum of the specified columns
          df_monthly_highest_vehicle = df_highest_month_vehicle.groupby(['Day'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-         
          
          
          #### WEEK
