@@ -495,7 +495,7 @@ def vehicle_page():
              columns_to_display = ['pand', 'truck', 'bakwagen', 'bestelwagen']
          
          # Plotting
-         fig5, ax5 = plt.subplots(figsize=(3,3))
+         fig5, ax5 = plt.subplots(figsize=(5,5))
          toename_df[columns_to_display].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
          col2.pyplot(fig5)
 
