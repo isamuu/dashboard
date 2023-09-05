@@ -279,7 +279,7 @@ def bsg_page():
                       </style>
                       """,
                       unsafe_allow_html=True)
-         st.markdown("<h1 style='text-align: center'>'Brons, Zilver of Goud'</h1>", unsafe_allow_html=True)
+         st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
          col1, col2 = st.columns(2)
          
          # Place text in the left column
