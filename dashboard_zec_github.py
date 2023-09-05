@@ -271,12 +271,12 @@ def homepage():
 
 def bsg_page():
          st.title('Brons, Zilver of Goud')
-         st.write('1233456')
+         col1, col2 = st.columns(2)
          # The user can select a year
-         year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
+         year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
          
          # The user can select between maximum and average
-         value_type = st.radio('Choose a value type', options=['max', 'gem'])
+         value_type = col1.radio('Choose a value type', options=['max', 'gem'])
 
          # Based on the user's selections, choose the appropriate column
          if value_type:
@@ -285,7 +285,7 @@ def bsg_page():
                   usage_column = f'gem verbruik in kWh {year}'  
 
 
-         col1, col2 = st.columns(2)
+         
 
          # Place text in the left column
          col1.text("Your Text Here")  # Replace with your desired text
