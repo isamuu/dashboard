@@ -285,12 +285,18 @@ def bsg_page():
                   usage_column = f'gem verbruik in kWh {year}'  
 
 
-         # Pie chart
+         col1, col2 = st.columns(2)
+
+         # Place text in the left column
+         col1.text("Your Text Here")  # Replace with your desired text
+         
+         # Create the pie chart for the right column
          labels = 'Werk niet mee', 'Werkt mee'
-         explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+         explode = (0.1, 0)  # only "explode" the 2nd slice
          fig5, ax5 = plt.subplots()
          ax5.pie(df["werkt mee"].value_counts(), explode=explode, labels=labels, autopct='%1.1f%%', 
-                shadow=True, startangle=90)
+                 shadow=True, startangle=90)
+         col2.pyplot(fig5)
     
          #### YEAR
          # Group by year, month and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
