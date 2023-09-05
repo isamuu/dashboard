@@ -283,6 +283,15 @@ def bsg_page():
                   usage_column = f'max verbruik in kWh {year}'
          else:
                   usage_column = f'gem verbruik in kWh {year}'  
+
+
+         # Pie chart
+         labels = 'Werk niet mee', 'Werkt mee'
+         explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+         fig, ax = plt.subplots()
+         ax.pie(df["werkt mee"].value_counts(), explode=explode, labels=labels, autopct='%1.1f%%', 
+                shadow=True, startangle=90)
+         plt.show()
     
          #### YEAR
          # Group by year, month and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
