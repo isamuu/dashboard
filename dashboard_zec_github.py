@@ -271,6 +271,16 @@ def homepage():
 
 def bsg_page():
          st.title('Brons, Zilver of Goud')
+         st.markdown(
+                      """
+                      <style>
+                          .reportview-container .markdown-text-container {
+                              text-align: center;
+                          }
+                      </style>
+                      """,
+                      unsafe_allow_html=True)
+         st.markdown("<h1 style='text-align: center'>Your Title Here</h1>", unsafe_allow_html=True)
          col1, col2 = st.columns(2)
          
          # Place text in the left column
