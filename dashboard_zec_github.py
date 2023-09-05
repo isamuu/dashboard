@@ -411,7 +411,6 @@ def bsg_page():
          cols[1].pyplot(fig2)
          cols[2].pyplot(fig3)
          cols[3].pyplot(fig4)
-         st.pyplot(fig5)
          
 
 
