@@ -460,20 +460,8 @@ def vehicle_page():
          value_type = col1.radio('Choose a value type', options=['max', 'gem'])
 
          adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
-
-
-         # Create chart that show yearly growth
-         option = col2.radio(
-             'Which data would you like to see?',
-             ('Voertuigen', 'Truck, Bakwagen, Bestelwagen'))
          
-         fig, ax = plt.subplots(figsize=(10, 6))
-         
-         # Depending on the choice, plot the relevant data
-         if option == 'Voertuigen':
-             toename_df[['voertuigen', 'pand']].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax)
-         else:
-             toename_df[['truck', 'bakwagen', 'bestelwagen', 'pand']].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax)
+
 
 
          
