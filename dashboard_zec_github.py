@@ -275,6 +275,8 @@ def bsg_page():
          
          # Place text in the left column
          col1.text("Your Text Here")  # Replace with your desired text
+
+         show_line = st.checkbox('Capaciteit netwerk')
          
          # The user can select a year
          year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
@@ -371,7 +373,7 @@ def bsg_page():
 
          ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
          
-         #show_line = st.checkbox('Capaciteit netwerk')
+         
          
          # if show_line:
          #         y_value = 1250000   Replace with the y value where you want the horizontal line
