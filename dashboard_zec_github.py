@@ -291,7 +291,7 @@ def bsg_page():
          fig5, ax5 = plt.subplots()
          ax5.pie(df["werkt mee"].value_counts(), explode=explode, labels=labels, autopct='%1.1f%%', 
                 shadow=True, startangle=90)
-         pyplot(fig5)
+         st.plotly_chart(fig5)
     
          #### YEAR
          # Group by year, month and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
