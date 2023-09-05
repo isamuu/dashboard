@@ -431,19 +431,35 @@ def bsg_page():
     
 
     
-def vehicle_page():
-         st.title('Voertuigen en pand')  
-         
-         # The user can select a year
-         year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
-         
-         # The user can select between maximum and average
-         value_type = st.radio('Choose a value type', options=['max', 'gem'])
+def vehicle_page(): 
+         # Title
+         st.markdown(
+                      """
+                      <style>
+                          .reportview-container .markdown-text-container {
+                              text-align: center;
+                          }
+                      </style>
+                      """,
+                      unsafe_allow_html=True)
+         st.markdown("<h1 style='text-align: center'>Voertuigen en pand</h1>", unsafe_allow_html=True)
+
+         # add columns
+         col1, col2 = st.columns(2)
+
+         # Place text in the left column
+         col1.text("Your Text Here")  # Replace with your desired text
 
          # capacity line
-         show_line = st.checkbox('Capaciteit netwerk')
+         show_line = col1.checkbox('Capaciteit netwerk')
+         
+         # The user can select a year
+         year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
+         
+         # The user can select between maximum and average
+         value_type = col1.radio('Choose a value type', options=['max', 'gem'])
 
-         adjustment_value = st.number_input('upgrade netwerk', value=0.0)
+         adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
          
          # Based on the user's selections, choose the appropriate columns
          truck_usage_column = f'truck {value_type} verbruik {year} in kWh'
