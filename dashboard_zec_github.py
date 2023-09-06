@@ -12,18 +12,6 @@ st.set_page_config(layout="wide")
 df = pd.read_csv("test_df_bt.csv")
 df_prob = pd.read_csv("df_prob.csv", index_col = 0)
 
-# change company names
-# Extract unique company names
-unique_companies = df["Bedrijf"].unique()
-
-# Create a mapping from original company names to new anonymous names
-company_mapping = {company: f"Bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
-
-# Replace the original company names with the new anonymous names
-df["Bedrijf"] = df["Bedrijf"].replace(company_mapping)
-df
-
-
 df.columns = df.columns.str.lower()
 df = df[["bedrijf", "werkt mee", "aantal truck", "aantal bakwagen", "aantal bestelwagen", 'truck gem afstand in km', 
          'bakwagen gem afstand in km', 'bestelwagen gem afstand in km', 'truck max afstand in km', 'bakwagen max afstand in km', 'bestelwagen max afstand in km', "bezoekende truck per dag", 
@@ -36,6 +24,17 @@ df = df[["bedrijf", "werkt mee", "aantal truck", "aantal bakwagen", "aantal best
          "voorspelling aantal elektrische truck 2035", "voorspelling aantal elektrische bestelwagen 2040",
          "voorspelling aantal elektrische bakwagen 2040", "voorspelling aantal elektrische truck 2040"]]
 df.columns = df.columns.str.replace(r'voorspelling aantal elektrische ', '')
+
+# change company names
+# Extract unique company names
+unique_companies = df["Bedrijf"].unique()
+
+# Create a mapping from original company names to new anonymous names
+company_mapping = {company: f"Bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
+
+# Replace the original company names with the new anonymous names
+df["Bedrijf"] = df["Bedrijf"].replace(company_mapping)
+df
 
 # dataframe maken voor tijden
 tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
