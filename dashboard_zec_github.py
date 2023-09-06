@@ -657,7 +657,7 @@ def company_page():
 
          
          toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
-         toename_df = toename_df[['bedrijf', 'Verbruik pand in kWh', 'Max verbruik in kWh 2025', 'Max verbruik in kWh 2030', 'Max verbruik in kWh 2035', 'Max verbruik in kWh 2040']] 
+         toename_df = toename_df[['bedrijf', 'Verbruik pand in kWh', 'max verbruik in kWh 2025', 'max verbruik in kWh 2030', 'max verbruik in kWh 2035', 'max verbruik in kWh 2040']] 
          toename_df = toename_df.rename(columns={'Verbruik pand in kWh':'Max verbruik in kWh 2023'})
          toename_df.columns = toename_df.columns.str.replace(r'Max verbruik ', '')
          toename_df.columns = toename_df.columns.str.replace(r'in kWh ', '')
