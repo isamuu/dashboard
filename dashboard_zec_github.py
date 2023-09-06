@@ -34,6 +34,7 @@ company_mapping = {company: f"bedrijf {chr(i+65)}" for i, company in enumerate(u
 
 # Replace the original company names with the new anonymous names
 df["bedrijf"] = df["bedrijf"].replace(company_mapping)
+df
 
 # dataframe maken voor tijden
 tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
