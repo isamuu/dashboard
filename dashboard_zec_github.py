@@ -25,16 +25,7 @@ df = df[["bedrijf", "werkt mee", "aantal truck", "aantal bakwagen", "aantal best
          "voorspelling aantal elektrische bakwagen 2040", "voorspelling aantal elektrische truck 2040"]]
 df.columns = df.columns.str.replace(r'voorspelling aantal elektrische ', '')
 
-# change company names
-# Extract unique company names
-unique_companies = df["bedrijf"].unique()
 
-# Create a mapping from original company names to new anonymous names
-company_mapping = {company: f"bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
-
-# Replace the original company names with the new anonymous names
-df["bedrijf"] = df["bedrijf"].replace(company_mapping)
-df
 
 # dataframe maken voor tijden
 tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
@@ -132,6 +123,16 @@ df['Weekday'] = df['Datum'].dt.weekday
 df['Hour'] = df['Datum'].dt.hour
 df = df[df['Year'] == 2022]
 df = df.rename(columns = {'Gem verbruik in kWh 2025':'gem verbruik in kWh 2025','Gem verbruik in kWh 2030':'gem verbruik in kWh 2030', 'Gem verbruik in kWh 2035':'gem verbruik in kWh 2035', 'Gem verbruik in kWh 2040':'gem verbruik in kWh 2040', 'Max verbruik in kWh 2025':'max verbruik in kWh 2025', 'Max verbruik in kWh 2030':'max verbruik in kWh 2030', 'Max verbruik in kWh 2035':'max verbruik in kWh 2035', 'Max verbruik in kWh 2040':'max verbruik in kWh 2040'})
+
+# change company names
+# Extract unique company names
+unique_companies = df["bedrijf"].unique()
+
+# Create a mapping from original company names to new anonymous names
+company_mapping = {company: f"bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
+
+# Replace the original company names with the new anonymous names
+df["bedrijf"] = df["bedrijf"].replace(company_mapping)
 
 def homepage():
          st.title('ZEC Mobility Dashboard')
