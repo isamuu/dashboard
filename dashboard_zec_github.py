@@ -767,7 +767,7 @@ def company_page():
          # Create the second chart
          fig2, ax2 = plt.subplots()
          df_monthly_highest_company.plot(kind='area', stacked=True, 
-                            title=f'Monthly Electricity Usage per Company (Highest Usage Month: {highest_year_month_vehicle[0]}-{highest_year_month_vehicle[1]})', ax=ax2)
+                            title=f'Monthly Electricity Usage per Company (Highest Usage Month: {highest_month_company[0]}-{highest_month_company[1]})', ax=ax2)
          ax2.set_ylim([0, df_highest_week_vehicle.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
          
          # cols[1].pyplot(fig2)
@@ -775,14 +775,14 @@ def company_page():
          # Create the third chart
          fig3, ax3 = plt.subplots()
          df_weekly_highest_company.plot(kind='area', stacked=True, 
-                           title=f'Weekly Electricity Usage per Company (Highest Usage Week: {highest_year_week_vehicle[0]}-Week {highest_year_week_vehicle[1]})', ax=ax3)
+                           title=f'Weekly Electricity Usage per Company (Highest Usage Week: {highest_week_company[0]}-Week {highest_week_company[1]})', ax=ax3)
          ax3.set_ylim([0, df_highest_week_vehicle.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
 
          
          # Create the fourth chart
          fig4, ax4 = plt.subplots()
          df_daily_highest_company.plot(kind='area', stacked=True, 
-                          title=f'Daily Electricity Usage per Company (Highest Usage Day: {highest_year_month_day_vehicle[0]}-{highest_year_month_day_vehicle[1]}-{highest_year_month_day_vehicle[2]})', ax=ax4)
+                          title=f'Daily Electricity Usage per Company (Highest Usage Day: {highest_day_company[0]}-{highest_day_company[1]}-{highest_year_month_day_vehicle[2]})', ax=ax4)
          ax4.set_ylim([0, df_highest_day_vehicle.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
 
 
