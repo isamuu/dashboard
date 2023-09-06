@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import geopandas as gpd
 import pydeck as pdk
+from plotly.tools import mpl_to_plotly
 st.set_page_config(layout="wide")
 
 # Load the geopackage file
@@ -509,7 +510,15 @@ def vehicle_page():
          
          # Adjusting legend font size
          ax5.legend(fontsize=8)
-         col2.pyplot(fig5)
+         #col2.pyplot(fig5)
+         
+         
+         # Convert Matplotlib figure to Plotly figure
+         plotly_fig = mpl_to_plotly(fig5)
+         
+         # Display using Streamlit's plotly_chart method
+         col2.plotly_chart(plotly_fig)
+
 
 
 
