@@ -12,6 +12,18 @@ st.set_page_config(layout="wide")
 df = pd.read_csv("test_df_bt.csv")
 df_prob = pd.read_csv("df_prob.csv", index_col = 0)
 
+# change company names
+# Extract unique company names
+unique_companies = df["Bedrijf"].unique()
+
+# Create a mapping from original company names to new anonymous names
+company_mapping = {company: f"Bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
+
+# Replace the original company names with the new anonymous names
+df["Bedrijf"] = df["Bedrijf"].replace(company_mapping)
+df
+
+
 df.columns = df.columns.str.lower()
 df = df[["bedrijf", "werkt mee", "aantal truck", "aantal bakwagen", "aantal bestelwagen", 'truck gem afstand in km', 
          'bakwagen gem afstand in km', 'bestelwagen gem afstand in km', 'truck max afstand in km', 'bakwagen max afstand in km', 'bestelwagen max afstand in km', "bezoekende truck per dag", 
@@ -659,7 +671,7 @@ def company_page():
          toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
          toename_df = toename_df[['bedrijf', 'Verbruik pand in kWh', 'max verbruik in kWh 2025', 'max verbruik in kWh 2030', 'max verbruik in kWh 2035', 'max verbruik in kWh 2040']] 
          toename_df = toename_df.rename(columns={'Verbruik pand in kWh':'Max verbruik in kWh 2023'})
-         toename_df.columns = toename_df.columns.str.replace(r'Max verbruik ', '')
+         toename_df.columns = toename_df.columns.str.replace(r'max verbruik ', '')
          toename_df.columns = toename_df.columns.str.replace(r'in kWh ', '')
          toename_df = toename_df.set_index("bedrijf").transpose()
          
