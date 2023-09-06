@@ -749,7 +749,7 @@ def company_page():
          
          
          # Create the first chart
-         fig1, ax1 = plt.subplots(figsize = (2,2))
+         fig1, ax1 = plt.subplots(figsize = (5,5))
          df_yearly_company.plot(kind='area', stacked=True, title='Yearly Electricity Usage per Company', ax=ax1)
          ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
          ax1.legend().set_visible(False)
@@ -757,7 +757,7 @@ def company_page():
          
          
          # Create the second chart
-         fig2, ax2 = plt.subplots()
+         fig2, ax2 = plt.subplots(figsize = (5,5))
          df_monthly_highest_company.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage per Company (Highest Usage Month: {highest_month_company[0]}-{highest_month_company[1]})', ax=ax2)
          ax2.set_ylim([0, df_highest_week_company.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
@@ -766,7 +766,7 @@ def company_page():
          # cols[1].pyplot(fig2)
          
          # Create the third chart
-         fig3, ax3 = plt.subplots()
+         fig3, ax3 = plt.subplots(figsize = (5,5))
          df_weekly_highest_company.plot(kind='area', stacked=True, 
                            title=f'Weekly Electricity Usage per Company (Highest Usage Week: {highest_week_company[0]}-Week {highest_week_company[1]})', ax=ax3)
          ax3.set_ylim([0, df_highest_week_company.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
@@ -774,7 +774,7 @@ def company_page():
 
          
          # Create the fourth chart
-         fig4, ax4 = plt.subplots()
+         fig4, ax4 = plt.subplots(figsize = (5,5))
          df_daily_highest_company.plot(kind='area', stacked=True, 
                           title=f'Daily Electricity Usage per Company (Highest Usage Day: {highest_day_company[0]}-{highest_day_company[1]}-{highest_day_company[2]})', ax=ax4)
          ax4.set_ylim([0, df_highest_day_company.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
