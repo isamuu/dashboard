@@ -657,37 +657,16 @@ def company_page():
 
          
          toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
-         toename_df = toename_df[['truck max verbruik 2025 in kWh', 'bakwagen max verbruik 2025 in kWh',
-                'bestelwagen max verbruik 2025 in kWh', 'voertuigen max verbruik 2025 in kWh', 'truck max verbruik 2030 in kWh',
-                'bakwagen max verbruik 2030 in kWh', 'bestelwagen max verbruik 2030 in kWh', 'voertuigen max verbruik 2030 in kWh', 
-                'truck max verbruik 2035 in kWh', 'bakwagen max verbruik 2035 in kWh', 'bestelwagen max verbruik 2035 in kWh',
-                'voertuigen max verbruik 2035 in kWh', 'truck max verbruik 2040 in kWh', 'bakwagen max verbruik 2040 in kWh',
-                'bestelwagen max verbruik 2040 in kWh', 'voertuigen max verbruik 2040 in kWh']] 
-         toename_df.columns = toename_df.columns.str.replace(r'max verbruik ', '')
-         toename_df.columns = toename_df.columns.str.replace(r' in kWh', '')
-         toename_df = pd.DataFrame(toename_df.sum()).reset_index().rename(columns = {"index":"type_year", 0:"value"})
-         
-         # Split the 'type_year' column into 'type' and 'year'
-         toename_df[['type', 'year']] = toename_df['type_year'].str.split(' ', expand=True)
-         
-         # Pivot the DataFrame to the desired shape
-         toename_df = toename_df.pivot(index='year', columns='type', values='value').reset_index()
-         toename_df["pand"] = df[df["Datum"] == "2022-10-3 17:00:00"]['Verbruik pand in kWh'].sum()
-         toename_df.loc[4] = [2023,0,0,0,0,4257.813287]
-         toename_df['year'] = toename_df['year'].astype(int)
-         toename_df = toename_df.sort_values(by = 'year')
-         toename_df = toename_df.set_index('year')[['pand','truck','bakwagen', 'bestelwagen', 'voertuigen']]
-
-         option = col2.radio('Weergave plot', ['Wagenpark', 'Per voertuig'])
-         
-         if option == 'Wagenpark':
-             columns_to_display = ['pand', 'voertuigen']
-         else:
-             columns_to_display = ['pand', 'truck', 'bakwagen', 'bestelwagen']
+         toename_df = toename_df[['bedrijf', 'Verbruik pand in kWh', 'Max verbruik in kWh 2025', 'Max verbruik in kWh 2030', 'Max verbruik in kWh 2035', 'Max verbruik in kWh 2040']] 
+         toename_df = toename_df.rename(columns={'Verbruik pand in kWh':'Max verbruik in kWh 2023'})
+         toename_df.columns = toename_df.columns.str.replace(r'Max verbruik ', '')
+         toename_df.columns = toename_df.columns.str.replace(r'in kWh ', '')
+         toename_df = toename_df.set_index("bedrijf").transpose()
+         toename_df
          
          # Plotting
-         #fig5, ax5 = plt.subplots(figsize=(6,3))
-         #toename_df[columns_to_display].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
+         fig5, ax5 = plt.subplots(figsize=(6,3))
+         toename_df[columns_to_display].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
          # Adjusting title font size
          #ax5.set_title(f'Toename piek stroomnet', fontsize=6)
          
@@ -700,7 +679,7 @@ def company_page():
          
          # Adjusting legend font size
          #ax5.legend(fontsize=8)
-         #col2.pyplot(fig5, use_container_width=True)
+         col2.pyplot(fig5, use_container_width=True)
          
          
 
@@ -801,15 +780,15 @@ def company_page():
 
 
 def main():
-         page = st.sidebar.selectbox('Navigation', options=['Homepage', 'Waar is de data op gebaseerd?', 'Wat gebruikt wat?', 'Wie gebruikt wat?'])
+         page = st.sidebar.selectbox('Navigation', options=['Homepage', '1. Waar is de data op gebaseerd?', '2. Wat gebruikt wat?', '3. Wie gebruikt wat?'])
          
          if page == 'Homepage':
                   homepage()
-         elif page == 'Waar is de data op gebaseerd?':
+         elif page == '1. Waar is de data op gebaseerd?':
                   bsg_page()
-         elif page == 'Wat gebruikt wat?':
+         elif page == '2. Wat gebruikt wat?':
                   vehicle_page()
-         elif page == 'Wie gebruikt wat?':
+         elif page == '3. Wie gebruikt wat?':
                   company_page()
         
 if __name__ == "__main__":
