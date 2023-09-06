@@ -513,8 +513,6 @@ def vehicle_page():
          #col2.pyplot(fig5)
          
          
-         # Convert Matplotlib figure to Plotly figure
-         plotly_fig = mpl_to_plotly(fig5)
          
          # Display using Streamlit's plotly_chart method
          col2.plotly_chart(plotly_fig)
