@@ -27,13 +27,13 @@ df.columns = df.columns.str.replace(r'voorspelling aantal elektrische ', '')
 
 # change company names
 # Extract unique company names
-unique_companies = df["Bedrijf"].unique()
+unique_companies = df["bedrijf"].unique()
 
 # Create a mapping from original company names to new anonymous names
-company_mapping = {company: f"Bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
+company_mapping = {company: f"bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
 
 # Replace the original company names with the new anonymous names
-df["Bedrijf"] = df["Bedrijf"].replace(company_mapping)
+df["bedrijf"] = df["bedrijf"].replace(company_mapping)
 df
 
 # dataframe maken voor tijden
