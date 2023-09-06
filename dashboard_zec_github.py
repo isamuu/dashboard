@@ -501,11 +501,11 @@ def vehicle_page():
          ax5.set_title(f'Toename piek stroomnet', fontsize=10)
          
          # Adjusting axis label font sizes
-         ax5.set_xlabel('Year', fontsize=8)
-         ax5.set_ylabel('Value', fontsize=8)
+         ax5.set_xlabel('Year', fontsize=6)
+         ax5.set_ylabel('Value', fontsize=6)
          
          # Adjusting tick font sizes
-         ax5.tick_params(axis='both', which='major', labelsize=8)
+         ax5.tick_params(axis='both', which='major', labelsize=6)
          
          # Adjusting legend font size
          ax5.legend(fontsize=8)
