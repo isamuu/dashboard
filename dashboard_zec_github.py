@@ -662,11 +662,11 @@ def company_page():
          toename_df.columns = toename_df.columns.str.replace(r'Max verbruik ', '')
          toename_df.columns = toename_df.columns.str.replace(r'in kWh ', '')
          toename_df = toename_df.set_index("bedrijf").transpose()
-         toename_df
+         
          
          # Plotting
          fig5, ax5 = plt.subplots(figsize=(6,3))
-         toename_df[columns_to_display].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
+         toename_df.plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
          # Adjusting title font size
          #ax5.set_title(f'Toename piek stroomnet', fontsize=6)
          
