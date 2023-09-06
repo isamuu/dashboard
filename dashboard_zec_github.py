@@ -768,7 +768,7 @@ def company_page():
          fig2, ax2 = plt.subplots()
          df_monthly_highest_company.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage per Company (Highest Usage Month: {highest_month_company[0]}-{highest_month_company[1]})', ax=ax2)
-         ax2.set_ylim([0, df_highest_week_vehicle.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
+         ax2.set_ylim([0, df_highest_week_company.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
          
          # cols[1].pyplot(fig2)
          
