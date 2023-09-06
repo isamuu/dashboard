@@ -515,7 +515,7 @@ def vehicle_page():
          
          
          # Display using Streamlit's plotly_chart method
-         col2.plotly_chart(plotly_fig)
+         col2.plotly_chart(fig5)
 
 
 
