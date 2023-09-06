@@ -749,7 +749,7 @@ def company_page():
          
          
          # Create the first chart
-         fig1, ax1 = plt.subplots()
+         fig1, ax1 = plt.subplots(figsize = (2,2))
          df_yearly_company.plot(kind='area', stacked=True, title='Yearly Electricity Usage per Company', ax=ax1)
          ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
          ax1.legend().set_visible(False)
