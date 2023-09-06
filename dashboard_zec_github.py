@@ -510,12 +510,12 @@ def vehicle_page():
          
          # Adjusting legend font size
          ax5.legend(fontsize=8)
-         #col2.pyplot(fig5)
+         col2.pyplot(fig5, use_container_width=True)
          
          
          
          # Display using Streamlit's plotly_chart method
-         col2.plotly_chart(fig5)
+         
 
 
 
