@@ -706,7 +706,7 @@ def company_page():
 
          
          #### Year
-         df_yearly_company = df.groupby(['Year', 'Month', 'bedrijf'])[usage_column].sum()
+         df_yearly_company = df.groupby(['Year', 'Month', 'bedrijf'])[usage_column].sum().unstack()
          
          #### MONTH
          # Group by year, month and calculate the sum of 'Max verbruik in kWh 2040' for all companies
