@@ -312,7 +312,7 @@ def bsg_page():
 
          # Create a dataframe
          data = {
-             'medal': ['gold', 'silver', 'bronze'],
+             'medal': ['Goud', 'Zilver', 'Brons'],
              'percentage': [5, 20, 75]
          }
          df_medals = pd.DataFrame(data)
