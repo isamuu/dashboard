@@ -298,11 +298,28 @@ def bsg_page():
 
          
          # Create the pie chart for the right column
-         labels = 'Werk niet mee', 'Werkt mee'
-         explode = (0.1, 0)  # only "explode" the 2nd slice
-         fig5, ax5 = plt.subplots(figsize=(2.5, 2.5))
-         ax5.pie(df["werkt mee"].value_counts(), explode=explode, labels=labels, autopct='%1.1f%%', 
-                 shadow=True, startangle=90)
+         #labels = 'Werk niet mee', 'Werkt mee'
+         #explode = (0.1, 0)  # only "explode" the 2nd slice
+         #fig5, ax5 = plt.subplots(figsize=(2.5, 2.5))
+         #ax5.pie(df["werkt mee"].value_counts(), explode=explode, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
+         #col2.pyplot(fig5)
+
+         # Create a dataframe
+         data = {
+             'medal': ['gold', 'silver', 'bronze'],
+             'percentage': [5, 20, 75]
+         }
+         df_medals = pd.DataFrame(data)
+         
+         # Pie chart settings
+         labels = df_medals['medal'].tolist()
+         colors = ['gold', 'silver', '#cd7f32']  # gold, silver, bronze colors
+         explode = (0.5, 0.25, 0)  # explode only the gold slice
+         
+         # Plot
+         fig, ax = plt.subplots(figsize=(2.5, 2.5))
+         ax5.pie(df_medals['percentage'], explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', 
+                shadow=True, startangle=90)
          col2.pyplot(fig5)
     
          #### YEAR
