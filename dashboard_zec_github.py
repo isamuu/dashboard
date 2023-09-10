@@ -135,8 +135,19 @@ company_mapping = {company: f"bedrijf {chr(i+65)}" for i, company in enumerate(u
 df["bedrijf"] = df["bedrijf"].replace(company_mapping)
 
 def homepage():
-         st.title('ZEC Mobility Dashboard')
-         st.write('Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.')
+         st.markdown(
+                      """
+                      <style>
+                          .reportview-container .markdown-text-container {
+                              text-align: center;
+                          }
+                      </style>
+                      """,
+                      unsafe_allow_html=True)
+         st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
+         col1, col2 = st.columns(2)
+         
+         col1.write('Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.')
          
          # The user can select a year
          year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
