@@ -150,10 +150,10 @@ def homepage():
          col1.write('Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.')
          
          # The user can select a year
-         year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
+         year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
          
          # The user can select between maximum and average
-         value_type = st.radio('Choose a value type', options=['max', 'gem'])
+         value_type = col1.radio('Choose a value type', options=['max', 'gem'])
          
          # Based on the user's selections, choose the appropriate column
          if value_type:
@@ -198,7 +198,7 @@ def homepage():
                   )
 
     # Render the map
-         st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=initial_view_state, map_style="mapbox://styles/mapbox/light-v9"))
+         col2.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=initial_view_state, map_style="mapbox://styles/mapbox/light-v9"))
 
     
     #### DATA
