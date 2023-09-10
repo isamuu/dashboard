@@ -150,10 +150,10 @@ def homepage():
          col1.write('Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.')
          
          # The user can select a year
-         year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
+         #year = st.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
          
          # The user can select between maximum and average
-         value_type = st.radio('Choose a value type', options=['max', 'gem'])
+         #value_type = st.radio('Choose a value type', options=['max', 'gem'])
          
          # Based on the user's selections, choose the appropriate column
          if value_type:
@@ -260,33 +260,6 @@ def homepage():
          
          
          
-         
-         #### PLOT
-         # Create a 1x4 layout
-         cols = st.columns(4)
-         
-         # Create the first chart
-         fig1, ax1 = plt.subplots()
-         df_yearly.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
-         cols[0].pyplot(fig1)
-         
-         # Create the second chart
-         fig2, ax2 = plt.subplots()
-         df_monthly.plot(kind='area', stacked=True, 
-                            title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month[0]}-{highest_year_month[1]})', ax=ax2)
-         cols[1].pyplot(fig2)
-         
-         # Create the third chart
-         fig3, ax3 = plt.subplots()
-         df_weekly.plot(kind='area', stacked=True, 
-                           title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week[0]}-Week {highest_year_week[1]})', ax=ax3)
-         cols[2].pyplot(fig3)
-         
-         # Create the fourth chart
-         fig4, ax4 = plt.subplots()
-         df_daily.plot(kind='area', stacked=True, 
-                          title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day[0]}-{highest_year_month_day[1]}-{highest_year_month_day[2]})', ax=ax4)
-         cols[3].pyplot(fig4)
 
 
 def bsg_page():
