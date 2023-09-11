@@ -5,6 +5,7 @@ import plotly.express as px
 import geopandas as gpd
 import pydeck as pdk
 from plotly.tools import mpl_to_plotly
+import folium
 st.set_page_config(layout="wide")
 
 # Load the geopackage file
@@ -187,31 +188,19 @@ def homepage():
          # Extract latitude and longitude for Pydeck
          data['lon'] = data['geometry'].x
          data['lat'] = data['geometry'].y
+
+         m = folium.Map(location=[data['lat'].mean(), data['lon'].mean()], zoom_start=13)
          
-         # Create a Pydeck map
-         map = pdk.Deck(
-             map_style="mapbox://styles/mapbox/light-v9",
-             initial_view_state={
-                 "latitude": data['lat'].mean(),
-                 "longitude": data['lon'].mean(),
-                 "zoom": 12,
-             },
-             layers=[
-                 pdk.Layer(
-                     "ScatterplotLayer",
-                     data,
-                     get_position=["lon", "lat"],
-                     get_radius=100,
-                     get_fill_color=[255, 0, 0, 140],
-                     pickable=True,
-                     auto_highlight=True,
-                     tooltip={"text": "{Bedrijf}"}
-                 ),
-             ],
-         )
+         # Add the points to the map with tooltips
+         for index, row in data.iterrows():
+             folium.Marker(
+                 location=[row['lat'], row['lon']],
+                 tooltip=row['Bedrijf'],
+             ).add_to(m)
          
-         # Display the map in Streamlit
-         col2.pydeck_chart(map)
+         # Display the folium map in Streamlit
+         m
+
           
          
          
