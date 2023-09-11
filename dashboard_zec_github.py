@@ -189,18 +189,35 @@ def homepage():
          data['lon'] = data['geometry'].x
          data['lat'] = data['geometry'].y
 
-         m = folium.Map(location=[data['lat'].mean(), data['lon'].mean()], zoom_start=13)
+         # Create a Pydeck map
+         # Create a Pydeck map
+         map = pdk.Deck(
+             map_style="mapbox://styles/mapbox/light-v9",
+             initial_view_state={
+                 "latitude": data['lat'].mean(),
+                 "longitude": data['lon'].mean(),
+                 "zoom": 10,
+                 "pitch": 50,
+             },
+             layers=[
+                 pdk.Layer(
+                     "ScatterplotLayer",
+                     data,
+                     get_position=["lon", "lat"],
+                     get_radius=100,
+                     get_fill_color=[255, 0, 0, 140],
+                     pickable=True,
+                     auto_highlight=True,
+                 ),
+             ],
+         )
          
-         # Add the points to the map with tooltips
-         for index, row in data.iterrows():
-             folium.Marker(
-                 location=[row['lat'], row['lon']],
-                 tooltip=row['Bedrijf'],
-             ).add_to(m)
-         
-         # Display the folium map in Streamlit
-         m
-
+         # If there's a click event and it contains data, display the company name
+         if st.pydeck_chart(map, use_container_width=True).clicked:
+             clicked_data = st.session_state.pydeck_clicked_input
+             st.write(f"Company: {clicked_data['Bedrijf']}")
+                  # Display the map in Streamlit
+                  
           
          
          
