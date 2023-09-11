@@ -207,9 +207,10 @@ def homepage():
                      get_fill_color=[255, 0, 0, 140],
                      pickable=True,
                      auto_highlight=True,
+                     
                  ),
              ],
-                  tooltip = {"html": "{jaja}"}
+                  tooltip={"text": "Company: {Bedrijf}"}
          )
          
          col2.pydeck_chart(map)
