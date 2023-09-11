@@ -199,12 +199,13 @@ def homepage():
              },
              layers=[
                  pdk.Layer(
-                     "ClusterLayer",
+                     "ScatterplotLayer",
                      data,
                      get_position=["lon", "lat"],
-                     radius=100,
-                     clusterRadius=30,
-                     clusterMaxZoom=14,
+                     get_radius=100,
+                     get_fill_color=[255, 0, 0, 140],
+                     pickable=True,
+                     auto_highlight=True,
                      tooltip={"text": "Cluster size: {point_count}"}
                      
                  ),
