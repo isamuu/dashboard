@@ -5,7 +5,6 @@ import plotly.express as px
 import geopandas as gpd
 import pydeck as pdk
 from plotly.tools import mpl_to_plotly
-import folium
 st.set_page_config(layout="wide")
 
 # Load the geopackage file
