@@ -195,7 +195,6 @@ def homepage():
                  "latitude": data['lat'].mean(),
                  "longitude": data['lon'].mean(),
                  "zoom": 10,
-                 "pitch": 50,
              },
              layers=[
                  pdk.Layer(
