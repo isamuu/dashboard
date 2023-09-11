@@ -209,6 +209,7 @@ def homepage():
                      auto_highlight=True,
                  ),
              ],
+                  tooltip = {"html": "{jaja}"}}
          )
          
          col2.pydeck_chart(map)
