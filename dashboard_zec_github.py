@@ -170,48 +170,45 @@ def homepage():
                   usage_column = f'gem verbruik in kWh {year}'
     
 
-         @st.cache(allow_output_mutation=True)
-         def load_data():
-                  gdf = gpd.read_file("companies.gpkg")
-                  # Convert to EPSG:4326
-                  gdf = gdf.to_crs(epsg=4326)
-                  gdf["lon"] = gdf["geometry"].x
-                  gdf["lat"] = gdf["geometry"].y
-                  return gdf
 
-         data = load_data()
-         
-         df_map = df.groupby("Bedrijf")[usage_column].sum()
-         data = data.merge(df_map, on = "Bedrijf", how = "left")
-         data[usage_column] = (data[usage_column] - data[usage_column].min()) / (data[usage_column].max() - data[usage_column].min())
-         
-
-
-    # Set the map's initial center to the mean of all points
-         initial_view_state = pdk.ViewState(
-                  latitude=data["lat"].mean(),
-                  longitude=data["lon"].mean(),
-                  zoom=13,
-                  )
-
-    # Create the scatter plot layer
-         layer = pdk.Layer(
-                  "ScatterplotLayer",
-                  data,
-                  get_position=["lon", "lat"],
-                  get_radius= [usage_column],
-                  radiusScale=10,
-                  radiusUnits = "pixels",
-                  get_fill_color=[180, 0, 200, 140],
-                  )
 
     # Render the map
-         col2.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=initial_view_state, map_style="mapbox://styles/mapbox/light-v9"))
+         #col2.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=initial_view_state, map_style="mapbox://styles/mapbox/light-v9"))
 
 
     
     #### DATA
-    
+    # Load the geospatial data
+         data = gpd.read_file("companies.gpkg")
+         
+         # Convert the geospatial data to a format that Pydeck understands
+         data['lon'] = data['geometry'].x
+         data['lat'] = data['geometry'].y
+         
+         # Create a Pydeck map
+         map = pdk.Deck(
+             map_style="mapbox://styles/mapbox/light-v9",
+             initial_view_state={
+                 "latitude": data['lat'].mean(),
+                 "longitude": data['lon'].mean(),
+                 "zoom": 10,
+                 "pitch": 50,
+             },
+             layers=[
+                 pdk.Layer(
+                     "ScatterplotLayer",
+                     data,
+                     get_position=["lon", "lat"],
+                     get_radius=100,
+                     get_fill_color=[255, 0, 0, 140],
+                     pickable=True,
+                     auto_highlight=True,
+                 ),
+             ],
+         )
+         
+         # Display the map in Streamlit
+         st.pydeck_chart(map)
           
          
          
