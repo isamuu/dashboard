@@ -199,19 +199,17 @@ def homepage():
              },
              layers=[
                  pdk.Layer(
-                     "ScatterplotLayer",
+                     "ClusterLayer",
                      data,
                      get_position=["lon", "lat"],
-                     get_radius=100,
+                     radius=100,
                      clusterRadius=30,
                      clusterMaxZoom=14,
-                     get_fill_color=[255, 0, 0, 140],
-                     pickable=True,
-                     auto_highlight=True,
+                     tooltip={"text": "Cluster size: {point_count}"}
                      
                  ),
              ],
-                  tooltip={"text": "Company: {Bedrijf}"}
+                  #tooltip={"text": "Company: {Bedrijf}"}
          )
          
          col2.pydeck_chart(map)
