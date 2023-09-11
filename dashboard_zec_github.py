@@ -205,6 +205,7 @@ def homepage():
                      get_fill_color=[255, 0, 0, 140],
                      pickable=True,
                      auto_highlight=True,
+                     tooltip={"text": "{Bedrijf}"}
                  ),
              ],
          )
