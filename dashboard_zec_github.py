@@ -203,6 +203,8 @@ def homepage():
                      data,
                      get_position=["lon", "lat"],
                      get_radius=100,
+                     clusterRadius=30,
+                     clusterMaxZoom=14,
                      get_fill_color=[255, 0, 0, 140],
                      pickable=True,
                      auto_highlight=True,
