@@ -189,13 +189,13 @@ def homepage():
          data['lat'] = data['geometry'].y
 
          # Create a Pydeck map
-         # Create a Pydeck map
          map = pdk.Deck(
              map_style="mapbox://styles/mapbox/light-v9",
              initial_view_state={
                  "latitude": data['lat'].mean(),
                  "longitude": data['lon'].mean(),
-                 "zoom": 12,
+                 "zoom": 10,
+                 "pitch": 50,
              },
              layers=[
                  pdk.Layer(
@@ -210,11 +210,9 @@ def homepage():
              ],
          )
          
-         # If there's a click event and it contains data, display the company name
-         if st.pydeck_chart(map, use_container_width=True).clicked:
-             clicked_data = st.session_state.pydeck_clicked_input
+         clicked_data = st.pydeck_chart(map, use_container_width=True).clicked
+         if clicked_data:
              st.write(f"Company: {clicked_data['Bedrijf']}")
-                  # Display the map in Streamlit
                   
           
          
