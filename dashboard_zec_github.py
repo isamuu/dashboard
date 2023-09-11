@@ -181,7 +181,10 @@ def homepage():
     # Load the geospatial data
          data = gpd.read_file("companies.gpkg")
          
-         # Convert the geospatial data to a format that Pydeck understands
+         # Convert to EPSG:4326
+         data = data.to_crs(epsg=4326)
+         
+         # Extract latitude and longitude for Pydeck
          data['lon'] = data['geometry'].x
          data['lat'] = data['geometry'].y
          
