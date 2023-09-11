@@ -5,7 +5,6 @@ import plotly.express as px
 import geopandas as gpd
 import pydeck as pdk
 from plotly.tools import mpl_to_plotly
-pip install streamlit-folium
 import folium
 from streamlit_folium import folium_static
 
@@ -214,9 +213,7 @@ def homepage():
              ],
          )
          
-         clicked_data = st.pydeck_chart(map, use_container_width=True).clicked
-         if clicked_data:
-             st.write(f"Company: {clicked_data['Bedrijf']}")
+         col2.pydeck_chart(map)
                   
           
          
