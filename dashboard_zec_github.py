@@ -5,6 +5,7 @@ import plotly.express as px
 import geopandas as gpd
 import pydeck as pdk
 from plotly.tools import mpl_to_plotly
+pip install streamlit-folium
 import folium
 from streamlit_folium import folium_static
 
