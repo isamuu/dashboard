@@ -211,7 +211,7 @@ def homepage():
          )
          
          # Display the map in Streamlit
-         st.pydeck_chart(map)
+         col2.pydeck_chart(map)
           
          
          
