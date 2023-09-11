@@ -157,7 +157,17 @@ def homepage():
          Dit betekent dat we geconfronteerd worden met een complexe puzzel die op de juiste manier moet worden aangepakt. 
          Dit dashboard biedt inzichten in de huidige situatie, uitdagingen en kansen binnen op het Schiphol Trade Park.""")
          
-
+         # The user can select a year
+         year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
+         
+         # The user can select between maximum and average
+         value_type = col1.radio('Choose a value type', options=['max', 'gem'])
+         
+         # Based on the user's selections, choose the appropriate column
+         if value_type:
+                  usage_column = f'max verbruik in kWh {year}'
+         else:
+                  usage_column = f'gem verbruik in kWh {year}'
     
 
          @st.cache(allow_output_mutation=True)
