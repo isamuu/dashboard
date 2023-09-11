@@ -157,17 +157,7 @@ def homepage():
          Dit betekent dat we geconfronteerd worden met een complexe puzzel die op de juiste manier moet worden aangepakt. 
          Dit dashboard biedt inzichten in de huidige situatie, uitdagingen en kansen binnen op het Schiphol Trade Park.""")
          
-         # The user can select a year
-         year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
-         
-         # The user can select between maximum and average
-         value_type = col1.radio('Choose a value type', options=['max', 'gem'])
-         
-         # Based on the user's selections, choose the appropriate column
-         if value_type:
-                  usage_column = f'max verbruik in kWh {year}'
-         else:
-                  usage_column = f'gem verbruik in kWh {year}'
+
     
 
          @st.cache(allow_output_mutation=True)
@@ -228,61 +218,7 @@ def homepage():
     
     #### DATA
     
-         #### YEAR
-         df_yearly = df.groupby(['Year', 'Month'])[usage_column].sum()
-         
-         
-         #### MONTH
-         # Group by year, month and calculate the sum of 'Max verbruik in kWh 2040'
-         df_monthly_total = df.groupby(['Year', 'Month'])[usage_column].sum().reset_index()
-         
-         # Find the month with the highest total usage
-         highest_month = df_monthly_total[df_monthly_total[usage_column] == df_monthly_total[usage_column].max()]
-         
-         # Extract the year and month
-         highest_year_month = highest_month[['Year', 'Month']].values[0]
-         
-         # Select data for the highest usage month
-         df_highest_month = df[(df['Year'] == highest_year_month[0]) & (df['Month'] == highest_year_month[1])]
-         
-         # Group by day and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-         df_monthly = df_highest_month.groupby('Day')[usage_column].sum()
-         
-         
-         #### WEEK
-         # Group by year, week and calculate the sum of 'Max verbruik in kWh 2040'
-         df_weekly_total = df.groupby(['Year', 'Week'])[usage_column].sum().reset_index()
-         
-         # Find the week with the highest total usage
-         highest_week = df_weekly_total[df_weekly_total[usage_column] == df_weekly_total[usage_column].max()]
-         
-         # Extract the year and week
-         highest_year_week = highest_week[['Year', 'Week']].values[0]
-         
-         # Select data for the highest usage week
-         df_highest_week = df[(df['Year'] == highest_year_week[0]) & (df['Week'] == highest_year_week[1])]
-         
-         # Group by weekday and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-         df_weekly = df_highest_week.groupby('Weekday')[usage_column].sum()
-         
-         
-         #### DAY
-         # Group by year, month, day and calculate the sum of 'Max verbruik in kWh 2040'
-         df_daily_total = df.groupby(['Year', 'Month', 'Day'])[usage_column].sum().reset_index()
-         
-         # Find the day with the highest total usage
-         highest_day = df_daily_total[df_daily_total[usage_column] == df_daily_total[usage_column].max()]
-         
-         # Extract the year, month and day
-         highest_year_month_day = highest_day[['Year', 'Month', 'Day']].values[0]
-         
-         # Select data for the highest usage day
-         df_highest_day = df[(df['Year'] == highest_year_month_day[0]) & (df['Month'] == highest_year_month_day[1]) & (df['Day'] == highest_year_month_day[2])]
-         
-         # Group by hour and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-         df_daily = df_highest_day.groupby('Hour')[usage_column].sum()
-         
-         
+          
          
          
 
