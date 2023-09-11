@@ -5,8 +5,6 @@ import plotly.express as px
 import geopandas as gpd
 import pydeck as pdk
 from plotly.tools import mpl_to_plotly
-import folium
-from streamlit_folium import folium_static
 
 st.set_page_config(layout="wide")
 
