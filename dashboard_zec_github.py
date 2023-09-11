@@ -147,9 +147,15 @@ def homepage():
          st.markdown("<h1 style='text-align: center'>STP Bedrijventerrein</h1>", unsafe_allow_html=True)
          col1, col2 = st.columns(2)
          
-         col1.write("""Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. 
+         col1.write(""" Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. 
          Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. 
-         Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.""")
+         Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.
+         
+         /n Terwijl de wereld zich richt op duurzame energie, wordt de overstap naar elektrische voertuigen op bedrijventerreinen een groot en complex vraagstuk. 
+         Het is algemeen bekend dat de elektriciteitsinfrastructuur in Nederland op sommige locaties al tegen zijn uiterste loopt.
+         De transitie naar eleketrisch transport zal nog meer druk zetten op onze infrastructuur, zo ook op het bedrijventerrein Schiphol Trade Park.
+         Dit betekent dat we geconfronteerd worden met een complexe puzzel die op de juiste manier moet worden aangepakt. 
+         Dit dashboard biedt inzichten in de huidige situatie, uitdagingen en kansen binnen op het Schiphol Trade Park.""")
          
          # The user can select a year
          year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
