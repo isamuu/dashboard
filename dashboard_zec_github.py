@@ -209,7 +209,7 @@ def homepage():
 
          cols = st.columns(4)
 
-         with open('/Icons%20dashboard/db%20bakwagen.svg', 'r') as file:
+         with open('Icons dashboard/db bakwagen.svg', 'r') as file:
                   svg_content = file.read()
 
          svg_content = svg_content.replace('#000000', '#FF0000')
