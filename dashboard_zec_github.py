@@ -185,7 +185,7 @@ def homepage():
              initial_view_state={
                  "latitude": data['lat'].mean(),
                  "longitude": data['lon'].mean(),
-                 "zoom": 14,
+                 "zoom": 13,
              },
              layers=[
                  pdk.Layer(
