@@ -215,7 +215,9 @@ def homepage():
          icon_bestelwagen_html = f'<img src="{icon_bestelwagen}" width="150" style="display: block; margin: auto;">'
          
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.png"
-         icon_truck_html = f'<img src="{icon_truck}" width="150" style="display: block; margin: auto;">'
+         #icon_truck_html = f'<img src="{icon_truck}" width="150" style="display: block; margin: auto;">'
+         icon_truck_html = f'''<img src="{icon_truck}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center;">{21} trucks</p>'''
          
          icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.png"
          icon_bedrijf_html = f'<img src="{icon_bedrijf}" width="150" style="display: block; margin: auto;">'
