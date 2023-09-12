@@ -199,7 +199,7 @@ def homepage():
                      
                  ),
              ],
-                  tooltip={"text": "Company: {Bedrijf}"}
+                  tooltip={"text": "Bedrijf: {Bedrijf}"}
          )
          
          col2.pydeck_chart(map)
