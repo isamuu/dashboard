@@ -214,7 +214,7 @@ def homepage():
          icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.png"
          
          # Display content in the first column
-         with cols[0].image(image_url, caption="Truck Icon", use_column_width=True)
+         cols[0].image(image_url, caption="Truck Icon", use_column_width=True)
          
 
                   
