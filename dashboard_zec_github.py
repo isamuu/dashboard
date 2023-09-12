@@ -258,7 +258,7 @@ def bsg_page():
                       """,
                       unsafe_allow_html=True)
          st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
-         col1, col2 = st.columns(2)
+         column1, column2, column3, column4 = st.columns([0.2,0.2,0.2,0.4])
          
          # Place text in the left column
          col1.text("Your Text Here")  # Replace with your desired text
@@ -266,10 +266,10 @@ def bsg_page():
          show_line = st.checkbox('Capaciteit netwerk')
          
          # The user can select a year
-         year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
+         year = column1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
          
          # The user can select between maximum and average
-         value_type = col1.radio('Choose a value type', options=['max', 'gem'])
+         value_type = column1.radio('Choose a value type', options=['max', 'gem'])
 
          # Based on the user's selections, choose the appropriate column
          if value_type:
