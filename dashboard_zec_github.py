@@ -215,12 +215,12 @@ def homepage():
          <p style="text-align: center;">{aantal_bakwagen} Bakwagens</p>'''
          
          icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.png"
-         aantal_bestelwagen = df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bestelwagen"].sum()
+         aantal_bestelwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bestelwagen"].sum())
          icon_bestelwagen_html = f'''<img src="{icon_bestelwagen}" width="150" style="display: block; margin: auto;">'
          <p style="text-align: center;">{aantal_bestelwagen} Bestelwagens</p>'''
          
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.png"
-         aantal_truck = df[df["Datum"]=="2022-01-01 00:00:00"]["aantal truck"].sum()
+         aantal_truck = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal truck"].sum())
          icon_truck_html = f'''<img src="{icon_truck}" width="150" style="display: block; margin: auto;">
          <p style="text-align: center;">{aantal_truck} Trucks</p>'''
          
