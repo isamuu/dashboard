@@ -210,14 +210,14 @@ def homepage():
          cols = st.columns(4)
          
          icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.png"
-         aantal_bakwagen = round(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bakwagen"].sum(), 0)
+         aantal_bakwagen = df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bakwagen"].sum()
          icon_bakwagen_html = f'''<img src="{icon_bakwagen}" width="150" style="display: block; margin: auto;">'
-         <p style="text-align: center;">{aantal_bakwagen} Bakwagens</p>'''
+         <p style="text-align: center;">{round(aantal_bakwagen, 0)} Bakwagens</p>'''
          
          icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.png"
          aantal_bestelwagen = df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bestelwagen"].sum()
          icon_bestelwagen_html = f'''<img src="{icon_bestelwagen}" width="150" style="display: block; margin: auto;">'
-         <p style="text-align: center;">{aantal_bestelwagen} Bestelwagens</p>'''
+         <p style="text-align: center;">{round(aantal_bestelwagen, 0)} Bestelwagens</p>'''
          
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.png"
          aantal_truck = df[df["Datum"]=="2022-01-01 00:00:00"]["aantal truck"].sum()
