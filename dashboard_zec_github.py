@@ -265,7 +265,8 @@ def bsg_page():
 
          # Place text in the left column
          column1.text("Your Text Here")
-         
+
+         #TRUCK
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.jpg"
          icon_truck_html = f'''<img src="{icon_truck}" width="150" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 24px;">{1} Truck</p>'''
@@ -286,8 +287,48 @@ def bsg_page():
          <p style="text-align: center; font-size: 24px;">{1} Truck</p>'''
          column1.markdown(icon_truck_brons_html, unsafe_allow_html=True)
 
+         #BAKWAGEN
+         icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.jpg"
+         icon_bakwagen_html = f'''<img src="{icon_bakwagen}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 24px;">{1} bakwagen</p>'''
+         column1.markdown(icon_bakwagen_html, unsafe_allow_html=True)
+
+         icon_bakwagen_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen%20goud.jpg"
+         icon_bakwagen_goud_html = f'''<img src="{icon_bakwagen_goud}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 24px;">{1} bakwagen</p>'''
+         column1.markdown(icon_bakwagen_goud_html, unsafe_allow_html=True)
+         
+         icon_bakwagen_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen%20zilver.jpg"
+         icon_bakwagen_zilver_html = f'''<img src="{icon_bakwagen_zilver}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 24px;">{1} bakwagen</p>'''
+         column1.markdown(icon_bakwagen_zilver_html, unsafe_allow_html=True)
+
+         icon_bakwagen_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen%20brons.jpg"
+         icon_bakwagen_brons_html = f'''<img src="{icon_bakwagen_brons}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 24px;">{1} bakwagen</p>'''
+         column1.markdown(icon_bakwagen_brons_html, unsafe_allow_html=True)
 
 
+         #BESTELWAGEN
+         icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.jpg"
+         icon_bestelwagen_html = f'''<img src="{icon_bestelwagen}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 24px;">{1} bestelwagen</p>'''
+         column1.markdown(icon_bestelwagen_html, unsafe_allow_html=True)
+
+         icon_bestelwagen_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20goud.jpg"
+         icon_bestelwagen_goud_html = f'''<img src="{icon_bestelwagen_goud}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 24px;">{1} bestelwagen</p>'''
+         column1.markdown(icon_bestelwagen_goud_html, unsafe_allow_html=True)
+         
+         icon_bestelwagen_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20zilver.jpg"
+         icon_bestelwagen_zilver_html = f'''<img src="{icon_bestelwagen_zilver}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 24px;">{1} bestelwagen</p>'''
+         column1.markdown(icon_bestelwagen_zilver_html, unsafe_allow_html=True)
+
+         icon_bestelwagen_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20brons.jpg"
+         icon_bestelwagen_brons_html = f'''<img src="{icon_bestelwagen_brons}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 24px;">{1} bestelwagen</p>'''
+         column1.markdown(icon_bestelwagen_brons_html, unsafe_allow_html=True)
 
 
 
