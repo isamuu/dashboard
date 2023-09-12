@@ -209,22 +209,22 @@ def homepage():
 
          cols = st.columns(4)
          
-         icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.png"
+         icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.jpg"
          aantal_bakwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bakwagen"].sum())
          icon_bakwagen_html = f'''<img src="{icon_bakwagen}" width="150" style="display: block; margin: auto;">'
          <p style="text-align: center; font-size: 24px;">{aantal_bakwagen} Bakwagens</p>'''
          
-         icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.png"
+         icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.jpg"
          aantal_bestelwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bestelwagen"].sum())
          icon_bestelwagen_html = f'''<img src="{icon_bestelwagen}" width="150" style="display: block; margin: auto;">'
          <p style="text-align: center; font-size: 24px;">{aantal_bestelwagen} Bestelwagens</p>'''
          
-         icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.png"
+         icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.jpg"
          aantal_truck = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal truck"].sum())
          icon_truck_html = f'''<img src="{icon_truck}" width="150" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 24px;">{aantal_truck} Trucks</p>'''
          
-         icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.png"
+         icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.jpg"
          aantal_bedrijf = len(df['Bedrijf'].unique())
          icon_bedrijf_html = f'''<img src="{icon_bedrijf}" width="150" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 24px;">{aantal_bedrijf} Bedrijven</p>'''
