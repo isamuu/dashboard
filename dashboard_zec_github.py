@@ -214,10 +214,10 @@ def homepage():
          icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.png"
          
          # Display content in the first column
-         cols[0].image(icon_bedrijf, caption="Bedrijf Icon", use_column_width=True)
-         cols[1].image(icon_truck, caption="Bedrijf Icon", use_column_width=True)
-         cols[2].image(icon_bakwagen, caption="Bedrijf Icon", use_column_width=True)
-         cols[3].image(icon_bestelwagen, caption="Bedrijf Icon", use_column_width=True)
+         cols[0].image(icon_bedrijf, caption="Bedrijf Icon", use_column_width='auto')
+         cols[1].image(icon_truck, caption="Bedrijf Icon", use_column_width='auto')
+         cols[2].image(icon_bakwagen, caption="Bedrijf Icon", use_column_width='auto')
+         cols[3].image(icon_bestelwagen, caption="Bedrijf Icon", use_column_width='auto')
 
                   
           
