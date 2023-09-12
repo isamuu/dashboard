@@ -222,7 +222,7 @@ def homepage():
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.png"
          aantal_truck = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal truck"].sum())
          icon_truck_html = f'''<img src="{icon_truck}" width="150" style="display: block; margin: auto;">
-         <p style="text-align: center;">{aantal_truck} Trucks</p>'''
+         <p style="text-align: center; font-size: 18px;">{aantal_truck} Trucks</p>'''
          
          icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.png"
          aantal_bedrijf = len(df['Bedrijf'].unique())
