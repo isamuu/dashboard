@@ -261,7 +261,7 @@ def bsg_page():
          column1, column2, column3, column4 = st.columns([0.2,0.2,0.2,0.4])
          
          # Place text in the left column
-         col1.text("Your Text Here")  # Replace with your desired text
+         column1.text("Your Text Here")  # Replace with your desired text
 
          show_line = st.checkbox('Capaciteit netwerk')
          
@@ -294,7 +294,7 @@ def bsg_page():
          fig5, ax5 = plt.subplots(figsize=(2.5, 2.5))
          ax5.pie(df_medals['percentage'], explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', 
                 shadow=True, startangle=90)
-         col2.pyplot(fig5)         
+         column4.pyplot(fig5)         
 
 
          
