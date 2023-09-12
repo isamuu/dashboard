@@ -208,20 +208,11 @@ def homepage():
          # Insights
 
          cols = st.columns(4)
-
-         #with open('Icons dashboard/db bakwagen.svg', 'r') as file:
-         #         svg_content = file.read()
-
-         #svg_content = svg_content.replace('#000000', '#FF0000')
          
-         
-         #icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.png"
+         icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.png"
          aantal_bakwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bakwagen"].sum())
-         #icon_bakwagen_html = f'''
-         #{svg_content}
-         #<p style="text-align: center;">{aantal_bakwagen} Bakwagens</p>'''
-         #icon_bakwagen_html = f'''<img src="{svg_content}" width="150" style="display: block; margin: auto;">'
-         #<p style="text-align: center;">{aantal_bakwagen} Bakwagens</p>'''
+         icon_bakwagen_html = f'''<img src="{svg_content}" width="150" style="display: block; margin: auto;">'
+         <p style="text-align: center;">{aantal_bakwagen} Bakwagens</p>'''
          
          icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.png"
          aantal_bestelwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bestelwagen"].sum())
@@ -245,32 +236,6 @@ def homepage():
          cols[0].markdown(icon_bedrijf_html, unsafe_allow_html=True)
          cols[1].markdown(icon_truck_html, unsafe_allow_html=True)
          cols[2].markdown(icon_bestelwagen_html, unsafe_allow_html=True)
-         #cols[3].markdown(icon_bakwagen_html, unsafe_allow_html=True)
-
-         import xml.etree.ElementTree as ET
-         import urllib.parse
-         
-         # Parse the SVG content
-         tree = ET.parse('Icons dashboard/db bakwagen.svg')
-         root = tree.getroot()
-         
-         # Define the namespaces if they exist (SVG files usually have the "svg" namespace)
-         namespaces = {'svg': 'http://www.w3.org/2000/svg'}
-         
-         # Iterate over all elements and check for fill attributes
-         for element in root.findall(".//svg:*[@fill='#000000']", namespaces=namespaces):
-             element.attrib['fill'] = '#FF0000'
-         
-         # Convert the modified SVG tree back to a string
-         svg_content_modified = ET.tostring(root, encoding='utf-8').decode('utf-8')
-         
-         # Convert SVG content to Data URL format
-         svg_data_url = "data:image/svg+xml;utf8," + urllib.parse.quote(svg_content_modified)
-         
-         icon_bakwagen_html = f'''
-         <img src="{svg_data_url}" width="150" style="display: block; margin: auto;">
-         <p style="text-align: center;">{aantal_bakwagen} Bakwagens</p>'''
-         
          cols[3].markdown(icon_bakwagen_html, unsafe_allow_html=True)
 
 
