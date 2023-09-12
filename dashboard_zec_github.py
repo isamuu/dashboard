@@ -208,13 +208,13 @@ def homepage():
          # Insights
 
          cols = st.columns(4)
-         image_url = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.png"
-         
+         icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.png"
+         icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.png"
+         icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.png"
+         icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.png"
          
          # Display content in the first column
-         with cols[0]:
-             # Display the image from GitHub
-             st.image(image_url, caption="Truck Icon", use_column_width=True)
+         with cols[0].image(image_url, caption="Truck Icon", use_column_width=True)
          
 
                   
