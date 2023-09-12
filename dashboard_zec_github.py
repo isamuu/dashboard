@@ -212,15 +212,20 @@ def homepage():
          icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.png"
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.png"
          icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.png"
+
+         icon_truck_html = f'<img src="{icon_truck}" width="150" style="display: block; margin: auto;">'
          
          # Display content in the first column
-         cols[0].image(icon_bedrijf, caption="Bedrijf Icon", use_column_width=False, width=150)
+         #cols[0].markdown(icon_bedrijf, caption="Bedrijf Icon", use_column_width=False, width=150)
+         cols[0].markdown(icon_truck_html, unsafe_allow_html=True)
          cols[1].image(icon_truck, caption="Bedrijf Icon", use_column_width=False, width=150)
          cols[2].image(icon_bakwagen, caption="Bedrijf Icon", use_column_width=False, width=150)
          cols[3].image(icon_bestelwagen, caption="Bedrijf Icon", use_column_width=False, width=150)
 
                   
-          
+         
+         
+ 
          
          
 
