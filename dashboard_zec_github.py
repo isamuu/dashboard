@@ -212,7 +212,7 @@ def homepage():
          with open('Icons dashboard/db bakwagen.svg', 'r') as file:
                   svg_content = file.read()
 
-         svg_content = svg_content.replace('#000000', '#FF0000')
+         #svg_content = svg_content.replace('#000000', '#FF0000')
          
          
          #icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.png"
@@ -242,7 +242,7 @@ def homepage():
          
          # Display content in the first column
          #cols[0].markdown(icon_bedrijf, caption="Bedrijf Icon", use_column_width=False, width=150)
-         cols[0].markdown(icon_bedrijf_html, unsafe_allow_html=True)
+         cols[0].markdown(svg_content, unsafe_allow_html=True)
          cols[1].markdown(icon_truck_html, unsafe_allow_html=True)
          cols[2].markdown(icon_bestelwagen_html, unsafe_allow_html=True)
          cols[3].markdown(icon_bakwagen_html, unsafe_allow_html=True)
