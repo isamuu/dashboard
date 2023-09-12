@@ -209,18 +209,24 @@ def homepage():
 
          cols = st.columns(4)
          icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.png"
+         icon_bakwagen_html = f'<img src="{icon_bakwagen}" width="150" style="display: block; margin: auto;">'
+         
          icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.png"
+         icon_bestelwagen_html = f'<img src="{icon_bestelwagen}" width="150" style="display: block; margin: auto;">'
+         
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.png"
-         icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.png"
-
          icon_truck_html = f'<img src="{icon_truck}" width="150" style="display: block; margin: auto;">'
+         
+         icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.png"
+         icon_bedrijf_html = f'<img src="{icon_bedrijf}" width="150" style="display: block; margin: auto;">'
+         
          
          # Display content in the first column
          #cols[0].markdown(icon_bedrijf, caption="Bedrijf Icon", use_column_width=False, width=150)
-         cols[0].markdown(icon_truck_html, unsafe_allow_html=True)
-         cols[1].image(icon_truck, caption="Bedrijf Icon", use_column_width=False, width=150)
-         cols[2].image(icon_bakwagen, caption="Bedrijf Icon", use_column_width=False, width=150)
-         cols[3].image(icon_bestelwagen, caption="Bedrijf Icon", use_column_width=False, width=150)
+         cols[0].markdown(icon_bedrijf_html, unsafe_allow_html=True)
+         cols[1].markdown(icon_truck_html, unsafe_allow_html=True)
+         cols[2].markdown(icon_bestelwagen_html, unsafe_allow_html=True)
+         cols[3].markdown(icon_bakwagen_html, unsafe_allow_html=True)
 
                   
          
