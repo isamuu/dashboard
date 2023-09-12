@@ -208,7 +208,7 @@ def homepage():
          # Insights
 
          cols = st.columns(4)
-         image_url = "https://raw.githubusercontent.com/YourUsername/YourRepoName/main/Icons%20dashboard/db%20bakwagen.png"
+         image_url = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.png"
          
          
          # Display content in the first column
