@@ -247,15 +247,25 @@ def homepage():
          cols[2].markdown(icon_bestelwagen_html, unsafe_allow_html=True)
          #cols[3].markdown(icon_bakwagen_html, unsafe_allow_html=True)
 
+         import xml.etree.ElementTree as ET
          import urllib.parse
-
-         with open('Icons dashboard/db bakwagen.svg', 'r') as file:
-             svg_content = file.read()
          
-         svg_content = svg_content.replace('.cls-1 { fill: #000000; }', '.cls-1 { fill: #FF0000; }')
+         # Parse the SVG content
+         tree = ET.parse('Icons dashboard/db bakwagen.svg')
+         root = tree.getroot()
+         
+         # Define the namespaces if they exist (SVG files usually have the "svg" namespace)
+         namespaces = {'svg': 'http://www.w3.org/2000/svg'}
+         
+         # Iterate over all elements and check for fill attributes
+         for element in root.findall(".//svg:*[@fill='#000000']", namespaces=namespaces):
+             element.attrib['fill'] = '#FF0000'
+         
+         # Convert the modified SVG tree back to a string
+         svg_content_modified = ET.tostring(root, encoding='utf-8').decode('utf-8')
          
          # Convert SVG content to Data URL format
-         svg_data_url = "data:image/svg+xml;utf8," + urllib.parse.quote(svg_content)
+         svg_data_url = "data:image/svg+xml;utf8," + urllib.parse.quote(svg_content_modified)
          
          icon_bakwagen_html = f'''
          <img src="{svg_data_url}" width="150" style="display: block; margin: auto;">
