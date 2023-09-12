@@ -242,7 +242,7 @@ def homepage():
          
          # Display content in the first column
          #cols[0].markdown(icon_bedrijf, caption="Bedrijf Icon", use_column_width=False, width=150)
-         cols[0].markdown(icon_bedrijf, unsafe_allow_html=True)
+         cols[0].markdown(icon_bedrijf_html, unsafe_allow_html=True)
          cols[1].markdown(icon_truck_html, unsafe_allow_html=True)
          cols[2].markdown(icon_bestelwagen_html, unsafe_allow_html=True)
          #cols[3].markdown(icon_bakwagen_html, unsafe_allow_html=True)
