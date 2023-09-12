@@ -203,6 +203,21 @@ def homepage():
          )
          
          col2.pydeck_chart(map)
+
+
+         # Insights
+
+         cols = st.columns(4)
+         # Display content in the first column
+         with cols[0]:
+             # Display number (for example, let's say 150 trucks)
+             st.write("150")
+         
+             # Display the truck icon using HTML & FontAwesome
+             st.markdown(
+                 '<i class="fas fa-truck"></i>', 
+                 unsafe_allow_html=True
+             )
                   
           
          
