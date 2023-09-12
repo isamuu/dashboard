@@ -208,19 +208,25 @@ def homepage():
          # Insights
 
          cols = st.columns(4)
+         
          icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.png"
+         aantal_bakwagen = df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bakwagen"].sum()
          icon_bakwagen_html = f'<img src="{icon_bakwagen}" width="150" style="display: block; margin: auto;">'
          
          icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.png"
+         aantal_bestelwagen = df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bestelwagen"].sum()
          icon_bestelwagen_html = f'<img src="{icon_bestelwagen}" width="150" style="display: block; margin: auto;">'
          
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.png"
-         #icon_truck_html = f'<img src="{icon_truck}" width="150" style="display: block; margin: auto;">'
+         aantal_truck = df[df["Datum"]=="2022-01-01 00:00:00"]["aantal truck"].sum()
          icon_truck_html = f'''<img src="{icon_truck}" width="150" style="display: block; margin: auto;">
          <p style="text-align: center;">{21} trucks</p>'''
          
          icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.png"
-         icon_bedrijf_html = f'<img src="{icon_bedrijf}" width="150" style="display: block; margin: auto;">'
+         aantal_bedrijf = len(df['Bedrijf'].unique())
+         icon_bedrijf_html = f'''<img src="{icon_bedrijf}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center;">{aantal_bedrijf} Bedrijven</p>'''
+         
          
          
          # Display content in the first column
