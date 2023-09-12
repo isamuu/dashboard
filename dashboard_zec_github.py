@@ -252,7 +252,7 @@ def homepage():
          with open('Icons dashboard/db bakwagen.svg', 'r') as file:
              svg_content = file.read()
          
-         svg_content = svg_content.replace('#000000', '#FF0000')
+         svg_content = svg_content.replace('#000000', '#FF0000').replace('rgb(0,0,0)', '#FF0000')
          
          # Convert SVG content to Data URL format
          svg_data_url = "data:image/svg+xml;utf8," + urllib.parse.quote(svg_content)
