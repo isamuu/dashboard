@@ -258,7 +258,19 @@ def bsg_page():
                       """,
                       unsafe_allow_html=True)
          st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
+         
+         
          column1, column2, column3, column4 = st.columns([0.2,0.2,0.2,0.4])
+         
+         icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.jpg"
+         icon_truck_html = f'''<img src="{icon_truck}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 24px;">{1} Truck</p>'''
+         column1.markdown(icon_truck_html, unsafe_allow_html=True)
+
+         icon_truck_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck%20brons.jpg"
+         icon_truck_brons_html = f'''<img src="{icon_truck_brons}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 24px;">{1} Truck</p>'''
+         column1.markdown(icon_truck_brons_html, unsafe_allow_html=True)
          
          # Place text in the left column
          column1.text("Your Text Here")  # Replace with your desired text
