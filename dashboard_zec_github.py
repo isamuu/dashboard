@@ -209,8 +209,8 @@ def homepage():
 
          cols = st.columns(4)
 
-         with open('Icons dashboard/db bakwagen.svg', 'r') as file:
-                  svg_content = file.read()
+         #with open('Icons dashboard/db bakwagen.svg', 'r') as file:
+         #         svg_content = file.read()
 
          #svg_content = svg_content.replace('#000000', '#FF0000')
          
@@ -220,8 +220,8 @@ def homepage():
          #icon_bakwagen_html = f'''
          #{svg_content}
          #<p style="text-align: center;">{aantal_bakwagen} Bakwagens</p>'''
-         icon_bakwagen_html = f'''<img src="{svg_content}" width="150" style="display: block; margin: auto;">'
-         <p style="text-align: center;">{aantal_bakwagen} Bakwagens</p>'''
+         #icon_bakwagen_html = f'''<img src="{svg_content}" width="150" style="display: block; margin: auto;">'
+         #<p style="text-align: center;">{aantal_bakwagen} Bakwagens</p>'''
          
          icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.png"
          aantal_bestelwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bestelwagen"].sum())
@@ -242,10 +242,27 @@ def homepage():
          
          # Display content in the first column
          #cols[0].markdown(icon_bedrijf, caption="Bedrijf Icon", use_column_width=False, width=150)
-         cols[0].markdown(svg_content, unsafe_allow_html=True)
+         cols[0].markdown(icon_bedrijf, unsafe_allow_html=True)
          cols[1].markdown(icon_truck_html, unsafe_allow_html=True)
          cols[2].markdown(icon_bestelwagen_html, unsafe_allow_html=True)
+         #cols[3].markdown(icon_bakwagen_html, unsafe_allow_html=True)
+
+         import urllib.parse
+
+         with open('Icons dashboard/db bakwagen.svg', 'r') as file:
+             svg_content = file.read()
+         
+         svg_content = svg_content.replace('#000000', '#FF0000')
+         
+         # Convert SVG content to Data URL format
+         svg_data_url = "data:image/svg+xml;utf8," + urllib.parse.quote(svg_content)
+         
+         icon_bakwagen_html = f'''
+         <img src="{svg_data_url}" width="150" style="display: block; margin: auto;">
+         <p style="text-align: center;">{aantal_bakwagen} Bakwagens</p>'''
+         
          cols[3].markdown(icon_bakwagen_html, unsafe_allow_html=True)
+
 
                   
          
