@@ -268,8 +268,9 @@ def bsg_page():
 
          #TRUCK
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.jpg"
+         aantal_truck = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal truck"].sum())
          icon_truck_html = f'''<img src="{icon_truck}" width="150" style="display: block; margin: auto;">
-         <p style="text-align: center; font-size: 24px;">{1} Truck</p>'''
+         <p style="text-align: center; font-size: 24px;">{aantal_truck} Truck</p>'''
          column1.markdown(icon_truck_html, unsafe_allow_html=True)
 
          icon_truck_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck%20goud.jpg"
@@ -290,18 +291,19 @@ def bsg_page():
          #BAKWAGEN
          column2.text("Your Text Here")
          icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.jpg"
+         aantal_bakwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bakwagen"].sum())
          icon_bakwagen_html = f'''<img src="{icon_bakwagen}" width="150" style="display: block; margin: auto;">
-         <p style="text-align: center; font-size: 24px;">{1} bakwagen</p>'''
+         <p style="text-align: center; font-size: 24px;">{aantal_bakwagen} Bakwagens</p>'''
          column2.markdown(icon_bakwagen_html, unsafe_allow_html=True)
 
          icon_bakwagen_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen%20goud.jpg"
          icon_bakwagen_goud_html = f'''<img src="{icon_bakwagen_goud}" width="150" style="display: block; margin: auto;">
-         <p style="text-align: center; font-size: 24px;">{1} bakwagen</p>'''
+         <p style="text-align: center; font-size: 24px;">{1} Bakwagens</p>'''
          column2.markdown(icon_bakwagen_goud_html, unsafe_allow_html=True)
          
          icon_bakwagen_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen%20zilver.jpg"
          icon_bakwagen_zilver_html = f'''<img src="{icon_bakwagen_zilver}" width="150" style="display: block; margin: auto;">
-         <p style="text-align: center; font-size: 24px;">{1} bakwagen</p>'''
+         <p style="text-align: center; font-size: 24px;">{1} Bakwagens</p>'''
          column2.markdown(icon_bakwagen_zilver_html, unsafe_allow_html=True)
 
          icon_bakwagen_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen%20brons.jpg"
@@ -313,8 +315,9 @@ def bsg_page():
          #BESTELWAGEN
          column3.text("Your Text Here")
          icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.jpg"
+         aantal_bestelwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bestelwagen"].sum())
          icon_bestelwagen_html = f'''<img src="{icon_bestelwagen}" width="150" style="display: block; margin: auto;">
-         <p style="text-align: center; font-size: 24px;">{1} bestelwagen</p>'''
+         <p style="text-align: center; font-size: 24px;">{aantal_bestelwagen} bestelwagen</p>'''
          column3.markdown(icon_bestelwagen_html, unsafe_allow_html=True)
 
          icon_bestelwagen_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20goud.jpg"
