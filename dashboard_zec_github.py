@@ -208,16 +208,15 @@ def homepage():
          # Insights
 
          cols = st.columns(4)
+         image_url = "https://raw.githubusercontent.com/YourUsername/YourRepoName/main/Icons%20dashboard/db%20bakwagen.png"
+         
+         
          # Display content in the first column
          with cols[0]:
-             # Display number (for example, let's say 150 trucks)
-             st.write("150")
+             # Display the image from GitHub
+             st.image(image_url, caption="Truck Icon", use_column_width=True)
          
-             # Display the truck icon using HTML & FontAwesome
-             st.markdown(
-                 '<i class="fas fa-truck"></i>', 
-                 unsafe_allow_html=True
-             )
+
                   
           
          
