@@ -329,19 +329,19 @@ def bsg_page():
          icon_bestelwagen_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20goud.jpg"
          aantal_bestelwagen_goud = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Goud")]["aantal bestelwagen"].sum())
          icon_bestelwagen_goud_html = f'''<img src="{icon_bestelwagen_goud}" width="150" style="display: block; margin: auto;">
-         <p style="text-align: center; font-size: 24px;">{1} bestelwagen</p>'''
+         <p style="text-align: center; font-size: 24px;">{aantal_bestelwagen_goud} bestelwagen</p>'''
          column3.markdown(icon_bestelwagen_goud_html, unsafe_allow_html=True)
          
          icon_bestelwagen_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20zilver.jpg"
          aantal_bestelwagen_zilver = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Zilver")]["aantal bestelwagen"].sum())
          icon_bestelwagen_zilver_html = f'''<img src="{icon_bestelwagen_zilver}" width="150" style="display: block; margin: auto;">
-         <p style="text-align: center; font-size: 24px;">{1} bestelwagen</p>'''
+         <p style="text-align: center; font-size: 24px;">{aantal_bestelwagen_zilver} bestelwagen</p>'''
          column3.markdown(icon_bestelwagen_zilver_html, unsafe_allow_html=True)
 
          icon_bestelwagen_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20brons.jpg"
          aantal_bestelwagen_brons = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Brons")]["aantal bestelwagen"].sum())
          icon_bestelwagen_brons_html = f'''<img src="{icon_bestelwagen_brons}" width="150" style="display: block; margin: auto;">
-         <p style="text-align: center; font-size: 24px;">{1} bestelwagen</p>'''
+         <p style="text-align: center; font-size: 24px;">{aantal_bestelwagen_brons} bestelwagen</p>'''
          column3.markdown(icon_bestelwagen_brons_html, unsafe_allow_html=True)
 
 
