@@ -274,8 +274,9 @@ def bsg_page():
          column1.markdown(icon_truck_html, unsafe_allow_html=True)
 
          icon_truck_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck%20goud.jpg"
+         aantal_truck_goud = df[(df["Datum"]=="2022-01-01 00:00:00") & (df["werkt mee"] == "Ja")]["aantal truck"].sum()
          icon_truck_goud_html = f'''<img src="{icon_truck_goud}" width="150" style="display: block; margin: auto;">
-         <p style="text-align: center; font-size: 24px;">{1} Truck</p>'''
+         <p style="text-align: center; font-size: 24px;">{aantal_truck_goud} Truck</p>'''
          column1.markdown(icon_truck_goud_html, unsafe_allow_html=True)
          
          icon_truck_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck%20zilver.jpg"
