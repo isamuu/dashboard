@@ -379,7 +379,7 @@ def bsg_page():
          # Plot
          fig5, ax5 = plt.subplots(figsize=(1, 1))
          ax5.pie(df_medals['percentage'], explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', 
-                shadow=True, startangle=90, textprops = {'fontsize': 11})
+                shadow=True, startangle=90, textprops = {'fontsize': 6})
          column4.pyplot(fig5)         
 
 
