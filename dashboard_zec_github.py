@@ -260,7 +260,7 @@ def bsg_page():
          st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
          
          
-         column1, column2, column3, column4 = st.columns([0.2,0.2,0.2,0.4])
+         column1, column2, column3, column4, column5 = st.columns([0.2,0.2,0.2,0.2,02])
 
 
          # Place text in the left column
@@ -377,10 +377,10 @@ def bsg_page():
          explode = (0.5, 0.25, 0)  # explode only the gold slice
          
          # Plot
-         fig5, ax5 = plt.subplots(figsize=(4, 4))
+         fig5, ax5 = plt.subplots(figsize=(2.5, 2.5))
          ax5.pie(df_medals['percentage'], explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', 
-                shadow=True, startangle=90, textprops = {'fontsize': 6})
-         column4.pyplot(fig5)         
+                shadow=True, startangle=90)
+         column5.pyplot(fig5)         
 
 
          
