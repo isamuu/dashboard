@@ -260,7 +260,7 @@ def bsg_page():
          st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
          
          
-         column1, column2, column3, column4, column5 = st.columns([0.2,0.2,0.2,0.2,02])
+         column1, column2, column3, column4, column5 = st.columns([0.2,0.2,0.2,0.1,0.3])
 
 
          # Place text in the left column
