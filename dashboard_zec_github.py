@@ -14,7 +14,7 @@ df = pd.read_csv("test_df_bt.csv")
 df_prob = pd.read_csv("df_prob.csv", index_col = 0)
 
 df.columns = df.columns.str.lower()
-df = df[["bedrijf", "werkt mee", "aantal truck", "aantal bakwagen", "aantal bestelwagen", 'truck gem afstand in km', 
+df = df[["bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen", 'truck gem afstand in km', 
          'bakwagen gem afstand in km', 'bestelwagen gem afstand in km', 'truck max afstand in km', 'bakwagen max afstand in km', 'bestelwagen max afstand in km', "bezoekende truck per dag", 
          "bezoekende bakwagen per dag", "bezoekende bestelwagen per dag", "tijd bezoekend truck in minuten", "jaarverbruik", 
          "tijd bezoekend bakwagen in minuten", "tijd bezoekend bestelwagen in minuten", "vermogen aansluiting in watt (pand)",
@@ -274,7 +274,7 @@ def bsg_page():
          column1.markdown(icon_truck_html, unsafe_allow_html=True)
 
          icon_truck_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck%20goud.jpg"
-         aantal_truck_goud = df[(df["Datum"]=="2022-01-01 00:00:00") & (df["werkt mee"] == "Ja")]["aantal truck"].sum()
+         aantal_truck_goud = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Goud")]["aantal truck"].sum())
          icon_truck_goud_html = f'''<img src="{icon_truck_goud}" width="150" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 24px;">{aantal_truck_goud} Truck</p>'''
          column1.markdown(icon_truck_goud_html, unsafe_allow_html=True)
@@ -376,84 +376,78 @@ def bsg_page():
 
 
          
-         # Create the pie chart for the right column
-         #labels = 'Werk niet mee', 'Werkt mee'
-         #explode = (0.1, 0)  # only "explode" the 2nd slice
-         #fig5, ax5 = plt.subplots(figsize=(2.5, 2.5))
-         #ax5.pie(df["werkt mee"].value_counts(), explode=explode, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
-         #col2.pyplot(fig5)
 
 
     
          #### YEAR
          # Group by year, month and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-         df_yearly_bet = df.groupby(['Year', 'Month', 'werkt mee'])[usage_column].sum().unstack()
+         #df_yearly_bet = df.groupby(['Year', 'Month', 'werkt mee'])[usage_column].sum().unstack()
          
          
          
          #### MONTH
          # Group by year, month and calculate the sum of 'Max verbruik in kWh 2040'
-         df_monthly_total_bet = df.groupby(['Year', 'Month'])[usage_column].sum().reset_index()
+         #df_monthly_total_bet = df.groupby(['Year', 'Month'])[usage_column].sum().reset_index()
          
          # Find the month with the highest total usage
-         highest_month_bet = df_monthly_total_bet[df_monthly_total_bet[usage_column] == df_monthly_total_bet[usage_column].max()]
+         #highest_month_bet = df_monthly_total_bet[df_monthly_total_bet[usage_column] == df_monthly_total_bet[usage_column].max()]
          
          # Extract the year and month
-         highest_year_month_bet = highest_month_bet[['Year', 'Month']].values[0]
+         #highest_year_month_bet = highest_month_bet[['Year', 'Month']].values[0]
          
          # Select data for the highest usage month
-         df_highest_month_bet = df[(df['Year'] == highest_year_month_bet[0]) & (df['Month'] == highest_year_month_bet[1])]
+         #df_highest_month_bet = df[(df['Year'] == highest_year_month_bet[0]) & (df['Month'] == highest_year_month_bet[1])]
          
          # Group by day and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-         df_monthly_bet = df_highest_month_bet.groupby(['Day', 'werkt mee'])[usage_column].sum().unstack()
+         #df_monthly_bet = df_highest_month_bet.groupby(['Day', 'werkt mee'])[usage_column].sum().unstack()
          
          
          
          #### WEEK
          # Group by year, week and calculate the sum of 'Max verbruik in kWh 2040'
-         df_weekly_total_bet = df.groupby(['Year', 'Week'])[usage_column].sum().reset_index()
+         #df_weekly_total_bet = df.groupby(['Year', 'Week'])[usage_column].sum().reset_index()
          
          # Find the week with the highest total usage
-         highest_week_bet = df_weekly_total_bet[df_weekly_total_bet[usage_column] == df_weekly_total_bet[usage_column].max()]
+         #highest_week_bet = df_weekly_total_bet[df_weekly_total_bet[usage_column] == df_weekly_total_bet[usage_column].max()]
          
          # Extract the year and week
-         highest_year_week_bet = highest_week_bet[['Year', 'Week']].values[0]
+         #highest_year_week_bet = highest_week_bet[['Year', 'Week']].values[0]
          
          # Select data for the highest usage week
-         df_highest_week_bet = df[(df['Year'] == highest_year_week_bet[0]) & (df['Week'] == highest_year_week_bet[1])]
+         #df_highest_week_bet = df[(df['Year'] == highest_year_week_bet[0]) & (df['Week'] == highest_year_week_bet[1])]
          
          # Group by weekday and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-         df_weekly_bet = df_highest_week_bet.groupby(['Weekday', 'werkt mee'])[usage_column].sum().unstack()
+         #df_weekly_bet = df_highest_week_bet.groupby(['Weekday', 'werkt mee'])[usage_column].sum().unstack()
          
          
          
          #### DAY
          # Group by year, month, day and calculate the sum of 'Max verbruik in kWh 2040'
-         df_daily_total_bet = df.groupby(['Year', 'Month', 'Day'])[usage_column].sum().reset_index()
+         #df_daily_total_bet = df.groupby(['Year', 'Month', 'Day'])[usage_column].sum().reset_index()
          
          # Find the day with the highest total usage
-         highest_day_bet = df_daily_total_bet[df_daily_total_bet[usage_column] == df_daily_total_bet[usage_column].max()]
+         #highest_day_bet = df_daily_total_bet[df_daily_total_bet[usage_column] == df_daily_total_bet[usage_column].max()]
          
          # Extract the year, month and day
-         highest_year_month_day_bet = highest_day_bet[['Year', 'Month', 'Day']].values[0]
+         #highest_year_month_day_bet = highest_day_bet[['Year', 'Month', 'Day']].values[0]
          
          # Select data for the highest usage day
-         df_highest_day_bet = df[(df['Year'] == highest_year_month_day_bet[0]) & (df['Month'] == highest_year_month_day_bet[1]) & (df['Day'] == highest_year_month_day_bet[2])]
+         #df_highest_day_bet = df[(df['Year'] == highest_year_month_day_bet[0]) & (df['Month'] == highest_year_month_day_bet[1]) & (df['Day'] == highest_year_month_day_bet[2])]
          
          # Group by hour and 'werkt mee', and calculate the sum of 'Max verbruik in kWh 2040'
-         df_daily_bet = df_highest_day_bet.groupby(['Hour', 'werkt mee'])[usage_column].sum().unstack()
+         #df_daily_bet = df_highest_day_bet.groupby(['Hour', 'werkt mee'])[usage_column].sum().unstack()
          
          
          
          #### PLOT
          # Create a 1x4 layout
-         cols = st.columns(4)
+        # cols = st.columns(4)
          
          # Create the first chart  
-         fig1, ax1 = plt.subplots()
-         df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
+         #fig1, ax1 = plt.subplots()
+         #df_yearly_bet.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
 
-         ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
+        # ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
          
          
          
@@ -465,25 +459,25 @@ def bsg_page():
          
          
          # Create the second chart
-         fig2, ax2 = plt.subplots()
-         df_monthly_bet.plot(kind='area', stacked=True, 
-                            title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_bet[0]}-{highest_year_month_bet[1]})', ax=ax2)
-         ax2.set_ylim([0, df_highest_week_bet.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
+         #fig2, ax2 = plt.subplots()
+         #df_monthly_bet.plot(kind='area', stacked=True, 
+         #                   title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_bet[0]}-{highest_year_month_bet[1]})', ax=ax2)
+         #ax2.set_ylim([0, df_highest_week_bet.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
          #cols[1].pyplot(fig2)
          
          # Create the third chart
-         fig3, ax3 = plt.subplots()
-         df_weekly_bet.plot(kind='area', stacked=True, 
-                           title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_bet[0]}-Week {highest_year_week_bet[1]})', ax=ax3)
-         ax3.set_ylim([0, df_highest_week_bet.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
+         #fig3, ax3 = plt.subplots()
+         #df_weekly_bet.plot(kind='area', stacked=True, 
+         #                  title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_bet[0]}-Week {highest_year_week_bet[1]})', ax=ax3)
+         #ax3.set_ylim([0, df_highest_week_bet.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
          
          #cols[2].pyplot(fig3)
          
          # Create the fourth chart
-         fig4, ax4 = plt.subplots()
-         df_daily_bet.plot(kind='area', stacked=True, 
-                          title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_bet[0]}-{highest_year_month_day_bet[1]}-{highest_year_month_day_bet[2]})', ax=ax4)
-         ax4.set_ylim([0, df_highest_day_bet.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
+         #fig4, ax4 = plt.subplots()
+         #df_daily_bet.plot(kind='area', stacked=True, 
+         #                 title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_bet[0]}-{highest_year_month_day_bet[1]}-{highest_year_month_day_bet[2]})', ax=ax4)
+         #ax4.set_ylim([0, df_highest_day_bet.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
          #cols[3].pyplot(fig4)
 
 
@@ -494,10 +488,10 @@ def bsg_page():
                   ax4.axhline(y=7500, color='black', linestyle='--')
 
          # Display the plots
-         cols[0].pyplot(fig1)
-         cols[1].pyplot(fig2)
-         cols[2].pyplot(fig3)
-         cols[3].pyplot(fig4)
+         #cols[0].pyplot(fig1)
+         #cols[1].pyplot(fig2)
+         #cols[2].pyplot(fig3)
+         #cols[3].pyplot(fig4)
          
 
 
