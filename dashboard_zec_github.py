@@ -377,7 +377,7 @@ def bsg_page():
          explode = (0.5, 0.25, 0)  # explode only the gold slice
          
          # Plot
-         fig5, ax5 = plt.subplots(figsize=(1, 1))
+         fig5, ax5 = plt.subplots(figsize=(4, 4))
          ax5.pie(df_medals['percentage'], explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', 
                 shadow=True, startangle=90, textprops = {'fontsize': 6})
          column4.pyplot(fig5)         
