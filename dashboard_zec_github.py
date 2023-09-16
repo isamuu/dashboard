@@ -340,7 +340,7 @@ def bsg_page():
 
          icon_bestelwagen_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20brons.jpg"
          aantal_bestelwagen_brons = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Brons")]["aantal bestelwagen"].sum())
-         icon_bestelwagen_brons_html = f'''<img src="{icon_bestelwagen_brons}" width="150" style="display: block; margin: auto;">
+         icon_bestelwagen_brons_html = f'''<img src="{icon_bestelwagen_brons}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 24px;">{aantal_bestelwagen_brons} bestelwagen</p>'''
          column3.markdown(icon_bestelwagen_brons_html, unsafe_allow_html=True)
 
