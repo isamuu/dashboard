@@ -519,7 +519,7 @@ def bsg_page():
 
          uitleg0.title("Jaarverbruik pand")
          uitleg0.write("""uitleg over bepalen jaarverbruik pand""")
-         df_anv_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
+         df_anv_verbruik = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "jaarverbruik"]]
          
          st.markdown("""
          <style>
@@ -531,11 +531,11 @@ def bsg_page():
          </style>
          """, unsafe_allow_html=True)
 
-         uitleg0.write(df_anv_voertuigen)
+         uitleg0.write(df_anv_verbruik)
 
          uitleg2.title("Aansluiting pand")
          uitleg2.write("""uitleg over aansluiting pand""")
-         df_anv_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
+         df_anv_aansluiting = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "vermogen aansluiting in watt (pand)"]]
          
          st.markdown("""
          <style>
@@ -547,7 +547,7 @@ def bsg_page():
          </style>
          """, unsafe_allow_html=True)
 
-         uitleg2.write(df_anv_voertuigen)
+         uitleg2.write(df_anv_aansluiting)
          
          uitleg0.title("Voorspelling Wagenpark")
          uitleg0.write("uitleg over bepalen overstap naar elektrisch")
