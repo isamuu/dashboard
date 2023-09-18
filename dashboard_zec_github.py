@@ -470,12 +470,12 @@ def bsg_page():
 
          # UITLEG SCHATTINGEN
 
-         uitleg1, uitleg2 = st.columns([0.5,0.5])
+         uitleg0, uitleg1, uitleg2 = st.columns([0.4,0.2,0.4])
 
-         uitleg1.title("Voertuigen")
-         uitleg1.write("""Om het aantal voertuigen per bedrijf te bepalen wordt er eerst gekeken naar de enquetedata. Hierin hebben bedrijven ingevuld hoeveel 
+         uitleg0.title("Voertuigen")
+         uitleg0.write("""Om het aantal voertuigen per bedrijf te bepalen wordt er eerst gekeken naar de enquetedata. Hierin hebben bedrijven ingevuld hoeveel 
          voertuigen zij hebben. Echter hebben niet alle bedrijven dat gedaan. Om een compleet beeld te geven van het wagenpark van het bedrijventerrein wordt er
-         gekeken naar cbs data: https://opendata.cbs.nl/#/CBS/nl/dataset/37209hvv/table . De voertuigen die in de enquetes naar boven kwamen worden van 
+         gekeken naar cbs data: https://opendata.cbs.nl/#/CBS/nl/dataset/37209hvv/table . \n\nDe voertuigen die in de enquetes naar boven kwamen worden van 
          de voertuigen van cbs afgetrokken. De resterende voertuigen worden vervolgens verdeeld over de "bronze" bedrijven. Deze verdeling is willekeurig.""")
          df_anv_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
          #uitleg2.table(df_anv_voertuigen)
@@ -491,10 +491,12 @@ def bsg_page():
              """, unsafe_allow_html=True)
           
          # Render the DataFrame in column2 as a table
+         uitleg2.markdown("<div class='custom-container'>", unsafe_allow_html=True)
          uitleg2.write(df_anv_voertuigen)
+         uitleg2.markdown("</div>", unsafe_allow_html=True)
 
-         uitleg1.title("Gereden kilometers")
-         uitleg1.write("""Om de impact van de voertuigen op het netwerk te weten, moeten wij eerst weten hoeveel kilometer zij rijden. Het aantal gereden 
+         uitleg0.title("Gereden kilometers")
+         uitleg0.write("""Om de impact van de voertuigen op het netwerk te weten, moeten wij eerst weten hoeveel kilometer zij rijden. Het aantal gereden 
          kilometers kan vervolgens worden omgerekend naar een hoeveelheid kWh wat geladen moet worden. De bedrijven die de enquete hebben ingevuld hebben 
          aangegeven hoeveel kilometer zij gemiddeld en maximaal op een dag rijden, i.c.m. het aantal voertuigen kan er een beeld geschetst worden van de 
          toekomstige laadvraag. We beschikken niet over het aantal gereden kilometers van de "bronze" bedrijven. Om dit te bepalen is er gekeken naar de 
@@ -502,14 +504,14 @@ def bsg_page():
          aan de bronze voertuigen""")
          
 
-         uitleg1.title("Jaarverbruik pand")
-         uitleg1.write("uitleg over bepalen jaarverbruik pand")
+         uitleg0.title("Jaarverbruik pand")
+         uitleg0.write("uitleg over bepalen jaarverbruik pand")
 
-         uitleg1.title("Aansluiting pand")
-         uitleg1.write("uitleg over aansluiting pand")
+         uitleg0.title("Aansluiting pand")
+         uitleg0.write("uitleg over aansluiting pand")
 
-         uitleg1.title("Voorspelling Wagenpark")
-         uitleg1.write("uitleg over bepalen overstap naar elektrisch")
+         uitleg0.title("Voorspelling Wagenpark")
+         uitleg0.write("uitleg over bepalen overstap naar elektrisch")
 
 
          
