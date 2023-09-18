@@ -410,7 +410,7 @@ def bsg_page():
          fig5, ax5 = plt.subplots(figsize=(2.5, 2.5))
          ax5.pie(df_voertuigen['aantal'], explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
          column5.pyplot(fig5)
-         column5.write('De bovenstaande grafiek geeft weer dat een groot deel van het aantal voertuigen bestaat uit de geschatte data)
+         column5.write('De bovenstaande grafiek geeft weer dat een groot deel van het aantal voertuigen bestaat uit de geschatte data')
                   
 
 
