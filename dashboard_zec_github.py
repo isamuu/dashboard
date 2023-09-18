@@ -1052,7 +1052,7 @@ def vehicle_page2():
          col1, col2 = st.columns(2)
 
          # Place text in the left column
-         col1.text(""" Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. 
+         col1.text(""" aaDit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. 
          Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. 
          Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.
          
@@ -1241,7 +1241,7 @@ def main():
                   vehicle_page()
          elif page == '3. Wie gebruikt wat?':
                   company_page()
-         elif page == 'wat gebruikt wat? 2':
+         elif page == 'wat gebruikt wat? das2':
                   vehicle_page2()
         
 if __name__ == "__main__":
