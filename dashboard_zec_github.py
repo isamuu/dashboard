@@ -399,22 +399,18 @@ def bsg_page():
 
 
          # Create a dataframe
-         data = {
-             'medal': ['Goud', 'Zilver', 'Brons'],
-             'percentage': [5, 20, 75]
-         }
-         df_medals = pd.DataFrame(data)
+         df_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][['kwaliteit data', 'aantal truck', 'aantal bakwagen', 'aantal bestelwagen']]
+         df_voertuigen = df_voertuigen.groupby(by = "kwaliteit data").sum()
+         df_voertuigen["aantal"] = df_voertuigen['aantal truck'] + df_voertuigen['aantal bakwagen'] + df_voertuigen['aantal bestelwagen']
+         df_voertuigen = df_voertuigen.reindex(['Goud', 'Zilver', 'Brons'])
          
-         # Pie chart settings
-         labels = df_medals['medal'].tolist()
+         labels = df_voertuigen.index.tolist()
          colors = ['gold', 'silver', '#cd7f32']  # gold, silver, bronze colors
          explode = (0.5, 0.25, 0)  # explode only the gold slice
-         
-         # Plot
          fig5, ax5 = plt.subplots(figsize=(2.5, 2.5))
-         ax5.pie(df_medals['percentage'], explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', 
-                shadow=True, startangle=90)
-         column5.pyplot(fig5)         
+         ax5.pie(df_voertuigen['aantal'], explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
+         column5.pyplot(fig5)
+                  
 
 
          
