@@ -472,7 +472,22 @@ def bsg_page():
 
          uitleg1, uitleg2 = st.columns([0.5,0.5])
 
-         uitleg1.title("mpp")
+         uitleg1.title("Voertuigen")
+         uitleg1.write("uitleg over bepalen voertuigen")
+
+         uitleg1.title("Gereden kilometers")
+         uitleg1.write("uitleg over bepalen afgelegde kilometers")
+
+         uitleg1.title("Jaarverbruik pand")
+         uitleg1.write("uitleg over bepalen jaarverbruik pand")
+
+         uitleg1.title("Aansluiting pand")
+         uitleg1.write("uitleg over aansluiting pand")
+
+         uitleg1.title("Voorspelling Wagenpark")
+         uitleg1.write("uitleg over bepalen overstap naar elektrisch")
+
+         
          
 
 
