@@ -498,21 +498,7 @@ def bsg_page():
          uitleg1.title("Voorspelling Wagenpark")
          uitleg1.write("uitleg over bepalen overstap naar elektrisch")
 
-         st.markdown("""
-             <style>
-                 .scrollable-table {
-                     height: 300px;  /* Adjust height as necessary */
-                     overflow-y: auto;
-                     display: block;
-                 }
-             </style>
-             """, unsafe_allow_html=True)
-         
-             # Render the DataFrame in column2 as a table inside a scrollable container
-         with column2:
-                 st.markdown("<div class='scrollable-table'>", unsafe_allow_html=True)
-                 st.write(df_anv_voertuigen)
-                 st.markdown("</div>", unsafe_allow_html=True)
+
          
 
 
