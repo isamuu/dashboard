@@ -284,12 +284,12 @@ def bsg_page():
          \n\nV
          \n\nV """)
 
-         text5.write(""" Goud
+         text5.write(""" Zilver
          \n\nX
          \n\nV
          \n\nV """)
 
-         text6.write(""" Goud
+         text6.write(""" Brons
          \n\nX
          \n\nX
          \n\nV """)
