@@ -476,7 +476,10 @@ def bsg_page():
          uitleg0.write("""Om het aantal voertuigen per bedrijf te bepalen wordt er eerst gekeken naar de enquetedata. Hierin hebben bedrijven ingevuld hoeveel 
          voertuigen zij hebben. Echter hebben niet alle bedrijven dat gedaan. Om een compleet beeld te geven van het wagenpark van het bedrijventerrein wordt er
          gekeken naar cbs data: https://opendata.cbs.nl/#/CBS/nl/dataset/37209hvv/table . \n\nDe voertuigen die in de enquetes naar boven kwamen worden van 
-         de voertuigen van cbs afgetrokken. De resterende voertuigen worden vervolgens verdeeld over de "bronze" bedrijven. Deze verdeling is willekeurig.""")
+         de voertuigen van cbs afgetrokken. De resterende voertuigen worden vervolgens verdeeld over de "bronze" bedrijven. Deze verdeling is willekeurig.
+         \n\n tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst 
+         tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst 
+         tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst""")
          df_anv_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
          #uitleg2.table(df_anv_voertuigen)
          st.markdown("""
