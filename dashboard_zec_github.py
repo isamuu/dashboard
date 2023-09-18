@@ -479,21 +479,27 @@ def bsg_page():
          de voertuigen van cbs afgetrokken. De resterende voertuigen worden vervolgens verdeeld over de "bronze" bedrijven. Deze verdeling is willekeurig.""")
          df_anv_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
          #uitleg2.table(df_anv_voertuigen)
-         # Add CSS for scrollable table
-         st.markdown("""
+
+
+         # Convert the DataFrame to an HTML table
+         tb_html = df_anv_voertuigen.to_html(index=False)
+
+         # Custom HTML with scrollable container
+         custom_html = f"""
              <style>
-                 .stTable {
-                     height: 100px;  /* Adjust height as necessary */
+                 .scroll-container {{
+                     height: 150px;  /* Adjusted height */
                      overflow-y: auto;
                      display: block;
-                 }
+                 }}
              </style>
-             """, unsafe_allow_html=True)
-          
-         # Render the DataFrame in column2 as a table
-         uitleg2.markdown("<div class='custom-container'>", unsafe_allow_html=True)
-         uitleg2.write(df_anv_voertuigen)
-         uitleg2.markdown("</div>", unsafe_allow_html=True)
+             <div class="scroll-container">
+                 {tb_html}
+             </div>
+             """
+         
+         # Render the custom HTML in column2
+         column2.markdown(custom_html, unsafe_allow_html=True)
 
          uitleg0.title("Gereden kilometers")
          uitleg0.write("""Om de impact van de voertuigen op het netwerk te weten, moeten wij eerst weten hoeveel kilometer zij rijden. Het aantal gereden 
