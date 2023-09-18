@@ -516,12 +516,39 @@ def bsg_page():
          uitleg2.write(df_anv_afstand)
          
 
+
          uitleg0.title("Jaarverbruik pand")
-         uitleg0.write("uitleg over bepalen jaarverbruik pand")
+         uitleg0.write("""uitleg over bepalen jaarverbruik pand""")
+         df_anv_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
+         
+         st.markdown("""
+         <style>
+                 .stTable {
+                     height: 300px;  /* Adjust height as necessary */
+                     overflow-y: auto;
+                     display: block;
+                 }
+         </style>
+         """, unsafe_allow_html=True)
 
-         uitleg0.title("Aansluiting pand")
-         uitleg0.write("uitleg over aansluiting pand")
+         uitleg2.write(df_anv_voertuigen)
 
+         uitleg2.title("Aansluiting pand")
+         uitleg2.write("""uitleg over aansluiting pand""")
+         df_anv_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
+         
+         st.markdown("""
+         <style>
+                 .stTable {
+                     height: 300px;  /* Adjust height as necessary */
+                     overflow-y: auto;
+                     display: block;
+                 }
+         </style>
+         """, unsafe_allow_html=True)
+
+         uitleg2.write(df_anv_voertuigen)
+         
          uitleg0.title("Voorspelling Wagenpark")
          uitleg0.write("uitleg over bepalen overstap naar elektrisch")
 
