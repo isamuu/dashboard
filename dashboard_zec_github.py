@@ -482,6 +482,7 @@ def bsg_page():
          tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst""")
          df_anv_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
          #uitleg2.table(df_anv_voertuigen)
+         uitleg2.write("Tabel Bedrijven en voertuigen")
          st.markdown("""
          <style>
                  .stTable {
