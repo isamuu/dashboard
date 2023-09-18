@@ -465,8 +465,9 @@ def bsg_page():
          explode = (0.5, 0.25, 0)  # explode only the gold slice
          fig5, ax5 = plt.subplots(figsize=(2.5, 2.5))
          ax5.pie(df_voertuigen['aantal'], explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', startangle=90)
+         column5.write('De onderstaande grafiek geeft weer dat een groot deel van het aantal voertuigen bestaat uit de geschatte data')
          column5.pyplot(fig5)
-         column5.write('De bovenstaande grafiek geeft weer dat een groot deel van het aantal voertuigen bestaat uit de geschatte data')
+         
                   
 
 
