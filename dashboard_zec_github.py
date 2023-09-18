@@ -259,7 +259,7 @@ def bsg_page():
                       unsafe_allow_html=True)
          st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
 
-         text1, text2, text3 = st.columns([0.4,0.2,0.7])
+         text1, text2, text3 = st.columns([0.5,0.1,0.4])
 
          text1.write(""" \n\n\n\nOm inzicht te geven in de toekomstige energiegebruik van het bedrijventerrein is het van belang om te weten 
          hoe de huidige situatie eruit ziet. Aan de hand van data en enquetes kan er achterhaald worden hoe het het huidige energieverbuik eruit ziet en wat voor
