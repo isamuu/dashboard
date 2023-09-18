@@ -260,7 +260,7 @@ def bsg_page():
          st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
 
          
-         text1, text2, text3 = st.columns([0.5,0.1,0.4])
+         text1, text2, text3 = st.columns([0.45,0.1,0.45])
 
          text1.write(""" \n\n\n\nOm inzicht te geven in de toekomstige energiegebruik van het bedrijventerrein is het van belang om te weten 
          hoe de huidige situatie eruit ziet. Aan de hand van data en enquetes kan er achterhaald worden hoe het het huidige energieverbuik eruit ziet en wat voor
@@ -477,13 +477,29 @@ def bsg_page():
          uitleg0.write("""Om het aantal voertuigen per bedrijf te bepalen wordt er eerst gekeken naar de enquetedata. Hierin hebben bedrijven ingevuld hoeveel 
          voertuigen zij hebben. Echter hebben niet alle bedrijven dat gedaan. Om een compleet beeld te geven van het wagenpark van het bedrijventerrein wordt er
          gekeken naar cbs data: https://opendata.cbs.nl/#/CBS/nl/dataset/37209hvv/table . \n\nDe voertuigen die in de enquetes naar boven kwamen worden van 
-         de voertuigen van cbs afgetrokken. De resterende voertuigen worden vervolgens verdeeld over de "bronze" bedrijven. Deze verdeling is willekeurig.
-         \n\n tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst 
-         tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst 
-         tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst tekst""")
+         de voertuigen van cbs afgetrokken. De resterende voertuigen worden vervolgens verdeeld over de "bronze" bedrijven. Deze verdeling is willekeurig.""")
          df_anv_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
-         #uitleg2.table(df_anv_voertuigen)
-         uitleg2.write("Tabel Bedrijven en voertuigen")
+         
+         st.markdown("""
+         <style>
+                 .stTable {
+                     height: 300px;  /* Adjust height as necessary */
+                     overflow-y: auto;
+                     display: block;
+                 }
+         </style>
+         """, unsafe_allow_html=True)
+
+         uitleg0.write(df_anv_voertuigen)
+
+         uitleg2.title("Gereden kilometers")
+         uitleg2.write("""Om de impact van de voertuigen op het netwerk te weten, moeten wij eerst weten hoeveel kilometer zij rijden. Het aantal gereden 
+         kilometers kan vervolgens worden omgerekend naar een hoeveelheid kWh wat geladen moet worden. De bedrijven die de enquete hebben ingevuld hebben 
+         aangegeven hoeveel kilometer zij gemiddeld en maximaal op een dag rijden, i.c.m. het aantal voertuigen kan er een beeld geschetst worden van de 
+         toekomstige laadvraag. We beschikken niet over het aantal gereden kilometers van de "bronze" bedrijven. Om dit te bepalen is er gekeken naar de 
+         hoeveelheid gereden kilometers van de zilvere en gouden bedrijven. Hiervan is een gemiddelde genomen per voertuig, deze is vervolgens toegewezen 
+         aan de bronze voertuigen""")
+
          st.markdown("""
          <style>
                  .stTable {
@@ -495,14 +511,6 @@ def bsg_page():
          """, unsafe_allow_html=True)
 
          uitleg2.write(df_anv_voertuigen)
-
-         uitleg0.title("Gereden kilometers")
-         uitleg0.write("""Om de impact van de voertuigen op het netwerk te weten, moeten wij eerst weten hoeveel kilometer zij rijden. Het aantal gereden 
-         kilometers kan vervolgens worden omgerekend naar een hoeveelheid kWh wat geladen moet worden. De bedrijven die de enquete hebben ingevuld hebben 
-         aangegeven hoeveel kilometer zij gemiddeld en maximaal op een dag rijden, i.c.m. het aantal voertuigen kan er een beeld geschetst worden van de 
-         toekomstige laadvraag. We beschikken niet over het aantal gereden kilometers van de "bronze" bedrijven. Om dit te bepalen is er gekeken naar de 
-         hoeveelheid gereden kilometers van de zilvere en gouden bedrijven. Hiervan is een gemiddelde genomen per voertuig, deze is vervolgens toegewezen 
-         aan de bronze voertuigen""")
          
 
          uitleg0.title("Jaarverbruik pand")
