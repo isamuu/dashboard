@@ -258,13 +258,14 @@ def bsg_page():
                       """,
                       unsafe_allow_html=True)
          st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
+
+         text1, text2 = st.columns([0.5,0.5])
+
+         text1.text("Your Text Here")
          
          
          column0, column1, column2, column3, column4, column5 = st.columns([0.2,0.2,0.2,0.2,0.1,0.3])
 
-
-         # Place text in the left column
-         column1.text("Your Text Here")
 
          #Bedrijven
          icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.jpg"
