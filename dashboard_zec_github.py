@@ -473,10 +473,18 @@ def bsg_page():
          uitleg1, uitleg2 = st.columns([0.5,0.5])
 
          uitleg1.title("Voertuigen")
-         uitleg1.write("uitleg over bepalen voertuigen")
+         uitleg1.write("""Om het aantal voertuigen per bedrijf te bepalen wordt er eerst gekeken naar de enquetedata. Hierin hebben bedrijven ingevuld hoeveel 
+         voertuigen zij hebben. Echter hebben niet alle bedrijven dat gedaan. Om een compleet beeld te geven van het wagenpark van het bedrijventerrein wordt er
+         gekeken naar cbs data: https://opendata.cbs.nl/#/CBS/nl/dataset/37209hvv/table . De voertuigen die in de enquetes naar boven kwamen worden van 
+         de voertuigen van cbs afgetrokken. De resterende voertuigen worden vervolgens verdeeld over de "bronze" bedrijven. Deze verdeling is willekeurig.""")
 
          uitleg1.title("Gereden kilometers")
-         uitleg1.write("uitleg over bepalen afgelegde kilometers")
+         uitleg1.write("""Om de impact van de voertuigen op het netwerk te weten, moeten wij eerst weten hoeveel kilometer zij rijden. Het aantal gereden 
+         kilometers kan vervolgens worden omgerekend naar een hoeveelheid kWh wat geladen moet worden. De bedrijven die de enquete hebben ingevuld hebben 
+         aangegeven hoeveel kilometer zij gemiddeld en maximaal op een dag rijden, i.c.m. het aantal voertuigen kan er een beeld geschetst worden van de 
+         toekomstige laadvraag. We beschikken niet over het aantal gereden kilometers van de "bronze" bedrijven. Om dit te bepalen is er gekeken naar de 
+         hoeveelheid gereden kilometers van de zilvere en gouden bedrijven. Hiervan is een gemiddelde genomen per voertuig, deze is vervolgens toegewezen 
+         aan de bronze voertuigen""")
 
          uitleg1.title("Jaarverbruik pand")
          uitleg1.write("uitleg over bepalen jaarverbruik pand")
