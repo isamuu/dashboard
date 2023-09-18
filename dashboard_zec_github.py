@@ -434,16 +434,6 @@ def bsg_page():
          <p style="text-align: center; font-size: 18px;">{aantal_bestelwagen_brons} bestelwagen</p>'''
          column3.markdown(icon_bestelwagen_brons_html, unsafe_allow_html=True)
 
-
-
-         # UITLEG SCHATTINGEN
-
-         uitleg1, uitleg2 = st.columns(0.5,0.5)
-
-         uitleg1.markdown("mpp")
-
-
-
          
 
 
@@ -478,7 +468,11 @@ def bsg_page():
          
                   
 
+         # UITLEG SCHATTINGEN
 
+         uitleg1, uitleg2 = st.columns([0.5,0.5])
+
+         uitleg1.markdown("mpp")
          
 
 
