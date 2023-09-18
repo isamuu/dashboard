@@ -477,6 +477,8 @@ def bsg_page():
          voertuigen zij hebben. Echter hebben niet alle bedrijven dat gedaan. Om een compleet beeld te geven van het wagenpark van het bedrijventerrein wordt er
          gekeken naar cbs data: https://opendata.cbs.nl/#/CBS/nl/dataset/37209hvv/table . De voertuigen die in de enquetes naar boven kwamen worden van 
          de voertuigen van cbs afgetrokken. De resterende voertuigen worden vervolgens verdeeld over de "bronze" bedrijven. Deze verdeling is willekeurig.""")
+         df_anv_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
+         uitleg2.table(df_anv_voertuigen)
 
          uitleg1.title("Gereden kilometers")
          uitleg1.write("""Om de impact van de voertuigen op het netwerk te weten, moeten wij eerst weten hoeveel kilometer zij rijden. Het aantal gereden 
