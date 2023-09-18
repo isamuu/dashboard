@@ -264,8 +264,8 @@ def bsg_page():
          text1.write(""" \n\n\n\nOm inzicht te geven in de toekomstige energiegebruik van het bedrijventerrein is het van belang om te weten 
          hoe de huidige situatie eruit ziet. Aan de hand van data en enquetes kan er achterhaald worden hoe het het huidige energieverbuik eruit ziet en wat voor
          invloed de overstap naar elektrische voertuigen zal hebben. Het type en aantal voertuigen per bedrijf kan laten zien hoe de toekomstige situatie van 
-         het wagenpark eruit ziet. \n\n
-         Lang niet alle bedrijven hebben echter de tijd of mogelijkheid om deze data te leveren. In dit geval moet er a.d.h.v openbare data schattingen 
+         het wagenpark eruit ziet. \n\nLang niet alle bedrijven hebben echter de tijd of mogelijkheid om deze data te leveren. 
+         In dit geval moet er a.d.h.v openbare data schattingen 
          gemaakt worden. Deze data en de data van de participerende bedrijven vormen samen de informatie over het gehele bedrijventerrein. 
          Alleen zo kunnen er inzichten worden gegeven over het gehele bedrijventerrein. \n\n
          Om de gaten op te vullen is er gebruik gemaakt van data van het CBS en PDOK. De data van de CBS geeft per PC4 gebied aan hoeveel type 
