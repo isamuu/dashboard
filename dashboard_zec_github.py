@@ -395,7 +395,7 @@ def bsg_page():
          #if value_type:
          #         usage_column = f'max verbruik in kWh {year}'
          #else:
-                  usage_column = f'gem verbruik in kWh {year}'  
+         #         usage_column = f'gem verbruik in kWh {year}'  
 
 
          # Create a dataframe
