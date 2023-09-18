@@ -319,7 +319,7 @@ def bsg_page():
              </table>
              """
 
-         
+         text3.write("Data type Tabel")
          text3.markdown(table_html, unsafe_allow_html=True)
 
          
