@@ -472,7 +472,7 @@ def bsg_page():
 
          uitleg1, uitleg2 = st.columns([0.5,0.5])
 
-         uitleg1.markdown("mpp")
+         uitleg1.title("mpp")
          
 
 
