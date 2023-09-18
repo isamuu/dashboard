@@ -499,6 +499,9 @@ def bsg_page():
          toekomstige laadvraag. We beschikken niet over het aantal gereden kilometers van de "bronze" bedrijven. Om dit te bepalen is er gekeken naar de 
          hoeveelheid gereden kilometers van de zilvere en gouden bedrijven. Hiervan is een gemiddelde genomen per voertuig, deze is vervolgens toegewezen 
          aan de bronze voertuigen""")
+         df_anv_afstand = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", 'truck gem afstand in km', 'bakwagen gem afstand in km',
+                                                 'bestelwagen gem afstand in km', 'truck max afstand in km', 'bakwagen max afstand in km', 
+                                                 'bestelwagen max afstand in km']]
 
          st.markdown("""
          <style>
@@ -510,7 +513,7 @@ def bsg_page():
          </style>
          """, unsafe_allow_html=True)
 
-         uitleg2.write(df_anv_voertuigen)
+         uitleg2.write(df_anv_afstand)
          
 
          uitleg0.title("Jaarverbruik pand")
