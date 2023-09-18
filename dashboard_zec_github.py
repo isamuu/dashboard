@@ -436,6 +436,14 @@ def bsg_page():
 
 
 
+         # UITLEG SCHATTINGEN
+
+         uitleg1, uitleg2 = st.columns(0.5,0.5)
+
+         uitleg1.markdown("mpp")
+
+
+
          
 
 
