@@ -333,7 +333,6 @@ def bsg_page():
          icon_bedrijf_html = f'''<img src="{icon_bedrijf}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_html, unsafe_allow_html=True)
-
          column0.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_bedrijf_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20goud.jpg"
@@ -341,18 +340,21 @@ def bsg_page():
          icon_bedrijf_goud_html = f'''<img src="{icon_bedrijf_goud}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_goud} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_goud_html, unsafe_allow_html=True)
+         column0.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_bedrijf_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20zilver.jpg"
          aantal_bedrijf_zilver = len(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Zilver")]["Bedrijf"])
          icon_bedrijf_zilver_html = f'''<img src="{icon_bedrijf_zilver}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_zilver} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_zilver_html, unsafe_allow_html=True)
+         column0.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_bedrijf_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20brons.jpg"
          aantal_bedrijf_brons = len(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Brons")]["Bedrijf"])
          icon_bedrijf_brons_html = f'''<img src="{icon_bedrijf_brons}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_brons} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_brons_html, unsafe_allow_html=True)
+         column0.write("--------------------------------------------------------------------------------------------------------------------------")
          
          
 
