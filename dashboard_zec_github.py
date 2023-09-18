@@ -294,6 +294,44 @@ def bsg_page():
          \n\nX
          \n\nV """)
 
+         table_html = """
+             <style>
+                 .gold { color: gold; }
+                 .silver { color: silver; }
+                 .bronze { color: #cd7f32; }  <!-- Bronze color -->
+                 .green-check { color: green; }
+                 .red-cross { color: red; }
+             </style>
+             <table>
+                 <tr>
+                     <th>Data type</th>
+                     <th class="gold">Goud</th>
+                     <th class="silver">Zilver</th>
+                     <th class="bronze">Brons</th>
+                 </tr>
+                 <tr>
+                     <td>Ritten data</td>
+                     <td class="green-check">✓</td>
+                     <td class="red-cross">✗</td>
+                     <td class="red-cross">✗</td>
+                 </tr>
+                 <tr>
+                     <td>Enquete data</td>
+                     <td class="green-check">✓</td>
+                     <td class="green-check">✓</td>
+                     <td class="red-cross">✗</td>
+                 </tr>
+                 <tr>
+                     <td>Openbare data</td>
+                     <td class="green-check">✓</td>
+                     <td class="green-check">✓</td>
+                     <td class="green-check">✓</td>
+                 </tr>
+             </table>
+             """
+         
+         text3.markdown(table_html, unsafe_allow_html=True)
+
          
          
          column0, column1, column2, column3, column4, column5 = st.columns([0.2,0.2,0.2,0.2,0.1,0.3])
