@@ -487,7 +487,21 @@ def bsg_page():
          toekomstige laadvraag. We beschikken niet over het aantal gereden kilometers van de "bronze" bedrijven. Om dit te bepalen is er gekeken naar de 
          hoeveelheid gereden kilometers van de zilvere en gouden bedrijven. Hiervan is een gemiddelde genomen per voertuig, deze is vervolgens toegewezen 
          aan de bronze voertuigen""")
-         uitleg2.table(df_anv_voertuigen)
+         st.markdown("""
+             <style>
+                 .scrollable-table {
+                     height: 300px;  /* Adjust height as necessary */
+                     overflow-y: auto;
+                     display: block;
+                 }
+             </style>
+             """, unsafe_allow_html=True)
+         
+             # Render the DataFrame in column2 as a table inside a scrollable container
+         with column2:
+                 st.markdown("<div class='scrollable-table'>", unsafe_allow_html=True)
+                 st.write(df_anv_voertuigen)
+                 st.markdown("</div>", unsafe_allow_html=True)
 
          uitleg1.title("Jaarverbruik pand")
          uitleg1.write("uitleg over bepalen jaarverbruik pand")
