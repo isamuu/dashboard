@@ -483,7 +483,7 @@ def bsg_page():
          st.markdown("""
              <style>
                  .stTable {
-                     height: 150px;  /* Adjust height as necessary */
+                     height: 100px;  /* Adjust height as necessary */
                      overflow-y: auto;
                      display: block;
                  }
