@@ -261,15 +261,21 @@ def bsg_page():
 
          text1, text2 = st.columns([0.4,0.5])
 
-         text1.write(""" \n\n\n\nDit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. 
-         Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. 
-         Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.
+         text1.write(""" \n\n\n\nOm inzicht te geven in de toekomstige energiegebruik van het bedrijventerrein is het van belang om te weten 
+         hoe de huidige situatie eruit ziet. Aan de hand van data en enquetes kan er achterhaald worden hoe het het huidige energieverbuik eruit ziet en wat voor
+         invloed de overstap naar elektrische voertuigen zal hebben. Het type en aantal voertuigen per bedrijf kan laten zien hoe de toekomstige situatie van 
+         het wagenpark eruit ziet. \n\n
          
-         \n\n Terwijl de wereld zich richt op duurzame energie, wordt de overstap naar elektrische voertuigen op bedrijventerreinen een groot en complex vraagstuk. 
-         Het is algemeen bekend dat de elektriciteitsinfrastructuur in Nederland op sommige locaties al tegen zijn uiterste loopt.
-         De transitie naar eleketrisch transport zal nog meer druk zetten op onze infrastructuur, zo ook op het bedrijventerrein Schiphol Trade Park.
-         Dit betekent dat we geconfronteerd worden met een complexe puzzel die op de juiste manier moet worden aangepakt. 
-         Dit dashboard biedt inzichten in de huidige situatie, uitdagingen en kansen binnen op het Schiphol Trade Park. \n\n\n\n""")
+         Lang niet alle bedrijven hebben echter de tijd of mogelijkheid om deze data te leveren. In dit geval moet er a.d.h.v openbare data schattingen 
+         gemaakt worden. Deze data en de data van de participerende bedrijven vormen samen de informatie over het gehele bedrijventerrein. 
+         Alleen zo kunnen er inzichten worden gegeven over het gehele bedrijventerrein. \n\n
+
+         Om de gaten op te vullen is er gebruik gemaakt van data van het CBS en PDOK. De data van de CBS geeft per PC4 gebied aan hoeveel type 
+         voertuigen er zich in het gebied bevinden. De PDOK data geeft informatie over de grootte van de panden van de bedrijven. \n\n
+
+         Om de kwaliteit van de data aan te geven wordt er in het dashboard gebruik gemaakt van een "Brons-Zilver-Goud Systeem". Dit systeem geeft aan waar 
+         de data vandaan komt en hoe deze gebruikt is. De tabel recht geeft dit weer.
+         \n\n\n\n""")
          
          
          column0, column1, column2, column3, column4, column5 = st.columns([0.2,0.2,0.2,0.2,0.1,0.3])
