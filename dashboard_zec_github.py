@@ -340,21 +340,18 @@ def bsg_page():
          icon_bedrijf_goud_html = f'''<img src="{icon_bedrijf_goud}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_goud} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_goud_html, unsafe_allow_html=True)
-         column0.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_bedrijf_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20zilver.jpg"
          aantal_bedrijf_zilver = len(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Zilver")]["Bedrijf"])
          icon_bedrijf_zilver_html = f'''<img src="{icon_bedrijf_zilver}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_zilver} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_zilver_html, unsafe_allow_html=True)
-         column0.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_bedrijf_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20brons.jpg"
          aantal_bedrijf_brons = len(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Brons")]["Bedrijf"])
          icon_bedrijf_brons_html = f'''<img src="{icon_bedrijf_brons}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_brons} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_brons_html, unsafe_allow_html=True)
-         column0.write("--------------------------------------------------------------------------------------------------------------------------")
          
          
 
@@ -364,6 +361,7 @@ def bsg_page():
          icon_truck_html = f'''<img src="{icon_truck}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_truck} Truck</p>'''
          column1.markdown(icon_truck_html, unsafe_allow_html=True)
+         column1.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_truck_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck%20goud.jpg"
          aantal_truck_goud = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Goud")]["aantal truck"].sum())
@@ -389,6 +387,7 @@ def bsg_page():
          icon_bakwagen_html = f'''<img src="{icon_bakwagen}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bakwagen} Bakwagens</p>'''
          column2.markdown(icon_bakwagen_html, unsafe_allow_html=True)
+         column2.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_bakwagen_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen%20goud.jpg"
          aantal_bakwagen_goud = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Goud")]["aantal bakwagen"].sum())
@@ -415,6 +414,7 @@ def bsg_page():
          icon_bestelwagen_html = f'''<img src="{icon_bestelwagen}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bestelwagen} bestelwagen</p>'''
          column3.markdown(icon_bestelwagen_html, unsafe_allow_html=True)
+         column3.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_bestelwagen_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20goud.jpg"
          aantal_bestelwagen_goud = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Goud")]["aantal bestelwagen"].sum())
