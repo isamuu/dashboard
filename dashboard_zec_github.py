@@ -259,7 +259,7 @@ def bsg_page():
                       unsafe_allow_html=True)
          st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
 
-         text1, text2 = st.columns([0.4,0.5])
+         text1, text2, text3, text4, text5 = st.columns([0.4,0.5,0.2,0.2,0.2])
 
          text1.write(""" \n\n\n\nOm inzicht te geven in de toekomstige energiegebruik van het bedrijventerrein is het van belang om te weten 
          hoe de huidige situatie eruit ziet. Aan de hand van data en enquetes kan er achterhaald worden hoe het het huidige energieverbuik eruit ziet en wat voor
@@ -273,6 +273,16 @@ def bsg_page():
          \n\nOm de kwaliteit van de data aan te geven wordt er in het dashboard gebruik gemaakt van een "Brons-Zilver-Goud Systeem". Dit systeem geeft aan waar 
          de data vandaan komt en hoe deze gebruikt is. De tabel recht geeft dit weer.
          \n\n\n\n""")
+
+         text3.write(""" \n\nRitten data
+         \n\nEnquete data
+         \n\nOpenbare data """)
+
+         text3.write(""" Goud
+         \n\nV
+         \n\nV
+         \n\nV """)
+
          
          
          column0, column1, column2, column3, column4, column5 = st.columns([0.2,0.2,0.2,0.2,0.1,0.3])
