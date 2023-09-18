@@ -334,6 +334,8 @@ def bsg_page():
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_html, unsafe_allow_html=True)
 
+         column0.write("--------------------------------------------------------------------------------------------------------------------------")
+
          icon_bedrijf_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20goud.jpg"
          aantal_bedrijf_goud = len(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Goud")]["Bedrijf"])
          icon_bedrijf_goud_html = f'''<img src="{icon_bedrijf_goud}" width="100" style="display: block; margin: auto;">
