@@ -260,11 +260,27 @@ def bsg_page():
          st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
          
          
-         column1, column2, column3, column4, column5 = st.columns([0.2,0.2,0.2,0.1,0.3])
+         column0, column1, column2, column3, column4, column5 = st.columns([0.2,0.2,0.2,0.2,0.1,0.3])
 
 
          # Place text in the left column
          column1.text("Your Text Here")
+
+         #Bedrijven
+         icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.jpg"
+         aantal_bedrijf = len(df['Bedrijf'].unique())
+         icon_bedrijf_html = f'''<img src="{icon_bedrijf}" width="100" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 18px;">{aantal_bedrijf} Bedrijven</p>'''    
+         column0.markdown(icon_bedrijf_html, unsafe_allow_html=True)
+
+         icon_bedrijf_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20goud.jpg"
+         aantal_bedrijf_goud = len(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Goud")]["Bedrijf"])
+         icon_bedrijf_goud_html = f'''<img src="{icon_bedrijf_goud}" width="100" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_goud} Bedrijven</p>'''    
+         column0.markdown(icon_bedrijf_goud_html, unsafe_allow_html=True)
+
+         
+         
 
          #TRUCK
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.jpg"
