@@ -277,6 +277,14 @@ def bsg_page():
 
          table_html = """
              <style>
+                 table {
+                     font-size: 20px; /* Adjust as necessary */
+                     width: 100%;
+                 }
+                 td, th {
+                     padding: 15px; /* Adjust as necessary */
+                     text-align: center;
+                 }
                  .gold { color: gold; }
                  .silver { color: silver; }
                  .bronze { color: #cd7f32; }  <!-- Bronze color -->
@@ -310,6 +318,7 @@ def bsg_page():
                  </tr>
              </table>
              """
+
          
          text3.markdown(table_html, unsafe_allow_html=True)
 
