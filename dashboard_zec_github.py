@@ -267,10 +267,10 @@ def bsg_page():
          het wagenpark eruit ziet. \n\nLang niet alle bedrijven hebben echter de tijd of mogelijkheid om deze data te leveren. 
          In dit geval moet er a.d.h.v openbare data schattingen 
          gemaakt worden. Deze data en de data van de participerende bedrijven vormen samen de informatie over het gehele bedrijventerrein. 
-         Alleen zo kunnen er inzichten worden gegeven over het gehele bedrijventerrein. \n\n
-         Om de gaten op te vullen is er gebruik gemaakt van data van het CBS en PDOK. De data van de CBS geeft per PC4 gebied aan hoeveel type 
-         voertuigen er zich in het gebied bevinden. De PDOK data geeft informatie over de grootte van de panden van de bedrijven. \n\n
-         Om de kwaliteit van de data aan te geven wordt er in het dashboard gebruik gemaakt van een "Brons-Zilver-Goud Systeem". Dit systeem geeft aan waar 
+         Alleen zo kunnen er inzichten worden gegeven over het gehele bedrijventerrein. 
+         \n\nOm de gaten op te vullen is er gebruik gemaakt van data van het CBS en PDOK. De data van de CBS geeft per PC4 gebied aan hoeveel type 
+         voertuigen er zich in het gebied bevinden. De PDOK data geeft informatie over de grootte van de panden van de bedrijven. 
+         \n\nOm de kwaliteit van de data aan te geven wordt er in het dashboard gebruik gemaakt van een "Brons-Zilver-Goud Systeem". Dit systeem geeft aan waar 
          de data vandaan komt en hoe deze gebruikt is. De tabel recht geeft dit weer.
          \n\n\n\n""")
          
