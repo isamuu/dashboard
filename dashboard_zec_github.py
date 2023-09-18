@@ -531,7 +531,7 @@ def bsg_page():
          </style>
          """, unsafe_allow_html=True)
 
-         uitleg2.write(df_anv_voertuigen)
+         uitleg0.write(df_anv_voertuigen)
 
          uitleg2.title("Aansluiting pand")
          uitleg2.write("""uitleg over aansluiting pand""")
