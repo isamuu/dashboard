@@ -279,6 +279,17 @@ def bsg_page():
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_goud} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_goud_html, unsafe_allow_html=True)
 
+         icon_bedrijf_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20zilver.jpg"
+         aantal_bedrijf_zilver = len(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Zilver")]["Bedrijf"])
+         icon_bedrijf_zilver_html = f'''<img src="{icon_bedrijf_zilver}" width="100" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_zilver} Bedrijven</p>'''    
+         column0.markdown(icon_bedrijf_zilver_html, unsafe_allow_html=True)
+
+         icon_bedrijf_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20brons.jpg"
+         aantal_bedrijf_brons = len(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Brons")]["Bedrijf"])
+         icon_bedrijf_brons_html = f'''<img src="{icon_bedrijf_brons}" width="100" style="display: block; margin: auto;">
+         <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_brons} Bedrijven</p>'''    
+         column0.markdown(icon_bedrijf_brons_html, unsafe_allow_html=True)
          
          
 
@@ -308,7 +319,6 @@ def bsg_page():
          column1.markdown(icon_truck_brons_html, unsafe_allow_html=True)
 
          #BAKWAGEN
-         column2.text("Your Text Here")
          icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.jpg"
          aantal_bakwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bakwagen"].sum())
          icon_bakwagen_html = f'''<img src="{icon_bakwagen}" width="100" style="display: block; margin: auto;">
@@ -335,7 +345,6 @@ def bsg_page():
 
 
          #BESTELWAGEN
-         column3.text("Your Text Here")
          icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.jpg"
          aantal_bestelwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bestelwagen"].sum())
          icon_bestelwagen_html = f'''<img src="{icon_bestelwagen}" width="100" style="display: block; margin: auto;">
