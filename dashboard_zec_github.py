@@ -696,7 +696,7 @@ def vehicle_page():
          col1, col2 = st.columns(2)
 
          # Place text in the left column
-         col1.text(""" Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. 
+         col1.write(""" Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. 
          Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. 
          Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.
          
