@@ -892,6 +892,7 @@ def company_page():
 
          # add columns
          col1, col2 = st.columns(2)
+         col1.selected_prob = st.selectbox('Select column for Probability Uur:', ['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
 
 
 
@@ -913,7 +914,7 @@ def company_page():
                   "voorspelling aantal elektrische bakwagen 2040", "voorspelling aantal elektrische truck 2040"]]
          df.columns = df.columns.str.replace(r'voorspelling aantal elektrische ', '')
          
-         col1.selected_prob = st.selectbox('Select column for Probability Uur:', ['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
+         
          
          # dataframe maken voor tijden
          tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
