@@ -11,7 +11,7 @@ st.set_page_config(layout="wide")
 # Load the geopackage file
 #df = pd.read_csv("df_final.csv")
 df = pd.read_csv("test_df_bt.csv")
-df_prob = pd.read_csv("df_probability.csv", index_col = 0)
+df_prob = pd.read_csv("df_prob.csv", index_col = 0)
 
 df.columns = df.columns.str.lower()
 df = df[["bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen", 'truck gem afstand in km', 
