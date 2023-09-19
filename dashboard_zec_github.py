@@ -11,7 +11,7 @@ st.set_page_config(layout="wide")
 # Load the geopackage file
 #df = pd.read_csv("df_final.csv")
 df = pd.read_csv("test_df_bt.csv")
-df_prob = pd.read_csv("df_prob.csv", index_col = 0)
+df_prob = pd.read_csv("df_probability.csv", index_col = 0)
 
 df.columns = df.columns.str.lower()
 df = df[["bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen", 'truck gem afstand in km', 
@@ -38,7 +38,8 @@ tijdrange = tijdrange.rename(columns = {0:"Datum"})
 
 df_gebruik = df_prob.merge(tijdrange, on = ["Maand nummer", "Dag nummer", "Uur nummer"])
 df_gebruik = df_gebruik.sort_values(["Bedrijf", "Datum"]).reset_index(drop = True)
-df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik["Probability Uur"]
+#df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik["Probability Uur"]
+df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik[selected_prob]
 df_gebruik = df_gebruik[["Bedrijf", "Datum", "Probability"]].merge(df, left_on = "Bedrijf", right_on = "bedrijf", how = "left")
 df_gebruik = df_gebruik.fillna(0)
 
@@ -691,6 +692,7 @@ def vehicle_page():
                       unsafe_allow_html=True)
          st.markdown("<h1 style='text-align: center'>Voertuigen en pand</h1>", unsafe_allow_html=True)
 
+         selected_prob = st.selectbox('Select column for Probability Uur:', ['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
          # add columns
          col1, col2 = st.columns(2)
 
