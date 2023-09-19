@@ -716,6 +716,8 @@ def vehicle_page():
 
          col1.session_state.selected_column = st.selectbox('Select column for Probability Uur:', 
                                                 ['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
+
+         df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik[st.session_state.selected_column]
          
          # The user can select a year
          year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
