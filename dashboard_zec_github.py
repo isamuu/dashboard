@@ -552,8 +552,7 @@ def bsg_page():
          uitleg2.write(df_anv_aansluiting)
          
          uitleg0.title("Voorspelling Wagenpark")
-         uitleg0.write("uitleg over bepalen overstap naar elektrisch
-         \n\nIs bepaald adhv aanschafprijs EV goedkoper dan diesel. truck -> 2030, bakwagen -> 2035, bestelwagen -> 2040")
+         uitleg0.write("uitleg over bepalen overstap naar elektrisch \n\nIs bepaald adhv aanschafprijs EV goedkoper dan diesel. truck -> 2030, bakwagen -> 2035, bestelwagen -> 2040")
 
 
          
