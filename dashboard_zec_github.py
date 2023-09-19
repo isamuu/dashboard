@@ -38,7 +38,6 @@ tijdrange = tijdrange.rename(columns = {0:"Datum"})
 
 df_gebruik = df_prob.merge(tijdrange, on = ["Maand nummer", "Dag nummer", "Uur nummer"])
 df_gebruik = df_gebruik.sort_values(["Bedrijf", "Datum"]).reset_index(drop = True)
-#df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik["Probability Uur"]
 df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik["Probability Uur"]
 df_gebruik = df_gebruik[["Bedrijf", "Datum", "Probability"]].merge(df, left_on = "Bedrijf", right_on = "bedrijf", how = "left")
 df_gebruik = df_gebruik.fillna(0)
@@ -696,7 +695,6 @@ def vehicle_page():
          # add columns
          col1, col2 = st.columns(2)
 
-         col1.selected_prob = st.selectbox('Select column for Probability Uur:', ['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
          # Place text in the left column
          col1.text(""" Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. 
          Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. 
@@ -892,7 +890,6 @@ def company_page():
 
          # add columns
          col1, col2 = st.columns(2)
-
 
 
          
