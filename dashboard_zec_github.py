@@ -38,12 +38,7 @@ tijdrange = tijdrange.rename(columns = {0:"Datum"})
 
 df_gebruik = df_prob.merge(tijdrange, on = ["Maand nummer", "Dag nummer", "Uur nummer"])
 df_gebruik = df_gebruik.sort_values(["Bedrijf", "Datum"]).reset_index(drop = True)
-
-if 'selected_column' not in st.session_state:
-    st.session_state.selected_column = 'Probability Uur'
-
 df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik["Probability Uur"]
-
 df_gebruik = df_gebruik[["Bedrijf", "Datum", "Probability"]].merge(df, left_on = "Bedrijf", right_on = "bedrijf", how = "left")
 df_gebruik = df_gebruik.fillna(0)
 
@@ -714,10 +709,7 @@ def vehicle_page():
          # capacity line
          show_line = col1.checkbox('Capaciteit netwerk')
 
-         col1.session_state.selected_column = st.selectbox('Select column for Probability Uur:', 
-                                                ['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
 
-         df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik[st.session_state.selected_column]
          
          # The user can select a year
          year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
