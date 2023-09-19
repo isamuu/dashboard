@@ -518,7 +518,8 @@ def bsg_page():
 
 
          uitleg0.title("Jaarverbruik pand")
-         uitleg0.write("""uitleg over bepalen jaarverbruik pand""")
+         uitleg0.write("""uitleg over bepalen jaarverbruik pand 
+         \n\n is bepaald adhv gemiddelde zilver en goud, ...kwh per m2""")
          df_anv_verbruik = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "jaarverbruik"]]
          
          st.markdown("""
@@ -534,7 +535,8 @@ def bsg_page():
          uitleg0.write(df_anv_verbruik)
 
          uitleg2.title("Aansluiting pand")
-         uitleg2.write("""uitleg over aansluiting pand""")
+         uitleg2.write("""uitleg over aansluiting pand
+         \n\n\n\n is bepaald adhv gemiddelde zilver en goud, ...kwh per m2""")
          df_anv_aansluiting = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "vermogen aansluiting in watt (pand)"]]
          
          st.markdown("""
