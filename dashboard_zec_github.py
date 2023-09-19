@@ -692,10 +692,11 @@ def vehicle_page():
                       unsafe_allow_html=True)
          st.markdown("<h1 style='text-align: center'>Voertuigen en pand</h1>", unsafe_allow_html=True)
 
-         selected_prob = st.selectbox('Select column for Probability Uur:', ['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
+         
          # add columns
          col1, col2 = st.columns(2)
 
+         col1.selected_prob = st.selectbox('Select column for Probability Uur:', ['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
          # Place text in the left column
          col1.text(""" Dit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. 
          Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. 
