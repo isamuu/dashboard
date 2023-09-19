@@ -892,9 +892,9 @@ def company_page():
 
          # add columns
          col1, col2 = st.columns(2)
-         col1.selected_prob = st.selectbox('Select column for Probability Uur:', ['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
+         okedan = col1.selectbox('Select column for Probability Uur:', options = ['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
 
-
+         
 
 
 
