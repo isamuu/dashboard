@@ -316,7 +316,7 @@ def homepage():
          <p style="text-align: center; font-size: 24px;">{aantal_truck} Trucks</p>'''
          
          icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.jpg"
-         aantal_bedrijf = len(df['Bedrijf'].unique())
+         aantal_bedrijf = len(df['bedrijf'].unique())
          icon_bedrijf_html = f'''<img src="{icon_bedrijf}" width="150" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 24px;">{aantal_bedrijf} Bedrijven</p>'''
          
@@ -421,7 +421,7 @@ def bsg_page():
 
          #Bedrijven
          icon_bedrijf = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf.jpg"
-         aantal_bedrijf = len(df['Bedrijf'].unique())
+         aantal_bedrijf = len(df['bedrijf'].unique())
          icon_bedrijf_html = f'''<img src="{icon_bedrijf}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_html, unsafe_allow_html=True)
