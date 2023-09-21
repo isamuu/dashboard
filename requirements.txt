@@ -2,3 +2,4 @@ matplotlib
 plotly
 geopandas
 pydeck
+openpyxl
