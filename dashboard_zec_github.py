@@ -215,102 +215,6 @@ df.columns = df.columns.str.replace(r'voorspelling aantal elektrische ', '')
 
 
 
-# dataframe maken voor tijden
-tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
-tijdrange["Maand nummer"] = tijdrange[0].dt.month
-tijdrange["Dag nummer"] = tijdrange[0].dt.dayofweek
-tijdrange["Dag nummer"] = tijdrange["Dag nummer"]+1
-tijdrange["Uur nummer"] = tijdrange[0].dt.hour
-tijdrange = tijdrange.rename(columns = {0:"Datum"})
-
-df_gebruik = df_prob.merge(tijdrange, on = ["Maand nummer", "Dag nummer", "Uur nummer"])
-df_gebruik = df_gebruik.sort_values(["Bedrijf", "Datum"]).reset_index(drop = True)
-df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik["Probability Uur"]
-df_gebruik = df_gebruik[["Bedrijf", "Datum", "Probability"]].merge(df, left_on = "Bedrijf", right_on = "bedrijf", how = "left")
-df_gebruik = df_gebruik.fillna(0)
-
-# voor maximaal aantal km
-# afstand*aantal voertuigen*verbruik per km
-df_gebruik["truck max verbruik 2025 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2025'] * 1  * df_gebruik["Probability"]
-df_gebruik["bakwagen max verbruik 2025 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2025'] * 0.9 * df_gebruik["Probability"]
-df_gebruik["bestelwagen max verbruik 2025 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2025'] * 0.2 * df_gebruik["Probability"]
-df_gebruik["voertuigen max verbruik 2025 in kWh"] = df_gebruik["truck max verbruik 2025 in kWh"] + df_gebruik["bakwagen max verbruik 2025 in kWh"] + df_gebruik["bestelwagen max verbruik 2025 in kWh"]
-
-df_gebruik["truck max verbruik 2030 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2030'] * 1  * df_gebruik["Probability"]
-df_gebruik["bakwagen max verbruik 2030 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2030'] * 0.9 * df_gebruik["Probability"]
-df_gebruik["bestelwagen max verbruik 2030 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2030'] * 0.2 * df_gebruik["Probability"]
-df_gebruik["voertuigen max verbruik 2030 in kWh"] = df_gebruik["truck max verbruik 2030 in kWh"] + df_gebruik["bakwagen max verbruik 2030 in kWh"] + df_gebruik["bestelwagen max verbruik 2030 in kWh"]
-
-df_gebruik["truck max verbruik 2035 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2035'] * 1  * df_gebruik["Probability"]
-df_gebruik["bakwagen max verbruik 2035 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2035'] * 0.9 * df_gebruik["Probability"]
-df_gebruik["bestelwagen max verbruik 2035 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2035'] * 0.2 * df_gebruik["Probability"]
-df_gebruik["voertuigen max verbruik 2035 in kWh"] = df_gebruik["truck max verbruik 2035 in kWh"] + df_gebruik["bakwagen max verbruik 2035 in kWh"] + df_gebruik["bestelwagen max verbruik 2035 in kWh"]
-
-df_gebruik["truck max verbruik 2040 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2040'] * 1  * df_gebruik["Probability"]
-df_gebruik["bakwagen max verbruik 2040 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2040'] * 0.9 * df_gebruik["Probability"]
-df_gebruik["bestelwagen max verbruik 2040 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2040'] * 0.2 * df_gebruik["Probability"]
-df_gebruik["voertuigen max verbruik 2040 in kWh"] = df_gebruik["truck max verbruik 2040 in kWh"] + df_gebruik["bakwagen max verbruik 2040 in kWh"] + df_gebruik["bestelwagen max verbruik 2040 in kWh"]
-
-# voor gemiddeld aantal km
-df_gebruik["truck gem verbruik 2025 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2025'] * 1  * df_gebruik["Probability"]
-df_gebruik["bakwagen gem verbruik 2025 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2025'] * 0.9 * df_gebruik["Probability"]
-df_gebruik["bestelwagen gem verbruik 2025 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2025'] * 0.2 * df_gebruik["Probability"]
-df_gebruik["voertuigen gem verbruik 2025 in kWh"] = df_gebruik["truck gem verbruik 2025 in kWh"] + df_gebruik["bakwagen gem verbruik 2025 in kWh"] + df_gebruik["bestelwagen gem verbruik 2025 in kWh"]
-
-df_gebruik["truck gem verbruik 2030 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2030'] * 1  * df_gebruik["Probability"]
-df_gebruik["bakwagen gem verbruik 2030 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2030'] * 0.9 * df_gebruik["Probability"]
-df_gebruik["bestelwagen gem verbruik 2030 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2030'] * 0.2 * df_gebruik["Probability"]
-df_gebruik["voertuigen gem verbruik 2030 in kWh"] = df_gebruik["truck gem verbruik 2030 in kWh"] + df_gebruik["bakwagen gem verbruik 2030 in kWh"] + df_gebruik["bestelwagen gem verbruik 2030 in kWh"]
-
-df_gebruik["truck gem verbruik 2035 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2035'] * 1  * df_gebruik["Probability"]
-df_gebruik["bakwagen gem verbruik 2035 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2035'] * 0.9 * df_gebruik["Probability"]
-df_gebruik["bestelwagen gem verbruik 2035 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2035'] * 0.2 * df_gebruik["Probability"]
-df_gebruik["voertuigen gem verbruik 2035 in kWh"] = df_gebruik["truck gem verbruik 2035 in kWh"] + df_gebruik["bakwagen gem verbruik 2035 in kWh"] + df_gebruik["bestelwagen gem verbruik 2035 in kWh"]
-
-df_gebruik["truck gem verbruik 2040 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2040'] * 1  * df_gebruik["Probability"]
-df_gebruik["bakwagen gem verbruik 2040 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2040'] * 0.9 * df_gebruik["Probability"]
-df_gebruik["bestelwagen gem verbruik 2040 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2040'] * 0.2 * df_gebruik["Probability"]
-df_gebruik["voertuigen gem verbruik 2040 in kWh"] = df_gebruik["truck gem verbruik 2040 in kWh"] + df_gebruik["bakwagen gem verbruik 2040 in kWh"] + df_gebruik["bestelwagen gem verbruik 2040 in kWh"]
-
-#Probability bepalen voor verdeling van jaarverbruik over de dagen
-jaarverbruik = tijdrange
-# Filter the dataframe based on the conditions
-filtered_df = jaarverbruik[(jaarverbruik['Dag nummer'].between(1, 5)) & (jaarverbruik['Uur nummer'].between(7, 17))]
-
-# Create a new column in the original dataframe, initially with all zeros
-jaarverbruik['Jaarverbruik Probability'] = 0
-
-# Assign the computed value to the filtered rows in the new column
-jaarverbruik.loc[filtered_df.index, 'Jaarverbruik Probability'] = 1/len(filtered_df)
-jaarverbruik = jaarverbruik[["Datum", "Jaarverbruik Probability"]]
-
-df_final = df_gebruik.merge(jaarverbruik, on = "Datum").sort_values(["Bedrijf", "Datum"])
-df_final = df_final.sort_values(by = ["Bedrijf", "Datum"])
-df_final["Verbruik pand in kWh"] = df_final["jaarverbruik"]*df_final["Jaarverbruik Probability"]
-
-df_final["Gem verbruik in kWh 2025"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2025 in kWh"]
-df_final["Gem verbruik in kWh 2030"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2030 in kWh"]
-df_final["Gem verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2035 in kWh"]
-df_final["Gem verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2040 in kWh"]
-
-df_final["Max verbruik in kWh 2025"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2025 in kWh"]
-df_final["Max verbruik in kWh 2030"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2030 in kWh"]
-df_final["Max verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2035 in kWh"]
-df_final["Max verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2040 in kWh"]
-
-df = df_final
-
-# Set to datetime type
-df['Datum'] = pd.to_datetime(df['Datum'])
-# Extract year and month from 'Datum'
-df['Year'] = df['Datum'].dt.year
-df['Month'] = df['Datum'].dt.month
-df['Day'] = df['Datum'].dt.day
-df['Week'] = df['Datum'].dt.isocalendar().week
-df['Weekday'] = df['Datum'].dt.weekday
-df['Hour'] = df['Datum'].dt.hour
-df = df[df['Year'] == 2022]
-df = df.rename(columns = {'Gem verbruik in kWh 2025':'gem verbruik in kWh 2025','Gem verbruik in kWh 2030':'gem verbruik in kWh 2030', 'Gem verbruik in kWh 2035':'gem verbruik in kWh 2035', 'Gem verbruik in kWh 2040':'gem verbruik in kWh 2040', 'Max verbruik in kWh 2025':'max verbruik in kWh 2025', 'Max verbruik in kWh 2030':'max verbruik in kWh 2030', 'Max verbruik in kWh 2035':'max verbruik in kWh 2035', 'Max verbruik in kWh 2040':'max verbruik in kWh 2040'})
 
 # change company names
 # Extract unique company names
@@ -397,17 +301,17 @@ def homepage():
          cols = st.columns(4)
          
          icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.jpg"
-         aantal_bakwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bakwagen"].sum())
+         aantal_bakwagen = int(df["aantal bakwagen"].sum())
          icon_bakwagen_html = f'''<img src="{icon_bakwagen}" width="150" style="display: block; margin: auto;">'
          <p style="text-align: center; font-size: 24px;">{aantal_bakwagen} Bakwagens</p>'''
          
          icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.jpg"
-         aantal_bestelwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bestelwagen"].sum())
+         aantal_bestelwagen = int(df["aantal bestelwagen"].sum())
          icon_bestelwagen_html = f'''<img src="{icon_bestelwagen}" width="150" style="display: block; margin: auto;">'
          <p style="text-align: center; font-size: 24px;">{aantal_bestelwagen} Bestelwagens</p>'''
          
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.jpg"
-         aantal_truck = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal truck"].sum())
+         aantal_truck = int(df["aantal truck"].sum())
          icon_truck_html = f'''<img src="{icon_truck}" width="150" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 24px;">{aantal_truck} Trucks</p>'''
          
@@ -524,19 +428,19 @@ def bsg_page():
          column0.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_bedrijf_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20goud.jpg"
-         aantal_bedrijf_goud = len(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Goud")]["Bedrijf"])
+         aantal_bedrijf_goud = len(df[df["kwaliteit data"] == "Goud"]["Bedrijf"])
          icon_bedrijf_goud_html = f'''<img src="{icon_bedrijf_goud}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_goud} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_goud_html, unsafe_allow_html=True)
 
          icon_bedrijf_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20zilver.jpg"
-         aantal_bedrijf_zilver = len(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Zilver")]["Bedrijf"])
+         aantal_bedrijf_zilver = len(df[df["kwaliteit data"] == "Zilver"]["Bedrijf"])
          icon_bedrijf_zilver_html = f'''<img src="{icon_bedrijf_zilver}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_zilver} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_zilver_html, unsafe_allow_html=True)
 
          icon_bedrijf_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20brons.jpg"
-         aantal_bedrijf_brons = len(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Brons")]["Bedrijf"])
+         aantal_bedrijf_brons = len(df[df["kwaliteit data"] == "Brons"]["Bedrijf"])
          icon_bedrijf_brons_html = f'''<img src="{icon_bedrijf_brons}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_brons} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_brons_html, unsafe_allow_html=True)
@@ -545,52 +449,52 @@ def bsg_page():
 
          #TRUCK
          icon_truck = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck.jpg"
-         aantal_truck = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal truck"].sum())
+         aantal_truck = int(df["aantal truck"].sum())
          icon_truck_html = f'''<img src="{icon_truck}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_truck} Truck</p>'''
          column1.markdown(icon_truck_html, unsafe_allow_html=True)
          column1.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_truck_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck%20goud.jpg"
-         aantal_truck_goud = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Goud")]["aantal truck"].sum())
+         aantal_truck_goud = int(df[df["kwaliteit data"] == "Goud"]["aantal truck"].sum())
          icon_truck_goud_html = f'''<img src="{icon_truck_goud}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_truck_goud} Truck</p>'''
          column1.markdown(icon_truck_goud_html, unsafe_allow_html=True)
          
          icon_truck_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck%20zilver.jpg"
-         aantal_truck_zilver = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Zilver")]["aantal truck"].sum())
+         aantal_truck_zilver = int(df[df["kwaliteit data"] == "Zilver"]["aantal truck"].sum())
          icon_truck_zilver_html = f'''<img src="{icon_truck_zilver}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_truck_zilver} Truck</p>'''
          column1.markdown(icon_truck_zilver_html, unsafe_allow_html=True)
 
          icon_truck_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20truck%20brons.jpg"
-         aantal_truck_brons = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Brons")]["aantal truck"].sum())
+         aantal_truck_brons = int(df[df["kwaliteit data"] == "Brons"]["aantal truck"].sum())
          icon_truck_brons_html = f'''<img src="{icon_truck_brons}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_truck_brons} Truck</p>'''
          column1.markdown(icon_truck_brons_html, unsafe_allow_html=True)
 
          #BAKWAGEN
          icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.jpg"
-         aantal_bakwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bakwagen"].sum())
+         aantal_bakwagen = int(df["aantal bakwagen"].sum())
          icon_bakwagen_html = f'''<img src="{icon_bakwagen}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bakwagen} Bakwagens</p>'''
          column2.markdown(icon_bakwagen_html, unsafe_allow_html=True)
          column2.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_bakwagen_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen%20goud.jpg"
-         aantal_bakwagen_goud = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Goud")]["aantal bakwagen"].sum())
+         aantal_bakwagen_goud = int(df[df["kwaliteit data"] == "Goud"]["aantal bakwagen"].sum())
          icon_bakwagen_goud_html = f'''<img src="{icon_bakwagen_goud}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bakwagen_goud} Bakwagens</p>'''
          column2.markdown(icon_bakwagen_goud_html, unsafe_allow_html=True)
          
          icon_bakwagen_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen%20zilver.jpg"
-         aantal_bakwagen_zilver = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Zilver")]["aantal bakwagen"].sum())
+         aantal_bakwagen_zilver = int(df[df["kwaliteit data"] == "Zilver"]["aantal bakwagen"].sum())
          icon_bakwagen_zilver_html = f'''<img src="{icon_bakwagen_zilver}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bakwagen_zilver} Bakwagens</p>'''
          column2.markdown(icon_bakwagen_zilver_html, unsafe_allow_html=True)
 
          icon_bakwagen_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen%20brons.jpg"
-         aantal_bakwagen_brons = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Brons")]["aantal bakwagen"].sum())
+         aantal_bakwagen_brons = int(df[df["kwaliteit data"] == "Brons"]["aantal bakwagen"].sum())
          icon_bakwagen_brons_html = f'''<img src="{icon_bakwagen_brons}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bakwagen_brons} bakwagen</p>'''
          column2.markdown(icon_bakwagen_brons_html, unsafe_allow_html=True)
@@ -598,26 +502,26 @@ def bsg_page():
 
          #BESTELWAGEN
          icon_bestelwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen.jpg"
-         aantal_bestelwagen = int(df[df["Datum"]=="2022-01-01 00:00:00"]["aantal bestelwagen"].sum())
+         aantal_bestelwagen = int(df["aantal bestelwagen"].sum())
          icon_bestelwagen_html = f'''<img src="{icon_bestelwagen}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bestelwagen} bestelwagen</p>'''
          column3.markdown(icon_bestelwagen_html, unsafe_allow_html=True)
          column3.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_bestelwagen_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20goud.jpg"
-         aantal_bestelwagen_goud = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Goud")]["aantal bestelwagen"].sum())
+         aantal_bestelwagen_goud = int(df[df["kwaliteit data"] == "Goud"]["aantal bestelwagen"].sum())
          icon_bestelwagen_goud_html = f'''<img src="{icon_bestelwagen_goud}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bestelwagen_goud} bestelwagen</p>'''
          column3.markdown(icon_bestelwagen_goud_html, unsafe_allow_html=True)
          
          icon_bestelwagen_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20zilver.jpg"
-         aantal_bestelwagen_zilver = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Zilver")]["aantal bestelwagen"].sum())
+         aantal_bestelwagen_zilver = int(df[df["kwaliteit data"] == "Zilver"]["aantal bestelwagen"].sum())
          icon_bestelwagen_zilver_html = f'''<img src="{icon_bestelwagen_zilver}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bestelwagen_zilver} bestelwagen</p>'''
          column3.markdown(icon_bestelwagen_zilver_html, unsafe_allow_html=True)
 
          icon_bestelwagen_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bestelwagen%20brons.jpg"
-         aantal_bestelwagen_brons = int(df[(df["Datum"]=="2022-01-01 00:00:00") & (df["kwaliteit data"] == "Brons")]["aantal bestelwagen"].sum())
+         aantal_bestelwagen_brons = int(df[df["kwaliteit data"] == "Brons"]["aantal bestelwagen"].sum())
          icon_bestelwagen_brons_html = f'''<img src="{icon_bestelwagen_brons}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bestelwagen_brons} bestelwagen</p>'''
          column3.markdown(icon_bestelwagen_brons_html, unsafe_allow_html=True)
@@ -625,23 +529,8 @@ def bsg_page():
          
 
 
-         #show_line = st.checkbox('Capaciteit netwerk')
-         
-         # The user can select a year
-         #year = column2.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
-         
-         # The user can select between maximum and average
-         #value_type = column3.radio('Choose a value type', options=['max', 'gem'])
-
-         # Based on the user's selections, choose the appropriate column
-         #if value_type:
-         #         usage_column = f'max verbruik in kWh {year}'
-         #else:
-         #         usage_column = f'gem verbruik in kWh {year}'  
-
-
          # Create a dataframe
-         df_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][['kwaliteit data', 'aantal truck', 'aantal bakwagen', 'aantal bestelwagen']]
+         df_voertuigen = df[['kwaliteit data', 'aantal truck', 'aantal bakwagen', 'aantal bestelwagen']]
          df_voertuigen = df_voertuigen.groupby(by = "kwaliteit data").sum()
          df_voertuigen["aantal"] = df_voertuigen['aantal truck'] + df_voertuigen['aantal bakwagen'] + df_voertuigen['aantal bestelwagen']
          df_voertuigen = df_voertuigen.reindex(['Goud', 'Zilver', 'Brons'])
@@ -665,7 +554,7 @@ def bsg_page():
          voertuigen zij hebben. Echter hebben niet alle bedrijven dat gedaan. Om een compleet beeld te geven van het wagenpark van het bedrijventerrein wordt er
          gekeken naar cbs data: https://opendata.cbs.nl/#/CBS/nl/dataset/37209hvv/table . \n\nDe voertuigen die in de enquetes naar boven kwamen worden van 
          de voertuigen van cbs afgetrokken. De resterende voertuigen worden vervolgens verdeeld over de "bronze" bedrijven. Deze verdeling is willekeurig.""")
-         df_anv_voertuigen = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
+         df_anv_voertuigen = df[["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
          
          st.markdown("""
          <style>
@@ -686,7 +575,7 @@ def bsg_page():
          toekomstige laadvraag. We beschikken niet over het aantal gereden kilometers van de "bronze" bedrijven. Om dit te bepalen is er gekeken naar de 
          hoeveelheid gereden kilometers van de zilvere en gouden bedrijven. Hiervan is een gemiddelde genomen per voertuig, deze is vervolgens toegewezen 
          aan de bronze voertuigen""")
-         df_anv_afstand = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", 'truck gem afstand in km', 'bakwagen gem afstand in km',
+         df_anv_afstand = df[["Bedrijf", "kwaliteit data", 'truck gem afstand in km', 'bakwagen gem afstand in km',
                                                  'bestelwagen gem afstand in km', 'truck max afstand in km', 'bakwagen max afstand in km', 
                                                  'bestelwagen max afstand in km']]
 
@@ -707,7 +596,7 @@ def bsg_page():
          uitleg0.title("Jaarverbruik pand")
          uitleg0.write("""uitleg over bepalen jaarverbruik pand 
          \n\n is bepaald adhv gemiddelde zilver en goud, ...kwh per m2""")
-         df_anv_verbruik = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "jaarverbruik"]]
+         df_anv_verbruik = df[["Bedrijf", "kwaliteit data", "jaarverbruik"]]
          
          st.markdown("""
          <style>
@@ -724,7 +613,7 @@ def bsg_page():
          uitleg2.title("Aansluiting pand")
          uitleg2.write("""uitleg over aansluiting pand
          \n\n\n\n is bepaald adhv gemiddelde zilver en goud, ...kwh per m2""")
-         df_anv_aansluiting = df[df["Datum"]=="2022-01-01 00:00:00"][["Bedrijf", "kwaliteit data", "vermogen aansluiting in watt (pand)"]]
+         df_anv_aansluiting = df[["Bedrijf", "kwaliteit data", "vermogen aansluiting in watt (pand)"]]
          
          st.markdown("""
          <style>
@@ -787,6 +676,116 @@ def vehicle_page():
          value_type = col1.radio('Choose a value type', options=['max', 'gem'])
 
          adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
+
+
+
+       # dataframe maken voor tijden
+       tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
+       tijdrange["Maand nummer"] = tijdrange[0].dt.month
+       tijdrange["Dag nummer"] = tijdrange[0].dt.dayofweek
+       tijdrange["Dag nummer"] = tijdrange["Dag nummer"]+1
+       tijdrange["Uur nummer"] = tijdrange[0].dt.hour
+       tijdrange = tijdrange.rename(columns = {0:"Datum"})
+       
+       df_gebruik = df_prob.merge(tijdrange, on = ["Maand nummer", "Dag nummer", "Uur nummer"])
+       df_gebruik = df_gebruik.sort_values(["Bedrijf", "Datum"]).reset_index(drop = True)
+       df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik["Probability Uur"]
+       df_gebruik = df_gebruik[["Bedrijf", "Datum", "Probability"]].merge(df, left_on = "Bedrijf", right_on = "bedrijf", how = "left")
+       df_gebruik = df_gebruik.fillna(0)
+       
+       # voor maximaal aantal km
+       # afstand*aantal voertuigen*verbruik per km
+       df_gebruik["truck max verbruik 2025 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2025'] * 1  * df_gebruik["Probability"]
+       df_gebruik["bakwagen max verbruik 2025 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2025'] * 0.9 * df_gebruik["Probability"]
+       df_gebruik["bestelwagen max verbruik 2025 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2025'] * 0.2 * df_gebruik["Probability"]
+       df_gebruik["voertuigen max verbruik 2025 in kWh"] = df_gebruik["truck max verbruik 2025 in kWh"] + df_gebruik["bakwagen max verbruik 2025 in kWh"] + df_gebruik["bestelwagen max verbruik 2025 in kWh"]
+       
+       df_gebruik["truck max verbruik 2030 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2030'] * 1  * df_gebruik["Probability"]
+       df_gebruik["bakwagen max verbruik 2030 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2030'] * 0.9 * df_gebruik["Probability"]
+       df_gebruik["bestelwagen max verbruik 2030 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2030'] * 0.2 * df_gebruik["Probability"]
+       df_gebruik["voertuigen max verbruik 2030 in kWh"] = df_gebruik["truck max verbruik 2030 in kWh"] + df_gebruik["bakwagen max verbruik 2030 in kWh"] + df_gebruik["bestelwagen max verbruik 2030 in kWh"]
+       
+       df_gebruik["truck max verbruik 2035 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2035'] * 1  * df_gebruik["Probability"]
+       df_gebruik["bakwagen max verbruik 2035 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2035'] * 0.9 * df_gebruik["Probability"]
+       df_gebruik["bestelwagen max verbruik 2035 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2035'] * 0.2 * df_gebruik["Probability"]
+       df_gebruik["voertuigen max verbruik 2035 in kWh"] = df_gebruik["truck max verbruik 2035 in kWh"] + df_gebruik["bakwagen max verbruik 2035 in kWh"] + df_gebruik["bestelwagen max verbruik 2035 in kWh"]
+       
+       df_gebruik["truck max verbruik 2040 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2040'] * 1  * df_gebruik["Probability"]
+       df_gebruik["bakwagen max verbruik 2040 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2040'] * 0.9 * df_gebruik["Probability"]
+       df_gebruik["bestelwagen max verbruik 2040 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2040'] * 0.2 * df_gebruik["Probability"]
+       df_gebruik["voertuigen max verbruik 2040 in kWh"] = df_gebruik["truck max verbruik 2040 in kWh"] + df_gebruik["bakwagen max verbruik 2040 in kWh"] + df_gebruik["bestelwagen max verbruik 2040 in kWh"]
+       
+       # voor gemiddeld aantal km
+       df_gebruik["truck gem verbruik 2025 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2025'] * 1  * df_gebruik["Probability"]
+       df_gebruik["bakwagen gem verbruik 2025 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2025'] * 0.9 * df_gebruik["Probability"]
+       df_gebruik["bestelwagen gem verbruik 2025 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2025'] * 0.2 * df_gebruik["Probability"]
+       df_gebruik["voertuigen gem verbruik 2025 in kWh"] = df_gebruik["truck gem verbruik 2025 in kWh"] + df_gebruik["bakwagen gem verbruik 2025 in kWh"] + df_gebruik["bestelwagen gem verbruik 2025 in kWh"]
+       
+       df_gebruik["truck gem verbruik 2030 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2030'] * 1  * df_gebruik["Probability"]
+       df_gebruik["bakwagen gem verbruik 2030 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2030'] * 0.9 * df_gebruik["Probability"]
+       df_gebruik["bestelwagen gem verbruik 2030 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2030'] * 0.2 * df_gebruik["Probability"]
+       df_gebruik["voertuigen gem verbruik 2030 in kWh"] = df_gebruik["truck gem verbruik 2030 in kWh"] + df_gebruik["bakwagen gem verbruik 2030 in kWh"] + df_gebruik["bestelwagen gem verbruik 2030 in kWh"]
+       
+       df_gebruik["truck gem verbruik 2035 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2035'] * 1  * df_gebruik["Probability"]
+       df_gebruik["bakwagen gem verbruik 2035 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2035'] * 0.9 * df_gebruik["Probability"]
+       df_gebruik["bestelwagen gem verbruik 2035 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2035'] * 0.2 * df_gebruik["Probability"]
+       df_gebruik["voertuigen gem verbruik 2035 in kWh"] = df_gebruik["truck gem verbruik 2035 in kWh"] + df_gebruik["bakwagen gem verbruik 2035 in kWh"] + df_gebruik["bestelwagen gem verbruik 2035 in kWh"]
+       
+       df_gebruik["truck gem verbruik 2040 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2040'] * 1  * df_gebruik["Probability"]
+       df_gebruik["bakwagen gem verbruik 2040 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2040'] * 0.9 * df_gebruik["Probability"]
+       df_gebruik["bestelwagen gem verbruik 2040 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2040'] * 0.2 * df_gebruik["Probability"]
+       df_gebruik["voertuigen gem verbruik 2040 in kWh"] = df_gebruik["truck gem verbruik 2040 in kWh"] + df_gebruik["bakwagen gem verbruik 2040 in kWh"] + df_gebruik["bestelwagen gem verbruik 2040 in kWh"]
+       
+       #Probability bepalen voor verdeling van jaarverbruik over de dagen
+       jaarverbruik = tijdrange
+       # Filter the dataframe based on the conditions
+       filtered_df = jaarverbruik[(jaarverbruik['Dag nummer'].between(1, 5)) & (jaarverbruik['Uur nummer'].between(7, 17))]
+       
+       # Create a new column in the original dataframe, initially with all zeros
+       jaarverbruik['Jaarverbruik Probability'] = 0
+       
+       # Assign the computed value to the filtered rows in the new column
+       jaarverbruik.loc[filtered_df.index, 'Jaarverbruik Probability'] = 1/len(filtered_df)
+       jaarverbruik = jaarverbruik[["Datum", "Jaarverbruik Probability"]]
+       
+       df_final = df_gebruik.merge(jaarverbruik, on = "Datum").sort_values(["Bedrijf", "Datum"])
+       df_final = df_final.sort_values(by = ["Bedrijf", "Datum"])
+       df_final["Verbruik pand in kWh"] = df_final["jaarverbruik"]*df_final["Jaarverbruik Probability"]
+       
+       df_final["Gem verbruik in kWh 2025"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2025 in kWh"]
+       df_final["Gem verbruik in kWh 2030"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2030 in kWh"]
+       df_final["Gem verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2035 in kWh"]
+       df_final["Gem verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2040 in kWh"]
+       
+       df_final["Max verbruik in kWh 2025"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2025 in kWh"]
+       df_final["Max verbruik in kWh 2030"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2030 in kWh"]
+       df_final["Max verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2035 in kWh"]
+       df_final["Max verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2040 in kWh"]
+       
+       df = df_final
+       
+       # Set to datetime type
+       df['Datum'] = pd.to_datetime(df['Datum'])
+       # Extract year and month from 'Datum'
+       df['Year'] = df['Datum'].dt.year
+       df['Month'] = df['Datum'].dt.month
+       df['Day'] = df['Datum'].dt.day
+       df['Week'] = df['Datum'].dt.isocalendar().week
+       df['Weekday'] = df['Datum'].dt.weekday
+       df['Hour'] = df['Datum'].dt.hour
+       df = df[df['Year'] == 2022]
+       df = df.rename(columns = {'Gem verbruik in kWh 2025':'gem verbruik in kWh 2025','Gem verbruik in kWh 2030':'gem verbruik in kWh 2030', 'Gem verbruik in kWh 2035':'gem verbruik in kWh 2035', 'Gem verbruik in kWh 2040':'gem verbruik in kWh 2040', 'Max verbruik in kWh 2025':'max verbruik in kWh 2025', 'Max verbruik in kWh 2030':'max verbruik in kWh 2030', 'Max verbruik in kWh 2035':'max verbruik in kWh 2035', 'Max verbruik in kWh 2040':'max verbruik in kWh 2040'})
+
+
+
+
+
+
+
+
+
+
+       
          
 
 
