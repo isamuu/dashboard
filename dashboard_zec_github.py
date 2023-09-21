@@ -428,19 +428,19 @@ def bsg_page():
          column0.write("--------------------------------------------------------------------------------------------------------------------------")
 
          icon_bedrijf_goud = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20goud.jpg"
-         aantal_bedrijf_goud = len(df[df["kwaliteit data"] == "Goud"]["Bedrijf"])
+         aantal_bedrijf_goud = len(df[df["kwaliteit data"] == "Goud"]["bedrijf"])
          icon_bedrijf_goud_html = f'''<img src="{icon_bedrijf_goud}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_goud} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_goud_html, unsafe_allow_html=True)
 
          icon_bedrijf_zilver = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20zilver.jpg"
-         aantal_bedrijf_zilver = len(df[df["kwaliteit data"] == "Zilver"]["Bedrijf"])
+         aantal_bedrijf_zilver = len(df[df["kwaliteit data"] == "Zilver"]["bedrijf"])
          icon_bedrijf_zilver_html = f'''<img src="{icon_bedrijf_zilver}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_zilver} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_zilver_html, unsafe_allow_html=True)
 
          icon_bedrijf_brons = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bedrijf%20brons.jpg"
-         aantal_bedrijf_brons = len(df[df["kwaliteit data"] == "Brons"]["Bedrijf"])
+         aantal_bedrijf_brons = len(df[df["kwaliteit data"] == "Brons"]["bedrijf"])
          icon_bedrijf_brons_html = f'''<img src="{icon_bedrijf_brons}" width="100" style="display: block; margin: auto;">
          <p style="text-align: center; font-size: 18px;">{aantal_bedrijf_brons} Bedrijven</p>'''    
          column0.markdown(icon_bedrijf_brons_html, unsafe_allow_html=True)
@@ -554,7 +554,7 @@ def bsg_page():
          voertuigen zij hebben. Echter hebben niet alle bedrijven dat gedaan. Om een compleet beeld te geven van het wagenpark van het bedrijventerrein wordt er
          gekeken naar cbs data: https://opendata.cbs.nl/#/CBS/nl/dataset/37209hvv/table . \n\nDe voertuigen die in de enquetes naar boven kwamen worden van 
          de voertuigen van cbs afgetrokken. De resterende voertuigen worden vervolgens verdeeld over de "bronze" bedrijven. Deze verdeling is willekeurig.""")
-         df_anv_voertuigen = df[["Bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
+         df_anv_voertuigen = df[["bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen"]]
          
          st.markdown("""
          <style>
@@ -575,7 +575,7 @@ def bsg_page():
          toekomstige laadvraag. We beschikken niet over het aantal gereden kilometers van de "bronze" bedrijven. Om dit te bepalen is er gekeken naar de 
          hoeveelheid gereden kilometers van de zilvere en gouden bedrijven. Hiervan is een gemiddelde genomen per voertuig, deze is vervolgens toegewezen 
          aan de bronze voertuigen""")
-         df_anv_afstand = df[["Bedrijf", "kwaliteit data", 'truck gem afstand in km', 'bakwagen gem afstand in km',
+         df_anv_afstand = df[["bedrijf", "kwaliteit data", 'truck gem afstand in km', 'bakwagen gem afstand in km',
                                                  'bestelwagen gem afstand in km', 'truck max afstand in km', 'bakwagen max afstand in km', 
                                                  'bestelwagen max afstand in km']]
 
@@ -596,7 +596,7 @@ def bsg_page():
          uitleg0.title("Jaarverbruik pand")
          uitleg0.write("""uitleg over bepalen jaarverbruik pand 
          \n\n is bepaald adhv gemiddelde zilver en goud, ...kwh per m2""")
-         df_anv_verbruik = df[["Bedrijf", "kwaliteit data", "jaarverbruik"]]
+         df_anv_verbruik = df[["bedrijf", "kwaliteit data", "jaarverbruik"]]
          
          st.markdown("""
          <style>
@@ -613,7 +613,7 @@ def bsg_page():
          uitleg2.title("Aansluiting pand")
          uitleg2.write("""uitleg over aansluiting pand
          \n\n\n\n is bepaald adhv gemiddelde zilver en goud, ...kwh per m2""")
-         df_anv_aansluiting = df[["Bedrijf", "kwaliteit data", "vermogen aansluiting in watt (pand)"]]
+         df_anv_aansluiting = df[["bedrijf", "kwaliteit data", "vermogen aansluiting in watt (pand)"]]
          
          st.markdown("""
          <style>
