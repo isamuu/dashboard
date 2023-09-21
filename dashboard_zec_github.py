@@ -677,7 +677,9 @@ def vehicle_page():
 
          adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
 
+         df_prob
 
+         df
 
          # dataframe maken voor tijden
          tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
