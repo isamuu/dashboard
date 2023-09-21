@@ -15,7 +15,7 @@ st.set_page_config(layout="wide")
 
 # Load the geopackage file
 #df = pd.read_csv("test_df_bt.csv")
-#df_prob = pd.read_csv("df_prob_smart.csv", index_col = 0)
+df_prob = pd.read_csv("df_prob_smart.csv", index_col = 0)
 
 df = pd.read_excel("Data/Data Sander.xlsx")
 sndr = pd.read_excel("Data/Data Sander.xlsx")
