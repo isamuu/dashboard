@@ -27,7 +27,7 @@ df = df[df["Bedrijventerrein"]=="STP"]
 sndr = sndr[sndr["Bedrijventerrein"]=="STP"]
 
 #postcodes van sanders data krijgen
-sndr["straat"], sndr["plaats"] = sndr["Adres"].str.split(", ", 1).str
+sndr["straat"], sndr["plaats"] = sndr["Adres"].str.split(", ", 1).str[0], sndr["Adres"].str.split(", ", 1).str[1]
 sndr["pc4"] = sndr["plaats"].str.extract('(\d+)').astype(float)
 sndr_pc = sndr[sndr["pc4"].notna()]
 sndr_pc["pc4"] = sndr_pc["pc4"].astype('int')
