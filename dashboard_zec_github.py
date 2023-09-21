@@ -5,13 +5,197 @@ import plotly.express as px
 import geopandas as gpd
 import pydeck as pdk
 from plotly.tools import mpl_to_plotly
+import re
+import numpy as np
+import random
+import shapely
 
 st.set_page_config(layout="wide")
 
 # Load the geopackage file
-#df = pd.read_csv("df_final.csv")
-df = pd.read_csv("test_df_bt.csv")
-df_prob = pd.read_csv("df_prob_smart.csv", index_col = 0)
+#df = pd.read_csv("test_df_bt.csv")
+#df_prob = pd.read_csv("df_prob_smart.csv", index_col = 0)
+
+df = pd.read_excel("Data/Data Sander.xlsx")
+sndr = pd.read_excel("Data/Data Sander.xlsx")
+vrtg_verdeling = pd.read_csv("Data/Motorvoertuigen__type__postcode__regio_s_14042023_154158 (1).csv", sep = ";")
+vrtg_verdeling = vrtg_verdeling[vrtg_verdeling["Perioden"] == 2022]
+panden = gpd.read_file("Data/pand 1681 2133.gpkg")
+
+df = df[df["Bedrijventerrein"]=="STP"]
+sndr = sndr[sndr["Bedrijventerrein"]=="STP"]
+
+#postcodes van sanders data krijgen
+sndr["straat"], sndr["plaats"] = sndr["Adres"].str.split(", ", 1).str
+sndr["pc4"] = sndr["plaats"].str.extract('(\d+)').astype(float)
+sndr_pc = sndr[sndr["pc4"].notna()]
+sndr_pc["pc4"] = sndr_pc["pc4"].astype('int')
+
+panden = panden[["gebruiksdoel", "oppervlakte", "openbare_ruimte", "huisnummer", "huisletter", "postcode", "geometry"]]
+panden["pc4"] = panden["postcode"].str.extract('(\d+)', expand=False)
+panden = panden.fillna("")
+panden["huisletter"] = panden["huisletter"].str.lower()
+panden["straat"] = panden["openbare_ruimte"] + str(" ") + panden["huisnummer"].astype(str) + panden["huisletter"]
+#toevoegen samenvoeging Groothandelsmarkt 8-10
+g8 = panden[panden["straat"].isin(["Groothandelsmarkt 8", "Groothandelsmarkt 10"])].groupby("openbare_ruimte")["oppervlakte"].sum().iloc[0]
+g8_10 = panden[panden["straat"] == "Groothandelsmarkt 10"]
+g8_10["oppervlakte"] = g8
+g8_10["huisnummer"] = "8-10"
+g8_10["straat"] = ["Groothandelsmarkt 8-10"]
+panden = pd.concat([panden, g8_10])
+
+sndr = sndr.merge(panden, on = "straat", how = "left")
+verdeling = sndr[['Bedrijf', 'pc4_y', 'oppervlakte']]
+
+verdeling = verdeling.rename(columns = {"pc4_y":"pc4"})
+
+verdeling["totaal oppervlakte"] = verdeling["oppervlakte"].sum()
+
+#Eigen voertuig aantallen
+vrtg_verdeling = vrtg_verdeling[["Regio's", 'Wegvoertuigen per 1 januari/Bedrijfsvoertuigen/Totaal bedrijfsvoertuigen (aantal)',
+       'Wegvoertuigen per 1 januari/Bedrijfsvoertuigen/Bedrijfsmotorvoertuigen/Totaal bedrijfsmotorvoertuigen (aantal)',
+       'Wegvoertuigen per 1 januari/Bedrijfsvoertuigen/Bedrijfsmotorvoertuigen/Bestelauto (aantal)',
+       'Wegvoertuigen per 1 januari/Bedrijfsvoertuigen/Bedrijfsmotorvoertuigen/Vrachtauto (excl. trekker voor oplegger) (aantal)',
+       'Wegvoertuigen per 1 januari/Bedrijfsvoertuigen/Bedrijfsmotorvoertuigen/Trekker voor oplegger (aantal)',
+       'Wegvoertuigen per 1 januari/Bedrijfsvoertuigen/Bedrijfsmotorvoertuigen/Speciaal voertuig (aantal)',
+       'Wegvoertuigen per 1 januari/Bedrijfsvoertuigen/Bedrijfsmotorvoertuigen/Bus (aantal)',
+       'Wegvoertuigen per 1 januari/Bedrijfsvoertuigen/Aanhangwagens en opleggers/Totaal aanhangwagens en opleggers (aantal)',
+       'Wegvoertuigen per 1 januari/Bedrijfsvoertuigen/Aanhangwagens en opleggers/Aanhangwagen (aantal)',
+       'Wegvoertuigen per 1 januari/Bedrijfsvoertuigen/Aanhangwagens en opleggers/Oplegger (aantal)']]
+vrtg_verdeling.columns = vrtg_verdeling.columns.str.replace(r'Wegvoertuigen per 1 januari/Bedrijfsvoertuigen/', '')
+vrtg_verdeling = vrtg_verdeling[["Regio's", "Bedrijfsmotorvoertuigen/Bestelauto (aantal)", 
+                   "Bedrijfsmotorvoertuigen/Vrachtauto (excl. trekker voor oplegger) (aantal)", 
+                  "Bedrijfsmotorvoertuigen/Trekker voor oplegger (aantal)"]]
+vrtg_verdeling = vrtg_verdeling.rename(columns = {"Regio's" : "pc4", 
+                                                  "Bedrijfsmotorvoertuigen/Bestelauto (aantal)": "pc4 Bestelwagen", 
+                                                 "Bedrijfsmotorvoertuigen/Vrachtauto (excl. trekker voor oplegger) (aantal)":"pc4 Bakwagen", 
+                                                 "Bedrijfsmotorvoertuigen/Trekker voor oplegger (aantal)":"pc4 Truck"})
+
+anvu_vrtg = sndr[["Bedrijf", "Bedrijventerrein", "Kwaliteit data", 'pc4_y', 'Eigen wagenpark', 'Aantal truck',
+       'Aantal bakwagen', 'Aantal bestelwagen', 'oppervlakte']]
+anvu_vrtg = anvu_vrtg.rename(columns = {"pc4_y":"pc4"})
+
+anvu_grp = anvu_vrtg.groupby("pc4").sum().reset_index()
+vrtg_verdeling["pc4"] = vrtg_verdeling["pc4"].apply(str)
+
+anvu_grp = anvu_grp.merge(vrtg_verdeling, on = "pc4")
+anvu_grp = anvu_grp[["pc4", "pc4 Bestelwagen", "pc4 Bakwagen", "pc4 Truck", "oppervlakte"]]
+anvu_grp = anvu_grp.rename(columns = {"oppervlakte":"pc4 Oppervlakte"})
+
+stp_vrtg = anvu_vrtg[anvu_vrtg["Bedrijventerrein"] == "STP"]
+
+stp_verd = vrtg_verdeling[vrtg_verdeling["pc4"] == "2133"]
+stp_verd['pc4 Bestelwagen'] = stp_verd['pc4 Bestelwagen'] - stp_vrtg["Aantal bestelwagen"].sum()
+stp_verd['pc4 Truck'] = stp_verd['pc4 Truck'] - stp_vrtg["Aantal truck"].sum()
+stp_verd['pc4 Bakwagen'] = stp_verd['pc4 Bakwagen'] - stp_vrtg["Aantal bakwagen"].sum()
+stp_verd = stp_verd.rename(columns = {"pc4 Bestelwagen":"Aantal bestelwagen", "pc4 Bakwagen":"Aantal bakwagen", 
+                                     "pc4 Truck":"Aantal truck"})
+
+
+stp_vrtg['Aantal truck'] = stp_vrtg['Aantal truck'].replace({np.nan: 0.0}).astype(int)
+stp_vrtg['Aantal bakwagen'] = stp_vrtg['Aantal bakwagen'].replace({np.nan: 0.0}).astype(int)
+stp_vrtg['Aantal bestelwagen'] = stp_vrtg['Aantal bestelwagen'].replace({np.nan: 0.0}).astype(int)
+
+# Filter the DataFrame based on the "Kwaliteit data" column
+df_brons = stp_vrtg[stp_vrtg['Kwaliteit data'] == 'Brons']
+
+# Total number of vehicles to distribute
+total_truck = int(stp_verd.iloc[0,3])
+total_bakwagen = int(stp_verd.iloc[0,2])
+total_bestelwagen = int(stp_verd.iloc[0,1])
+
+# Distribute the vehicles randomly
+for _ in range(total_truck):
+    rand_index = random.choice(df_brons.index.to_list())
+    df_brons.at[rand_index, 'Aantal truck'] += 1
+
+for _ in range(total_bakwagen):
+    rand_index = random.choice(df_brons.index.to_list())
+    df_brons.at[rand_index, 'Aantal bakwagen'] += 1
+
+for _ in range(total_bestelwagen):
+    rand_index = random.choice(df_brons.index.to_list())
+    df_brons.at[rand_index, 'Aantal bestelwagen'] += 1
+
+
+# Merge the updated rows back into the original DataFrame
+stp_vrtg.update(df_brons)
+
+df = df.reset_index(drop = True)
+df.update(stp_vrtg)
+
+#Eigen voertuig afstand
+sndr_afstand = df[['Bedrijf', 'Eigen wagenpark', 'Truck gem afstand in km', 'Bakwagen gem afstand in km',
+       'Bestelwagen gem afstand in km', 'Truck max afstand in km',
+       'Bakwagen max afstand in km', 'Bestelwagen max afstand in km']]
+sndr_afstand = sndr_afstand.merge(verdeling, on = "Bedrijf")
+
+sndr_afstand['Truck gem afstand in km'] = sndr_afstand['Truck gem afstand in km'].fillna(round(sndr_afstand['Truck gem afstand in km'].mean(),0))
+sndr_afstand['Bakwagen gem afstand in km'] = sndr_afstand['Bakwagen gem afstand in km'].fillna(round(sndr_afstand['Bakwagen gem afstand in km'].mean(),0))
+sndr_afstand['Bestelwagen gem afstand in km'] = sndr_afstand['Bestelwagen gem afstand in km'].fillna(round(sndr_afstand['Bestelwagen gem afstand in km'].mean(),0))
+sndr_afstand['Truck max afstand in km'] = sndr_afstand['Truck max afstand in km'].fillna(round(sndr_afstand['Truck max afstand in km'].mean(),0))
+sndr_afstand['Bakwagen max afstand in km'] = sndr_afstand['Bakwagen max afstand in km'].fillna(round(sndr_afstand['Bakwagen max afstand in km'].mean(),0))
+sndr_afstand['Bestelwagen max afstand in km'] = sndr_afstand['Bestelwagen max afstand in km'].fillna(round(sndr_afstand['Bestelwagen max afstand in km'].mean(),0))
+
+df.update(sndr_afstand)
+
+#Parkeerplaatsen
+sndr_park = df[['Bedrijf', 'Eigen wagenpark', 'Parkeerplaatsen']]
+sndr_park = sndr_park.merge(verdeling, on = "Bedrijf")
+
+park_mean = sndr_park[sndr_park["Parkeerplaatsen"].notna()]
+park_mean["Parkeerplaatsen per m2 oppervlakte"] = park_mean["Parkeerplaatsen"]/park_mean["oppervlakte"]
+sndr_park["Parkeerplaatsen per m2 oppervlakte"] = park_mean["Parkeerplaatsen per m2 oppervlakte"].mean()
+
+sndr_park["Parkeerplaatsen"] = sndr_park["Parkeerplaatsen"].fillna(round(sndr_park["Parkeerplaatsen per m2 oppervlakte"]*sndr_park["oppervlakte"], 0))
+df.update(sndr_park)
+
+#Jaarverbruik
+sndr_jaarverbruik = df[['Bedrijf', 'Eigen wagenpark', 'Jaarverbruik']]
+sndr_jaarverbruik = sndr_jaarverbruik.merge(verdeling, on = "Bedrijf")
+
+jaarverbruik_mean = sndr_jaarverbruik[sndr_jaarverbruik["Jaarverbruik"].notna()]
+jaarverbruik_mean["Jaarverbruik per m2 oppervlakte"] = jaarverbruik_mean["Jaarverbruik"]/jaarverbruik_mean["oppervlakte"]
+sndr_jaarverbruik["Jaarverbruik per m2 oppervlakte"] = jaarverbruik_mean["Jaarverbruik per m2 oppervlakte"].mean()
+
+sndr_jaarverbruik["Jaarverbruik"] = sndr_jaarverbruik["Jaarverbruik"].fillna(round(sndr_jaarverbruik["Jaarverbruik per m2 oppervlakte"]*sndr_jaarverbruik["oppervlakte"], 0))
+
+df["Jaarverbruik"] = sndr_jaarverbruik["Jaarverbruik"]
+
+
+#Aansluiting pand
+sndr_aansluiting = df[['Bedrijf', 'Eigen wagenpark', 'Vermogen aansluiting in watt (pand)']]
+sndr_aansluiting = sndr_aansluiting.merge(verdeling, on = "Bedrijf")
+
+aansluiting_mean = sndr_aansluiting[sndr_aansluiting["Vermogen aansluiting in watt (pand)"].notna()]
+aansluiting_mean["Aansluiting per m2 oppervlakte"] = aansluiting_mean["Vermogen aansluiting in watt (pand)"]/aansluiting_mean["oppervlakte"]
+sndr_aansluiting["Aansluiting per m2 oppervlakte"] = aansluiting_mean["Aansluiting per m2 oppervlakte"].mean()
+
+sndr_aansluiting["Vermogen aansluiting in watt (pand)"] = sndr_aansluiting["Vermogen aansluiting in watt (pand)"].fillna(round(sndr_aansluiting["Aansluiting per m2 oppervlakte"]*sndr_aansluiting["oppervlakte"], 0))
+
+df.update(sndr_aansluiting)
+
+#ZEC Voorspelling
+mask = df['Kwaliteit data'] == 'Brons'
+
+# bakwagen vanf 2033 goedkoper -> 2035
+# Copy values from "Aantal bakwagen" to "Voorspelling aantal elektrische bakwagen 2035"
+df.loc[mask, 'Voorspelling aantal elektrische bakwagen 2035'] = df.loc[mask, 'Aantal bakwagen']
+df.loc[mask, 'Voorspelling aantal elektrische bakwagen 2040'] = df.loc[mask, 'Aantal bakwagen']
+
+# trucks vanaf 2032 goedkoper -> 2030
+# Copy values from "Aantal truck" to "Voorspelling aantal elektrische truck 2030"
+df.loc[mask, 'Voorspelling aantal elektrische truck 2030'] = df.loc[mask, 'Aantal truck']
+df.loc[mask, 'Voorspelling aantal elektrische truck 2035'] = df.loc[mask, 'Aantal truck']
+df.loc[mask, 'Voorspelling aantal elektrische truck 2040'] = df.loc[mask, 'Aantal truck']
+
+# bestelwagen van 2040 goedkoper -> 2040
+# Copy values from "Aantal bestelwagen" to "Voorspelling aantal elektrische bestelwagen 2040"
+df.loc[mask, 'Voorspelling aantal elektrische bestelwagen 2040'] = df.loc[mask, 'Aantal bestelwagen']
+
+#######################################
+#######################################
+#######################################
 
 df.columns = df.columns.str.lower()
 df = df[["bedrijf", "kwaliteit data", "aantal truck", "aantal bakwagen", "aantal bestelwagen", 'truck gem afstand in km', 
