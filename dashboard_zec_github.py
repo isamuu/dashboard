@@ -679,102 +679,102 @@ def vehicle_page():
 
 
 
-       # dataframe maken voor tijden
-       tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
-       tijdrange["Maand nummer"] = tijdrange[0].dt.month
-       tijdrange["Dag nummer"] = tijdrange[0].dt.dayofweek
-       tijdrange["Dag nummer"] = tijdrange["Dag nummer"]+1
-       tijdrange["Uur nummer"] = tijdrange[0].dt.hour
-       tijdrange = tijdrange.rename(columns = {0:"Datum"})
+         # dataframe maken voor tijden
+         tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
+         tijdrange["Maand nummer"] = tijdrange[0].dt.month
+         tijdrange["Dag nummer"] = tijdrange[0].dt.dayofweek
+         tijdrange["Dag nummer"] = tijdrange["Dag nummer"]+1
+         tijdrange["Uur nummer"] = tijdrange[0].dt.hour
+         tijdrange = tijdrange.rename(columns = {0:"Datum"})
        
-       df_gebruik = df_prob.merge(tijdrange, on = ["Maand nummer", "Dag nummer", "Uur nummer"])
-       df_gebruik = df_gebruik.sort_values(["Bedrijf", "Datum"]).reset_index(drop = True)
-       df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik["Probability Uur"]
-       df_gebruik = df_gebruik[["Bedrijf", "Datum", "Probability"]].merge(df, left_on = "Bedrijf", right_on = "bedrijf", how = "left")
-       df_gebruik = df_gebruik.fillna(0)
+         df_gebruik = df_prob.merge(tijdrange, on = ["Maand nummer", "Dag nummer", "Uur nummer"])
+         df_gebruik = df_gebruik.sort_values(["Bedrijf", "Datum"]).reset_index(drop = True)
+         df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik["Probability Uur"]
+         df_gebruik = df_gebruik[["Bedrijf", "Datum", "Probability"]].merge(df, left_on = "Bedrijf", right_on = "bedrijf", how = "left")
+         df_gebruik = df_gebruik.fillna(0)
        
-       # voor maximaal aantal km
-       # afstand*aantal voertuigen*verbruik per km
-       df_gebruik["truck max verbruik 2025 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2025'] * 1  * df_gebruik["Probability"]
-       df_gebruik["bakwagen max verbruik 2025 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2025'] * 0.9 * df_gebruik["Probability"]
-       df_gebruik["bestelwagen max verbruik 2025 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2025'] * 0.2 * df_gebruik["Probability"]
-       df_gebruik["voertuigen max verbruik 2025 in kWh"] = df_gebruik["truck max verbruik 2025 in kWh"] + df_gebruik["bakwagen max verbruik 2025 in kWh"] + df_gebruik["bestelwagen max verbruik 2025 in kWh"]
+         # voor maximaal aantal km
+         # afstand*aantal voertuigen*verbruik per km
+         df_gebruik["truck max verbruik 2025 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2025'] * 1  * df_gebruik["Probability"]
+         df_gebruik["bakwagen max verbruik 2025 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2025'] * 0.9 * df_gebruik["Probability"]
+         df_gebruik["bestelwagen max verbruik 2025 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2025'] * 0.2 * df_gebruik["Probability"]
+         df_gebruik["voertuigen max verbruik 2025 in kWh"] = df_gebruik["truck max verbruik 2025 in kWh"] + df_gebruik["bakwagen max verbruik 2025 in kWh"] + df_gebruik["bestelwagen max verbruik 2025 in kWh"]
        
-       df_gebruik["truck max verbruik 2030 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2030'] * 1  * df_gebruik["Probability"]
-       df_gebruik["bakwagen max verbruik 2030 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2030'] * 0.9 * df_gebruik["Probability"]
-       df_gebruik["bestelwagen max verbruik 2030 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2030'] * 0.2 * df_gebruik["Probability"]
-       df_gebruik["voertuigen max verbruik 2030 in kWh"] = df_gebruik["truck max verbruik 2030 in kWh"] + df_gebruik["bakwagen max verbruik 2030 in kWh"] + df_gebruik["bestelwagen max verbruik 2030 in kWh"]
+         df_gebruik["truck max verbruik 2030 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2030'] * 1  * df_gebruik["Probability"]
+         df_gebruik["bakwagen max verbruik 2030 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2030'] * 0.9 * df_gebruik["Probability"]
+         df_gebruik["bestelwagen max verbruik 2030 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2030'] * 0.2 * df_gebruik["Probability"]
+         df_gebruik["voertuigen max verbruik 2030 in kWh"] = df_gebruik["truck max verbruik 2030 in kWh"] + df_gebruik["bakwagen max verbruik 2030 in kWh"] + df_gebruik["bestelwagen max verbruik 2030 in kWh"]
        
-       df_gebruik["truck max verbruik 2035 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2035'] * 1  * df_gebruik["Probability"]
-       df_gebruik["bakwagen max verbruik 2035 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2035'] * 0.9 * df_gebruik["Probability"]
-       df_gebruik["bestelwagen max verbruik 2035 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2035'] * 0.2 * df_gebruik["Probability"]
-       df_gebruik["voertuigen max verbruik 2035 in kWh"] = df_gebruik["truck max verbruik 2035 in kWh"] + df_gebruik["bakwagen max verbruik 2035 in kWh"] + df_gebruik["bestelwagen max verbruik 2035 in kWh"]
+         df_gebruik["truck max verbruik 2035 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2035'] * 1  * df_gebruik["Probability"]
+         df_gebruik["bakwagen max verbruik 2035 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2035'] * 0.9 * df_gebruik["Probability"]
+         df_gebruik["bestelwagen max verbruik 2035 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2035'] * 0.2 * df_gebruik["Probability"]
+         df_gebruik["voertuigen max verbruik 2035 in kWh"] = df_gebruik["truck max verbruik 2035 in kWh"] + df_gebruik["bakwagen max verbruik 2035 in kWh"] + df_gebruik["bestelwagen max verbruik 2035 in kWh"]
        
-       df_gebruik["truck max verbruik 2040 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2040'] * 1  * df_gebruik["Probability"]
-       df_gebruik["bakwagen max verbruik 2040 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2040'] * 0.9 * df_gebruik["Probability"]
-       df_gebruik["bestelwagen max verbruik 2040 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2040'] * 0.2 * df_gebruik["Probability"]
-       df_gebruik["voertuigen max verbruik 2040 in kWh"] = df_gebruik["truck max verbruik 2040 in kWh"] + df_gebruik["bakwagen max verbruik 2040 in kWh"] + df_gebruik["bestelwagen max verbruik 2040 in kWh"]
+         df_gebruik["truck max verbruik 2040 in kWh"] = df_gebruik['truck max afstand in km'] * df_gebruik['truck 2040'] * 1  * df_gebruik["Probability"]
+         df_gebruik["bakwagen max verbruik 2040 in kWh"] = df_gebruik['bakwagen max afstand in km'] * df_gebruik['bakwagen 2040'] * 0.9 * df_gebruik["Probability"]
+         df_gebruik["bestelwagen max verbruik 2040 in kWh"] = df_gebruik['bestelwagen max afstand in km'] * df_gebruik['bestelwagen 2040'] * 0.2 * df_gebruik["Probability"]
+         df_gebruik["voertuigen max verbruik 2040 in kWh"] = df_gebruik["truck max verbruik 2040 in kWh"] + df_gebruik["bakwagen max verbruik 2040 in kWh"] + df_gebruik["bestelwagen max verbruik 2040 in kWh"]
        
-       # voor gemiddeld aantal km
-       df_gebruik["truck gem verbruik 2025 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2025'] * 1  * df_gebruik["Probability"]
-       df_gebruik["bakwagen gem verbruik 2025 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2025'] * 0.9 * df_gebruik["Probability"]
-       df_gebruik["bestelwagen gem verbruik 2025 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2025'] * 0.2 * df_gebruik["Probability"]
-       df_gebruik["voertuigen gem verbruik 2025 in kWh"] = df_gebruik["truck gem verbruik 2025 in kWh"] + df_gebruik["bakwagen gem verbruik 2025 in kWh"] + df_gebruik["bestelwagen gem verbruik 2025 in kWh"]
+         # voor gemiddeld aantal km
+         df_gebruik["truck gem verbruik 2025 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2025'] * 1  * df_gebruik["Probability"]
+         df_gebruik["bakwagen gem verbruik 2025 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2025'] * 0.9 * df_gebruik["Probability"]
+         df_gebruik["bestelwagen gem verbruik 2025 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2025'] * 0.2 * df_gebruik["Probability"]
+         df_gebruik["voertuigen gem verbruik 2025 in kWh"] = df_gebruik["truck gem verbruik 2025 in kWh"] + df_gebruik["bakwagen gem verbruik 2025 in kWh"] + df_gebruik["bestelwagen gem verbruik 2025 in kWh"]
        
-       df_gebruik["truck gem verbruik 2030 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2030'] * 1  * df_gebruik["Probability"]
-       df_gebruik["bakwagen gem verbruik 2030 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2030'] * 0.9 * df_gebruik["Probability"]
-       df_gebruik["bestelwagen gem verbruik 2030 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2030'] * 0.2 * df_gebruik["Probability"]
-       df_gebruik["voertuigen gem verbruik 2030 in kWh"] = df_gebruik["truck gem verbruik 2030 in kWh"] + df_gebruik["bakwagen gem verbruik 2030 in kWh"] + df_gebruik["bestelwagen gem verbruik 2030 in kWh"]
+         df_gebruik["truck gem verbruik 2030 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2030'] * 1  * df_gebruik["Probability"]
+         df_gebruik["bakwagen gem verbruik 2030 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2030'] * 0.9 * df_gebruik["Probability"]
+         df_gebruik["bestelwagen gem verbruik 2030 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2030'] * 0.2 * df_gebruik["Probability"]
+         df_gebruik["voertuigen gem verbruik 2030 in kWh"] = df_gebruik["truck gem verbruik 2030 in kWh"] + df_gebruik["bakwagen gem verbruik 2030 in kWh"] + df_gebruik["bestelwagen gem verbruik 2030 in kWh"]
        
-       df_gebruik["truck gem verbruik 2035 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2035'] * 1  * df_gebruik["Probability"]
-       df_gebruik["bakwagen gem verbruik 2035 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2035'] * 0.9 * df_gebruik["Probability"]
-       df_gebruik["bestelwagen gem verbruik 2035 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2035'] * 0.2 * df_gebruik["Probability"]
-       df_gebruik["voertuigen gem verbruik 2035 in kWh"] = df_gebruik["truck gem verbruik 2035 in kWh"] + df_gebruik["bakwagen gem verbruik 2035 in kWh"] + df_gebruik["bestelwagen gem verbruik 2035 in kWh"]
+         df_gebruik["truck gem verbruik 2035 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2035'] * 1  * df_gebruik["Probability"]
+         df_gebruik["bakwagen gem verbruik 2035 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2035'] * 0.9 * df_gebruik["Probability"]
+         df_gebruik["bestelwagen gem verbruik 2035 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2035'] * 0.2 * df_gebruik["Probability"]
+         df_gebruik["voertuigen gem verbruik 2035 in kWh"] = df_gebruik["truck gem verbruik 2035 in kWh"] + df_gebruik["bakwagen gem verbruik 2035 in kWh"] + df_gebruik["bestelwagen gem verbruik 2035 in kWh"]
        
-       df_gebruik["truck gem verbruik 2040 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2040'] * 1  * df_gebruik["Probability"]
-       df_gebruik["bakwagen gem verbruik 2040 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2040'] * 0.9 * df_gebruik["Probability"]
-       df_gebruik["bestelwagen gem verbruik 2040 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2040'] * 0.2 * df_gebruik["Probability"]
-       df_gebruik["voertuigen gem verbruik 2040 in kWh"] = df_gebruik["truck gem verbruik 2040 in kWh"] + df_gebruik["bakwagen gem verbruik 2040 in kWh"] + df_gebruik["bestelwagen gem verbruik 2040 in kWh"]
+         df_gebruik["truck gem verbruik 2040 in kWh"] = df_gebruik['truck gem afstand in km'] * df_gebruik['truck 2040'] * 1  * df_gebruik["Probability"]
+         df_gebruik["bakwagen gem verbruik 2040 in kWh"] = df_gebruik['bakwagen gem afstand in km'] * df_gebruik['bakwagen 2040'] * 0.9 * df_gebruik["Probability"]
+         df_gebruik["bestelwagen gem verbruik 2040 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2040'] * 0.2 * df_gebruik["Probability"]
+         df_gebruik["voertuigen gem verbruik 2040 in kWh"] = df_gebruik["truck gem verbruik 2040 in kWh"] + df_gebruik["bakwagen gem verbruik 2040 in kWh"] + df_gebruik["bestelwagen gem verbruik 2040 in kWh"]
        
-       #Probability bepalen voor verdeling van jaarverbruik over de dagen
-       jaarverbruik = tijdrange
-       # Filter the dataframe based on the conditions
-       filtered_df = jaarverbruik[(jaarverbruik['Dag nummer'].between(1, 5)) & (jaarverbruik['Uur nummer'].between(7, 17))]
+         #Probability bepalen voor verdeling van jaarverbruik over de dagen
+         jaarverbruik = tijdrange
+         # Filter the dataframe based on the conditions
+         filtered_df = jaarverbruik[(jaarverbruik['Dag nummer'].between(1, 5)) & (jaarverbruik['Uur nummer'].between(7, 17))]
        
-       # Create a new column in the original dataframe, initially with all zeros
-       jaarverbruik['Jaarverbruik Probability'] = 0
+         # Create a new column in the original dataframe, initially with all zeros
+         jaarverbruik['Jaarverbruik Probability'] = 0
        
-       # Assign the computed value to the filtered rows in the new column
-       jaarverbruik.loc[filtered_df.index, 'Jaarverbruik Probability'] = 1/len(filtered_df)
-       jaarverbruik = jaarverbruik[["Datum", "Jaarverbruik Probability"]]
+         # Assign the computed value to the filtered rows in the new column
+         jaarverbruik.loc[filtered_df.index, 'Jaarverbruik Probability'] = 1/len(filtered_df)
+         jaarverbruik = jaarverbruik[["Datum", "Jaarverbruik Probability"]]
        
-       df_final = df_gebruik.merge(jaarverbruik, on = "Datum").sort_values(["Bedrijf", "Datum"])
-       df_final = df_final.sort_values(by = ["Bedrijf", "Datum"])
-       df_final["Verbruik pand in kWh"] = df_final["jaarverbruik"]*df_final["Jaarverbruik Probability"]
+         df_final = df_gebruik.merge(jaarverbruik, on = "Datum").sort_values(["Bedrijf", "Datum"])
+         df_final = df_final.sort_values(by = ["Bedrijf", "Datum"])
+         df_final["Verbruik pand in kWh"] = df_final["jaarverbruik"]*df_final["Jaarverbruik Probability"]
        
-       df_final["Gem verbruik in kWh 2025"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2025 in kWh"]
-       df_final["Gem verbruik in kWh 2030"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2030 in kWh"]
-       df_final["Gem verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2035 in kWh"]
-       df_final["Gem verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2040 in kWh"]
+         df_final["Gem verbruik in kWh 2025"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2025 in kWh"]
+         df_final["Gem verbruik in kWh 2030"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2030 in kWh"]
+         df_final["Gem verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2035 in kWh"]
+         df_final["Gem verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2040 in kWh"]
        
-       df_final["Max verbruik in kWh 2025"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2025 in kWh"]
-       df_final["Max verbruik in kWh 2030"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2030 in kWh"]
-       df_final["Max verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2035 in kWh"]
-       df_final["Max verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2040 in kWh"]
+         df_final["Max verbruik in kWh 2025"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2025 in kWh"]
+         df_final["Max verbruik in kWh 2030"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2030 in kWh"]
+         df_final["Max verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2035 in kWh"]
+         df_final["Max verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2040 in kWh"]
        
-       df = df_final
+         df = df_final
        
-       # Set to datetime type
-       df['Datum'] = pd.to_datetime(df['Datum'])
-       # Extract year and month from 'Datum'
-       df['Year'] = df['Datum'].dt.year
-       df['Month'] = df['Datum'].dt.month
-       df['Day'] = df['Datum'].dt.day
-       df['Week'] = df['Datum'].dt.isocalendar().week
-       df['Weekday'] = df['Datum'].dt.weekday
-       df['Hour'] = df['Datum'].dt.hour
-       df = df[df['Year'] == 2022]
-       df = df.rename(columns = {'Gem verbruik in kWh 2025':'gem verbruik in kWh 2025','Gem verbruik in kWh 2030':'gem verbruik in kWh 2030', 'Gem verbruik in kWh 2035':'gem verbruik in kWh 2035', 'Gem verbruik in kWh 2040':'gem verbruik in kWh 2040', 'Max verbruik in kWh 2025':'max verbruik in kWh 2025', 'Max verbruik in kWh 2030':'max verbruik in kWh 2030', 'Max verbruik in kWh 2035':'max verbruik in kWh 2035', 'Max verbruik in kWh 2040':'max verbruik in kWh 2040'})
+         # Set to datetime type
+         df['Datum'] = pd.to_datetime(df['Datum'])
+         # Extract year and month from 'Datum'
+         df['Year'] = df['Datum'].dt.year
+         df['Month'] = df['Datum'].dt.month
+         df['Day'] = df['Datum'].dt.day
+         df['Week'] = df['Datum'].dt.isocalendar().week
+         df['Weekday'] = df['Datum'].dt.weekday
+         df['Hour'] = df['Datum'].dt.hour
+         df = df[df['Year'] == 2022]
+         df = df.rename(columns = {'Gem verbruik in kWh 2025':'gem verbruik in kWh 2025','Gem verbruik in kWh 2030':'gem verbruik in kWh 2030', 'Gem verbruik in kWh 2035':'gem verbruik in kWh 2035', 'Gem verbruik in kWh 2040':'gem verbruik in kWh 2040', 'Max verbruik in kWh 2025':'max verbruik in kWh 2025', 'Max verbruik in kWh 2030':'max verbruik in kWh 2030', 'Max verbruik in kWh 2035':'max verbruik in kWh 2035', 'Max verbruik in kWh 2040':'max verbruik in kWh 2040'})
 
 
 
