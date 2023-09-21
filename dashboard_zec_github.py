@@ -677,7 +677,7 @@ def vehicle_page():
 
          adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
 
-         df = df
+         sndr_park
 
          df
 
