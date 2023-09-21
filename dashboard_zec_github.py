@@ -1,3 +1,4 @@
+pip install openpyxl 
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -9,6 +10,7 @@ import re
 import numpy as np
 import random
 import shapely
+
 
 st.set_page_config(layout="wide")
 
