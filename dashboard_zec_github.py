@@ -629,7 +629,7 @@ def bsg_page():
          
          uitleg0.title("Voorspelling Wagenpark")
          uitleg0.write("uitleg over bepalen overstap naar elektrisch \n\nIs bepaald adhv aanschafprijs EV goedkoper dan diesel. truck -> 2030, bakwagen -> 2035, bestelwagen -> 2040")
-
+         df
          
 
 
@@ -677,7 +677,7 @@ def vehicle_page():
 
          adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
 
-         df_prob
+         df = df
 
          df
 
