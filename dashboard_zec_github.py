@@ -776,6 +776,11 @@ def vehicle_page():
          # Set to datetime type
          df['Datum'] = pd.to_datetime(df['Datum'])
          # Extract year and month from 'Datum'
+         df['Year'] = df['Datum'].dt.year
+         df['Month'] = df['Datum'].dt.month
+         df['Day'] = df['Datum'].dt.day
+         df['Week'] = df['Datum'].dt.isocalendar().week
+         df['Weekday'] = df['Datum'].dt.weekday
          
          
 
