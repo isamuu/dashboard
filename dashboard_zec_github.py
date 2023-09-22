@@ -637,7 +637,173 @@ def bsg_page():
 
     
 def vehicle_page(): 
+         st.title('Bedrijven')
          # Title
+         st.markdown(
+                      """
+                      <style>
+                          .reportview-container .markdown-text-container {
+                              text-align: center;
+                          }
+                      </style>
+                      """,
+                      unsafe_allow_html=True)
+         st.markdown("<h1 style='text-align: center'>Bedrijven</h1>", unsafe_allow_html=True)
+
+         # add columns
+         col1, col2 = st.columns(2)
+
+         df
+         
+         # Place text in the left column
+         col1.text("Tekst over gebruik bedrijven")  # Replace with your desired text
+
+         # capacity line
+         show_line = col1.checkbox('Capaciteit netwerk')
+         
+         # The user can select a year
+         year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
+         
+         # The user can select between maximum and average
+         value_type = col1.radio('Choose a value type', options=['max', 'gem'])
+
+         adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
+         
+         if value_type:
+                  usage_column = f'max verbruik in kWh {year}'
+         else:
+                  usage_column = f'gem verbruik in kWh {year}'
+
+
+         
+         toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
+         toename_df = toename_df[['bedrijf', 'Verbruik pand in kWh', 'max verbruik in kWh 2025', 'max verbruik in kWh 2030', 'max verbruik in kWh 2035', 'max verbruik in kWh 2040']] 
+         toename_df = toename_df.rename(columns={'Verbruik pand in kWh':'Max verbruik in kWh 2023'})
+         toename_df.columns = toename_df.columns.str.replace(r'max verbruik ', '')
+         toename_df.columns = toename_df.columns.str.replace(r'in kWh ', '')
+         toename_df = toename_df.set_index("bedrijf").transpose()
+         
+         
+         # Plotting
+         fig5, ax5 = plt.subplots(figsize=(6,3))
+         toename_df.plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
+         ax5.axhline(y=8000 + adjustment_value, color='black', linestyle='--')
+         # Adjusting title font size
+         #ax5.set_title(f'Toename piek stroomnet', fontsize=6)
+         
+         # Adjusting axis label font sizes
+         #ax5.set_xlabel('Year', fontsize=6)
+         #ax5.set_ylabel('Value', fontsize=6)
+         
+         # Adjusting tick font sizes
+         #ax5.tick_params(axis='both', which='major', labelsize=6)
+         
+         # Adjusting legend font size
+         #ax5.legend(fontsize=8)
+         col2.pyplot(fig5, use_container_width=True)
+         
+         
+
+         
+         #### Year
+         df_yearly_company = df.groupby(['Year', 'Month', 'bedrijf'])[usage_column].sum().unstack()
+         
+         #### MONTH
+         # Group by year, month and calculate the sum of 'Max verbruik in kWh 2040' for all companies
+         df_monthly_total_company = df.groupby(['Year', 'Month'])[usage_column].sum()
+         
+         # Find the month with the highest total usage
+         highest_month_company = df_monthly_total_company.idxmax()
+         
+         # Select data for the highest usage month
+         df_highest_month_company = df[(df['Year'] == highest_month_company[0]) & (df['Month'] == highest_month_company[1])]
+         
+         # Group by day and 'Bedrijf', and calculate the sum of 'Max verbruik in kWh 2040'
+         df_monthly_highest_company = df_highest_month_company.groupby(['Day', 'Bedrijf'])[usage_column].sum().unstack()
+         
+         
+         #### WEEK
+         # Group by year, week and calculate the sum of 'Max verbruik in kWh 2040' for all companies
+         df_weekly_total_company = df.groupby(['Year', 'Week'])[usage_column].sum()
+         
+         # Find the week with the highest total usage
+         highest_week_company = df_weekly_total_company.idxmax()
+         
+         # Select data for the highest usage week
+         df_highest_week_company = df[(df['Year'] == highest_week_company[0]) & (df['Week'] == highest_week_company[1])]
+         
+         # Group by weekday and 'Bedrijf', and calculate the sum of 'Max verbruik in kWh 2040'
+         df_weekly_highest_company = df_highest_week_company.groupby(['Weekday', 'Bedrijf'])[usage_column].sum().unstack()
+                  
+         
+         
+         #### DAY
+        # Group by year, month, day and calculate the sum of 'Max verbruik in kWh 2040' for all companies
+         df_daily_total_company = df.groupby(['Year', 'Month', 'Day'])[usage_column].sum()
+         
+         # Find the day with the highest total usage
+         highest_day_company = df_daily_total_company.idxmax()
+         
+         # Select data for the highest usage day
+         df_highest_day_company = df[(df['Year'] == highest_day_company[0]) & (df['Month'] == highest_day_company[1]) & (df['Day'] == highest_day_company[2])]
+         
+         # Group by hour and 'Bedrijf', and calculate the sum of 'Max verbruik in kWh 2040'
+         df_daily_highest_company = df_highest_day_company.groupby(['Hour', 'Bedrijf'])[usage_column].sum().unstack()
+         
+         
+         
+         #### PLOT
+         # Create a 1x4 layout
+         cols = st.columns(4)
+         
+         
+         # Create the first chart
+         fig1, ax1 = plt.subplots()
+         df_yearly_company.plot(kind='area', stacked=True, title='Yearly Electricity Usage per Company', ax=ax1)
+         ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
+         ax1.legend().set_visible(False)
+         # cols[0].pyplot(fig1)
+         
+         
+         # Create the second chart
+         fig2, ax2 = plt.subplots()
+         df_monthly_highest_company.plot(kind='area', stacked=True, 
+                            title=f'Monthly Electricity Usage per Company (Highest Usage Month: {highest_month_company[0]}-{highest_month_company[1]})', ax=ax2)
+         ax2.set_ylim([0, df_highest_week_company.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
+         ax2.legend().set_visible(False)
+         
+         # cols[1].pyplot(fig2)
+         
+         # Create the third chart
+         fig3, ax3 = plt.subplots()
+         df_weekly_highest_company.plot(kind='area', stacked=True, 
+                           title=f'Weekly Electricity Usage per Company (Highest Usage Week: {highest_week_company[0]}-Week {highest_week_company[1]})', ax=ax3)
+         ax3.set_ylim([0, df_highest_week_company.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
+         ax3.legend().set_visible(False)
+
+         
+         # Create the fourth chart
+         fig4, ax4 = plt.subplots()
+         df_daily_highest_company.plot(kind='area', stacked=True, 
+                          title=f'Daily Electricity Usage per Company (Highest Usage Day: {highest_day_company[0]}-{highest_day_company[1]}-{highest_day_company[2]})', ax=ax4)
+         ax4.set_ylim([0, df_highest_day_company.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
+         ax4.legend().set_visible(False)
+
+
+         if show_line:
+                  ax1.axhline(y=1500000 + adjustment_value, color='black', linestyle='--')
+                  ax2.axhline(y=50000 + adjustment_value, color='black', linestyle='--')
+                  ax3.axhline(y=40000 + adjustment_value, color='black', linestyle='--')
+                  ax4.axhline(y=7500 + adjustment_value, color='black', linestyle='--')
+
+         # Display the plots
+         cols[0].pyplot(fig1)
+         cols[1].pyplot(fig2)
+         cols[2].pyplot(fig3)
+         cols[3].pyplot(fig4)
+
+def company_page():
+         
          st.markdown(
                       """
                       <style>
@@ -677,9 +843,7 @@ def vehicle_page():
 
          adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
 
-         #df = pd.read_excel("Data/Data Sander.xlsx")
-
-         df2
+         df
 
          # dataframe maken voor tijden
          tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
@@ -946,171 +1110,11 @@ def vehicle_page():
          cols[2].pyplot(fig3)
          cols[3].pyplot(fig4)
     
-def company_page():
-         st.title('Bedrijven')
-         # Title
-         st.markdown(
-                      """
-                      <style>
-                          .reportview-container .markdown-text-container {
-                              text-align: center;
-                          }
-                      </style>
-                      """,
-                      unsafe_allow_html=True)
-         st.markdown("<h1 style='text-align: center'>Bedrijven</h1>", unsafe_allow_html=True)
-
-         # add columns
-         col1, col2 = st.columns(2)
-
-         df
+       
+       
+       
+       
          
-         # Place text in the left column
-         col1.text("Tekst over gebruik bedrijven")  # Replace with your desired text
-
-         # capacity line
-         show_line = col1.checkbox('Capaciteit netwerk')
-         
-         # The user can select a year
-         year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
-         
-         # The user can select between maximum and average
-         value_type = col1.radio('Choose a value type', options=['max', 'gem'])
-
-         adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
-         
-         if value_type:
-                  usage_column = f'max verbruik in kWh {year}'
-         else:
-                  usage_column = f'gem verbruik in kWh {year}'
-
-
-         
-         toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
-         toename_df = toename_df[['bedrijf', 'Verbruik pand in kWh', 'max verbruik in kWh 2025', 'max verbruik in kWh 2030', 'max verbruik in kWh 2035', 'max verbruik in kWh 2040']] 
-         toename_df = toename_df.rename(columns={'Verbruik pand in kWh':'Max verbruik in kWh 2023'})
-         toename_df.columns = toename_df.columns.str.replace(r'max verbruik ', '')
-         toename_df.columns = toename_df.columns.str.replace(r'in kWh ', '')
-         toename_df = toename_df.set_index("bedrijf").transpose()
-         
-         
-         # Plotting
-         fig5, ax5 = plt.subplots(figsize=(6,3))
-         toename_df.plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
-         ax5.axhline(y=8000 + adjustment_value, color='black', linestyle='--')
-         # Adjusting title font size
-         #ax5.set_title(f'Toename piek stroomnet', fontsize=6)
-         
-         # Adjusting axis label font sizes
-         #ax5.set_xlabel('Year', fontsize=6)
-         #ax5.set_ylabel('Value', fontsize=6)
-         
-         # Adjusting tick font sizes
-         #ax5.tick_params(axis='both', which='major', labelsize=6)
-         
-         # Adjusting legend font size
-         #ax5.legend(fontsize=8)
-         col2.pyplot(fig5, use_container_width=True)
-         
-         
-
-         
-         #### Year
-         df_yearly_company = df.groupby(['Year', 'Month', 'bedrijf'])[usage_column].sum().unstack()
-         
-         #### MONTH
-         # Group by year, month and calculate the sum of 'Max verbruik in kWh 2040' for all companies
-         df_monthly_total_company = df.groupby(['Year', 'Month'])[usage_column].sum()
-         
-         # Find the month with the highest total usage
-         highest_month_company = df_monthly_total_company.idxmax()
-         
-         # Select data for the highest usage month
-         df_highest_month_company = df[(df['Year'] == highest_month_company[0]) & (df['Month'] == highest_month_company[1])]
-         
-         # Group by day and 'Bedrijf', and calculate the sum of 'Max verbruik in kWh 2040'
-         df_monthly_highest_company = df_highest_month_company.groupby(['Day', 'Bedrijf'])[usage_column].sum().unstack()
-         
-         
-         #### WEEK
-         # Group by year, week and calculate the sum of 'Max verbruik in kWh 2040' for all companies
-         df_weekly_total_company = df.groupby(['Year', 'Week'])[usage_column].sum()
-         
-         # Find the week with the highest total usage
-         highest_week_company = df_weekly_total_company.idxmax()
-         
-         # Select data for the highest usage week
-         df_highest_week_company = df[(df['Year'] == highest_week_company[0]) & (df['Week'] == highest_week_company[1])]
-         
-         # Group by weekday and 'Bedrijf', and calculate the sum of 'Max verbruik in kWh 2040'
-         df_weekly_highest_company = df_highest_week_company.groupby(['Weekday', 'Bedrijf'])[usage_column].sum().unstack()
-                  
-         
-         
-         #### DAY
-        # Group by year, month, day and calculate the sum of 'Max verbruik in kWh 2040' for all companies
-         df_daily_total_company = df.groupby(['Year', 'Month', 'Day'])[usage_column].sum()
-         
-         # Find the day with the highest total usage
-         highest_day_company = df_daily_total_company.idxmax()
-         
-         # Select data for the highest usage day
-         df_highest_day_company = df[(df['Year'] == highest_day_company[0]) & (df['Month'] == highest_day_company[1]) & (df['Day'] == highest_day_company[2])]
-         
-         # Group by hour and 'Bedrijf', and calculate the sum of 'Max verbruik in kWh 2040'
-         df_daily_highest_company = df_highest_day_company.groupby(['Hour', 'Bedrijf'])[usage_column].sum().unstack()
-         
-         
-         
-         #### PLOT
-         # Create a 1x4 layout
-         cols = st.columns(4)
-         
-         
-         # Create the first chart
-         fig1, ax1 = plt.subplots()
-         df_yearly_company.plot(kind='area', stacked=True, title='Yearly Electricity Usage per Company', ax=ax1)
-         ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
-         ax1.legend().set_visible(False)
-         # cols[0].pyplot(fig1)
-         
-         
-         # Create the second chart
-         fig2, ax2 = plt.subplots()
-         df_monthly_highest_company.plot(kind='area', stacked=True, 
-                            title=f'Monthly Electricity Usage per Company (Highest Usage Month: {highest_month_company[0]}-{highest_month_company[1]})', ax=ax2)
-         ax2.set_ylim([0, df_highest_week_company.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
-         ax2.legend().set_visible(False)
-         
-         # cols[1].pyplot(fig2)
-         
-         # Create the third chart
-         fig3, ax3 = plt.subplots()
-         df_weekly_highest_company.plot(kind='area', stacked=True, 
-                           title=f'Weekly Electricity Usage per Company (Highest Usage Week: {highest_week_company[0]}-Week {highest_week_company[1]})', ax=ax3)
-         ax3.set_ylim([0, df_highest_week_company.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
-         ax3.legend().set_visible(False)
-
-         
-         # Create the fourth chart
-         fig4, ax4 = plt.subplots()
-         df_daily_highest_company.plot(kind='area', stacked=True, 
-                          title=f'Daily Electricity Usage per Company (Highest Usage Day: {highest_day_company[0]}-{highest_day_company[1]}-{highest_day_company[2]})', ax=ax4)
-         ax4.set_ylim([0, df_highest_day_company.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
-         ax4.legend().set_visible(False)
-
-
-         if show_line:
-                  ax1.axhline(y=1500000 + adjustment_value, color='black', linestyle='--')
-                  ax2.axhline(y=50000 + adjustment_value, color='black', linestyle='--')
-                  ax3.axhline(y=40000 + adjustment_value, color='black', linestyle='--')
-                  ax4.axhline(y=7500 + adjustment_value, color='black', linestyle='--')
-
-         # Display the plots
-         cols[0].pyplot(fig1)
-         cols[1].pyplot(fig2)
-         cols[2].pyplot(fig3)
-         cols[3].pyplot(fig4)
 
 def ffkijken():
          # Title
