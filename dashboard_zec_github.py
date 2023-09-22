@@ -1112,7 +1112,7 @@ def company_page():
          cols[2].pyplot(fig3)
          cols[3].pyplot(fig4)
 
-def vehicle_page2():
+def ffkijken():
          # Title
          st.markdown(
                       """
@@ -1319,7 +1319,7 @@ def main():
          elif page == '3. Wie gebruikt wat?':
                   company_page()
          elif page == 'wat gebruikt wat? das2':
-                  vehicle_page2()
+                  ffkijken()
         
 if __name__ == "__main__":
          main()
