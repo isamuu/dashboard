@@ -806,7 +806,7 @@ def vehicle_page():
          
          # Pivot the DataFrame to the desired shape
          toename_df = toename_df.pivot(index='year', columns='type', values='value').reset_index()
-         toename_df["pand"] = df[df["Datum"] == "2022-10-3 17:00:00"]['Verbruik pand in kWh'].sum()
+         toename_df["pand"] = df_final[df_final["Datum"] == "2022-10-3 17:00:00"]['Verbruik pand in kWh'].sum()
          toename_df.loc[4] = [2023,0,0,0,0,4257.813287]
          toename_df['year'] = toename_df['year'].astype(int)
          toename_df = toename_df.sort_values(by = 'year')
