@@ -963,7 +963,7 @@ def company_page():
          # add columns
          col1, col2 = st.columns(2)
 
-
+         df
          
          # Place text in the left column
          col1.text("Tekst over gebruik bedrijven")  # Replace with your desired text
