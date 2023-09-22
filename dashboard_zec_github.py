@@ -773,24 +773,24 @@ def vehicle_page():
          df_final["Max verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2035 in kWh"]
          df_final["Max verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2040 in kWh"]
 
-         df = df_final
+         df_final
        
          # Set to datetime type
-         df['Datum'] = pd.to_datetime(df['Datum'])
+         df_final['Datum'] = pd.to_datetime(df_final['Datum'])
          # Extract year and month from 'Datum'
-         df['Year'] = df['Datum'].dt.year
-         df['Month'] = df['Datum'].dt.month
-         df['Day'] = df['Datum'].dt.day
-         df['Week'] = df['Datum'].dt.isocalendar().week
-         df['Weekday'] = df['Datum'].dt.weekday
-         df['Hour'] = df['Datum'].dt.hour
+         df_final['Year'] = df_final['Datum'].dt.year
+         df_final['Month'] = df_final['Datum'].dt.month
+         df_final['Day'] = df_final['Datum'].dt.day
+         df_final['Week'] = df_final['Datum'].dt.isocalendar().week
+         df_final['Weekday'] = df_final['Datum'].dt.weekday
+         df_final['Hour'] = df_final['Datum'].dt.hour
          #df = df.rename(columns = {'Gem verbruik in kWh 2025':'gem verbruik in kWh 2025','Gem verbruik in kWh 2030':'gem verbruik in kWh 2030', 'Gem verbruik in kWh 2035':'gem verbruik in kWh 2035', 
          #                          'Gem verbruik in kWh 2040':'gem verbruik in kWh 2040', 'Max verbruik in kWh 2025':'max verbruik in kWh 2025', 'Max verbruik in kWh 2030':'max verbruik in kWh 2030', 
          #                          'Max verbruik in kWh 2035':'max verbruik in kWh 2035', 'Max verbruik in kWh 2040':'max verbruik in kWh 2040'})
          
          
 
-         toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
+         toename_df = df_final[df_final["Datum"] == "2022-10-3 17:00:00"]
          toename_df = toename_df[['truck max verbruik 2025 in kWh', 'bakwagen max verbruik 2025 in kWh',
                 'bestelwagen max verbruik 2025 in kWh', 'voertuigen max verbruik 2025 in kWh', 'truck max verbruik 2030 in kWh',
                 'bakwagen max verbruik 2030 in kWh', 'bestelwagen max verbruik 2030 in kWh', 'voertuigen max verbruik 2030 in kWh', 
