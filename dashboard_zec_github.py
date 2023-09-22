@@ -693,8 +693,7 @@ def vehicle_page():
          df_gebruik = df_gebruik[["Bedrijf", "Datum", "Probability"]].merge(df, left_on = "Bedrijf", right_on = "bedrijf", how = "left")
          df_gebruik = df_gebruik.fillna(0)
        
-         
-
+         df_gebruik
        
        
        
