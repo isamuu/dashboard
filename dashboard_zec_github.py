@@ -684,7 +684,10 @@ def vehicle_page():
          # The user can select between maximum and average
          value_type = col1.radio('Choose a value type', options=['max', 'gem'])
 
+         patroon_type = col1.radio('Kies een laadscenario', options=['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
+
          adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
+
 
          
 
@@ -698,7 +701,7 @@ def vehicle_page():
        
          df_gebruik = df_prob.merge(tijdrange, on = ["Maand nummer", "Dag nummer", "Uur nummer"])
          df_gebruik = df_gebruik.sort_values(["Bedrijf", "Datum"]).reset_index(drop = True)
-         df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik["Probability Uur"]
+         df_gebruik["Probability"] = df_gebruik["Probability Maand"]*df_gebruik["Probability Dag"]*df_gebruik[patroon_type]
          df_gebruik = df_gebruik[["Bedrijf", "Datum", "Probability"]].merge(df, left_on = "Bedrijf", right_on = "bedrijf", how = "left")
          df_gebruik = df_gebruik.fillna(0)
        
