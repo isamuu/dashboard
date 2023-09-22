@@ -782,8 +782,7 @@ def vehicle_page():
          df['Week'] = df['Datum'].dt.isocalendar().week
          df['Weekday'] = df['Datum'].dt.weekday
          df['Hour'] = df['Datum'].dt.hour
-         df = df[df['Year'] == 2022]
-         
+
          
 
          toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
