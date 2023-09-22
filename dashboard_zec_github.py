@@ -629,7 +629,7 @@ def bsg_page():
          
          uitleg0.title("Voorspelling Wagenpark")
          uitleg0.write("uitleg over bepalen overstap naar elektrisch \n\nIs bepaald adhv aanschafprijs EV goedkoper dan diesel. truck -> 2030, bakwagen -> 2035, bestelwagen -> 2040")
-         df
+         df2 = df
          
 
 
@@ -679,7 +679,7 @@ def vehicle_page():
 
          #df = pd.read_excel("Data/Data Sander.xlsx")
 
-         df
+         df2
 
          # dataframe maken voor tijden
          tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
