@@ -773,7 +773,10 @@ def vehicle_page():
          df_final["Max verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2035 in kWh"]
          df_final["Max verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2040 in kWh"]
        
-       
+         # Set to datetime type
+         df['Datum'] = pd.to_datetime(df['Datum'])
+         # Extract year and month from 'Datum'
+         
          
 
          toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
