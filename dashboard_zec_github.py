@@ -684,7 +684,7 @@ def vehicle_page():
          # The user can select between maximum and average
          value_type = col1.radio('Choose a value type', options=['max', 'gem'])
 
-         patroon_type = col1.radio('Kies een laadscenario', options=['Probability Uur', 'Probability Uur Smart0', 'Probability Uur Smart1'])
+         patroon_type = col1.radio('Kies een laadscenario', options=['Probability Uur Smart0', 'Probability Uur Smart1'])
 
          adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
 
