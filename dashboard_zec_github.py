@@ -773,7 +773,7 @@ def vehicle_page():
          df_final["max verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2035 in kWh"]
          df_final["max verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2040 in kWh"]
 
-         df_final
+         
        
          # Set to datetime type
          df_final['Datum'] = pd.to_datetime(df_final['Datum'])
