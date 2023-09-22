@@ -896,7 +896,7 @@ def vehicle_page():
          # Group by hour and calculate the sum of the specified columns
          df_daily_highest_vehicle = df_highest_day_vehicle.groupby(['Hour'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
          
-         df_daily_total_vehicle
+         highest_day_vehicle
          
          #### PLOT
          # Create a 1x4 layout
