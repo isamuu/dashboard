@@ -746,10 +746,34 @@ def vehicle_page():
          df_gebruik["bestelwagen gem verbruik 2040 in kWh"] = df_gebruik['bestelwagen gem afstand in km'] * df_gebruik['bestelwagen 2040'] * 0.2 * df_gebruik["Probability"]
          df_gebruik["voertuigen gem verbruik 2040 in kWh"] = df_gebruik["truck gem verbruik 2040 in kWh"] + df_gebruik["bakwagen gem verbruik 2040 in kWh"] + df_gebruik["bestelwagen gem verbruik 2040 in kWh"]
        
-         df_gebruik
+         
+         #Probability bepalen voor verdeling van jaarverbruik over de dagen
+         jaarverbruik = tijdrange
+         # Filter the dataframe based on the conditions
+         filtered_df = jaarverbruik[(jaarverbruik['Dag nummer'].between(1, 5)) & (jaarverbruik['Uur nummer'].between(7, 17))]
+       
+         # Create a new column in the original dataframe, initially with all zeros
+         jaarverbruik['Jaarverbruik Probability'] = 0
+       
+         # Assign the computed value to the filtered rows in the new column
+         jaarverbruik.loc[filtered_df.index, 'Jaarverbruik Probability'] = 1/len(filtered_df)
+         jaarverbruik = jaarverbruik[["Datum", "Jaarverbruik Probability"]]
+       
+         df_final = df_gebruik.merge(jaarverbruik, on = "Datum").sort_values(["Bedrijf", "Datum"])
+         df_final = df_final.sort_values(by = ["Bedrijf", "Datum"])
+         df_final["Verbruik pand in kWh"] = df_final["jaarverbruik"]*df_final["Jaarverbruik Probability"]
+       
+         df_final["Gem verbruik in kWh 2025"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2025 in kWh"]
+         df_final["Gem verbruik in kWh 2030"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2030 in kWh"]
+         df_final["Gem verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2035 in kWh"]
+         df_final["Gem verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen gem verbruik 2040 in kWh"]
+       
+         df_final["Max verbruik in kWh 2025"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2025 in kWh"]
+         df_final["Max verbruik in kWh 2030"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2030 in kWh"]
+         df_final["Max verbruik in kWh 2035"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2035 in kWh"]
+         df_final["Max verbruik in kWh 2040"] = df_final["Verbruik pand in kWh"] + df_final["voertuigen max verbruik 2040 in kWh"]
        
          
-
        
          
 
