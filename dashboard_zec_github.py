@@ -873,7 +873,7 @@ def vehicle_page():
          highest_year_week_vehicle = highest_week_vehicle[['Total']].idxmax()[0]
          
          # Select data for the highest usage week
-         df_highest_week_vehicle = df_final[(df_final['Year'] == highest_year_week_vehicle[0]) & (df['Week'] == highest_year_week_vehicle[1])]
+         df_highest_week_vehicle = df_final[(df_final['Year'] == highest_year_week_vehicle[0]) & (df_final['Week'] == highest_year_week_vehicle[1])]
          
          # Group by weekday and calculate the sum of the specified columns
          df_weekly_highest_vehicle = df_highest_week_vehicle.groupby(['Weekday'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
