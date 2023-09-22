@@ -689,7 +689,7 @@ def vehicle_page():
          
 
          # dataframe maken voor tijden
-         tijdrange = pd.DataFrame(pd.date_range("01-01-2022", "01-01-2023", freq = "H"))
+         tijdrange = pd.DataFrame(pd.date_range("01-01-2022 00:00:00", "31-12-2022 23:00:00", freq = "H"))
          tijdrange["Maand nummer"] = tijdrange[0].dt.month
          tijdrange["Dag nummer"] = tijdrange[0].dt.dayofweek
          tijdrange["Dag nummer"] = tijdrange["Dag nummer"]+1
@@ -777,7 +777,6 @@ def vehicle_page():
          df['Datum'] = pd.to_datetime(df['Datum'])
          # Extract year and month from 'Datum'
          df['Year'] = df['Datum'].dt.year
-         #df = df[df['Year'] == 2022]
          df['Month'] = df['Datum'].dt.month
          df['Day'] = df['Datum'].dt.day
          df['Week'] = df['Datum'].dt.isocalendar().week
