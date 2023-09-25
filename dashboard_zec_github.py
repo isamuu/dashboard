@@ -797,7 +797,7 @@ def vehicle_page():
          ]
        
          toename = (
-           df[df["Weekday"] < 5]
+           df_final[df_final["Weekday"] < 5]
            .groupby(df["Datum"].dt.date)[cols]
            .sum()
            .agg(['max', 'min', 'mean'], axis=1)
