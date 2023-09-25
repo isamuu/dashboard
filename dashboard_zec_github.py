@@ -822,7 +822,7 @@ def vehicle_page():
        
          # Plotting
          fig7, ax7 = plt.subplots()
-         ax7.plot(filtered_toename['jaar'], filtered_toename['gem'])
+         ax7.plot(filtered_toename['jaar'], filtered_toename['min'])
          #ax7.fill_between(filtered_toename['jaar'], filtered_toename['min'], filtered_toename['max'])
          plt.xlabel('Jaar')
          plt.ylabel('Value')
