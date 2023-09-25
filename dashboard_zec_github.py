@@ -810,7 +810,7 @@ def vehicle_page():
 
 
          # User selects the type
-         selected_type = st.selectbox('Select type', ['Gem', 'Max'])
+         selected_type = col1.selectbox('Select type', ['Gem', 'Max'])
        
          # Filter the DataFrame based on the selected type
          filtered_toename = toename[toename['type'] == selected_type]
