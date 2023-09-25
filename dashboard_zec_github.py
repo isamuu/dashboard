@@ -812,7 +812,7 @@ def vehicle_page():
          toename['jaar'] = pd.to_numeric(toename['jaar'])
          toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
          
-
+         toename
 
          # User selects the type
          selected_type = col1.selectbox('Select type', ['gem', 'max'])
