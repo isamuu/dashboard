@@ -807,10 +807,10 @@ def vehicle_page():
          toename_max = pd.DataFrame(toename.max())
          toename = toename_max.merge(toename_min, left_index = True, right_index = True, suffixes = ["max", "min"])
          toename = toename.merge(toename_mean, left_index = True, right_index = True)
-         toename = toename.rename(columns = {"0max":"max", "0min":"min", 0:"gem"}).reset_index()
-         toename[['type', 'jaar']] = toename['index'].str.split('  ', expand=True)
-         toename['jaar'] = pd.to_numeric(toename['jaar'])
-         toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
+         #toename = toename.rename(columns = {"0max":"max", "0min":"min", 0:"gem"}).reset_index()
+         #toename[['type', 'jaar']] = toename['index'].str.split('  ', expand=True)
+         #toename['jaar'] = pd.to_numeric(toename['jaar'])
+         #toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
          toename
          
 
