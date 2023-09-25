@@ -805,13 +805,15 @@ def vehicle_page():
          toename = toename.merge(toename_mean, left_index = True, right_index = True)
          toename = toename.rename(columns = {"0max":"max", "0min":"min", 0:"gem"}).reset_index()
          toename[['type', 'jaar']] = toename['index'].str.split('  ', expand=True)
+         toename['jaar'] = pd.to_numeric(toename['jaar'])
+         toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
 
 
          # User selects the type
          selected_type = st.selectbox('Select type', ['Gem', 'Max'])
        
          # Filter the DataFrame based on the selected type
-         filtered_df = df[df['type'] == selected_type]
+         filtered_df = toename[toename['type'] == selected_type]
        
          # Plotting
          fig, ax = plt.subplots()
