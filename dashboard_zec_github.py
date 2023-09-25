@@ -811,14 +811,7 @@ def vehicle_page():
          toename[['type', 'jaar']] = toename['index'].str.split('  ', expand=True)
          toename['jaar'] = pd.to_numeric(toename['jaar'])
          toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
-         data = {
-                  'jaar': [2025, 2030, 2035, 2040, 2025, 2030, 2035, 2040],
-                  'type': ['gem', 'gem', 'gem', 'gem', 'max', 'max', 'max', 'max'],
-                  'max': [4364.512939, 5621.398675, 6103.355580, 6879.586509, 4496.531153, 6720.947636, 7766.242536, 10274.443924],
-                  'min': [4285.296531, 4844.003750, 5090.996731, 5632.263736, 4319.301222, 5295.052281, 5937.551883, 8042.957973],
-                  'gem': [4311.847085, 5104.559192, 5430.303818, 6050.322467, 4378.702463, 5772.962262, 6550.464684, 8790.873594]
-         }
-         toename = pd.DataFrame(data)
+         
 
 
          # User selects the type
@@ -830,7 +823,7 @@ def vehicle_page():
          # Plotting
          fig7, ax7 = plt.subplots()
          ax7.plot(filtered_toename['jaar'], filtered_toename['gem'])
-         ax7.fill_between(filtered_toename['jaar'], filtered_toename['min'], filtered_toename['max'], color='skyblue', alpha=0.4)
+         ax7.fill_between(filtered_toename['jaar'], float(filtered_toename['min']), float(filtered_toename['max']), color='skyblue', alpha=0.4)
          plt.xlabel('Jaar')
          plt.ylabel('Value')
          plt.legend()
