@@ -817,9 +817,9 @@ def vehicle_page():
          filtered_toename = toename[toename['type'] == selected_type]
        
          # Plotting
-         fig, ax = plt.subplots()
-         ax.plot(filtered_toename['jaar'], filtered_toename['min'])
-         ax.fill_between(filtered_toename['jaar'], filtered_toename['gem'], filtered_toename['max'], color='skyblue', alpha=0.4)
+         fig7, ax7 = plt.subplots()
+         ax7.plot(filtered_toename['jaar'], filtered_toename['gem'])
+         ax7.fill_between(filtered_toename['jaar'], filtered_toename['min'], filtered_toename['max'], color='skyblue', alpha=0.4)
          plt.xlabel('Jaar')
          plt.ylabel('Value')
          plt.legend()
