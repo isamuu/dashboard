@@ -795,25 +795,25 @@ def vehicle_page():
                 'gem verbruik in kWh 2040', 'max verbruik in kWh 2025',
                 'max verbruik in kWh 2030', 'max verbruik in kWh 2035',
                 'max verbruik in kWh 2040']].sum().reset_index()
-         #toename["Date"] = toename["Datum"].dt.date
-         #toename = toename.groupby("Date").max()
-         #toename = toename.drop("Datum", axis = 1)
-         #toename.columns = toename.columns.str.replace(r'verbruik in kWh', '')
-         #toename_mean = pd.DataFrame(toename.mean())
-         #toename_min = pd.DataFrame(toename.min())
-         #toename_max = pd.DataFrame(toename.max())
-         #toename = toename_max.merge(toename_min, left_index = True, right_index = True, suffixes = ["max", "min"])
-         #toename = toename.merge(toename_mean, left_index = True, right_index = True)
-         #toename = toename.rename(columns = {"0max":"max", "0min":"min", 0:"gem"}).reset_index()
-         #toename[['type', 'jaar']] = toename['index'].str.split('  ', expand=True)
-         #toename['jaar'] = pd.to_numeric(toename['jaar'])
-         #toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
-         toename
+         toename["Date"] = toename["Datum"].dt.date
+         toename = toename.groupby("Date").max()
+         toename = toename.drop("Datum", axis = 1)
+         toename.columns = toename.columns.str.replace(r'verbruik in kWh', '')
+         toename_mean = pd.DataFrame(toename.mean())
+         toename_min = pd.DataFrame(toename.min())
+         toename_max = pd.DataFrame(toename.max())
+         toename = toename_max.merge(toename_min, left_index = True, right_index = True, suffixes = ["max", "min"])
+         toename = toename.merge(toename_mean, left_index = True, right_index = True)
+         toename = toename.rename(columns = {"0max":"max", "0min":"min", 0:"gem"}).reset_index()
+         toename[['type', 'jaar']] = toename['index'].str.split('  ', expand=True)
+         toename['jaar'] = pd.to_numeric(toename['jaar'])
+         toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
+         
        
-         #toename[['type', 'jaar']] = toename['Date'].str.split('  ', expand=True)
-         #toename['jaar'] = pd.to_numeric(toename['jaar'])
-         #toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
-         df_final
+         toename[['type', 'jaar']] = toename['Date'].str.split('  ', expand=True)
+         toename['jaar'] = pd.to_numeric(toename['jaar'])
+         toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
+         
 
          
          
@@ -827,7 +827,7 @@ def vehicle_page():
          # Plotting
          fig7, ax7 = plt.subplots()
          ax7.plot(filtered_toename['jaar'], filtered_toename['min'])
-         #ax7.fill_between(filtered_toename['jaar'], filtered_toename['min'], filtered_toename['max'])
+         ax7.fill_between(filtered_toename['jaar'], filtered_toename['min'], filtered_toename['max'])
          plt.xlabel('Jaar')
          plt.ylabel('Value')
          plt.legend()
