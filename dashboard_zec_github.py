@@ -805,9 +805,9 @@ def vehicle_page():
            .rename(columns={'index': 'Date', 'max': 'max', 'min': 'min', 'mean': 'gem'})
          )
        
-         toename[['type', 'jaar']] = toename['Date'].str.split('  ', expand=True)
-         toename['jaar'] = pd.to_numeric(toename['jaar'])
-         toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
+         #toename[['type', 'jaar']] = toename['Date'].str.split('  ', expand=True)
+         #toename['jaar'] = pd.to_numeric(toename['jaar'])
+         #toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
          toename
 
          
