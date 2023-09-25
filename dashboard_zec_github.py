@@ -819,7 +819,7 @@ def vehicle_page():
        
          # Filter the DataFrame based on the selected type
          filtered_toename = toename[toename['type'] == selected_type]
-       
+         filtered_toename
          # Plotting
          fig7, ax7 = plt.subplots()
          ax7.plot(filtered_toename['jaar'], filtered_toename['min'])
