@@ -789,21 +789,26 @@ def vehicle_page():
          df_final['Hour'] = df_final['Datum'].dt.hour
 
          
-         cols = [
-           'gem verbruik in kWh 2025', 'gem verbruik in kWh 2030', 
-           'gem verbruik in kWh 2035', 'gem verbruik in kWh 2040', 
-           'max verbruik in kWh 2025', 'max verbruik in kWh 2030', 
-           'max verbruik in kWh 2035', 'max verbruik in kWh 2040'
-         ]
-       
-         toename = (
-           df_final[df_final["Weekday"] < 5]
-           .groupby(df_final["Datum"].dt.date)[cols]
-           .sum()
-           .agg(['max', 'min', 'mean'], axis=1)
-           .reset_index()
-           .rename(columns={'index': 'Date', 'max': 'max', 'min': 'min', 'mean': 'gem'})
-         )
+         toename = df[df["Weekday"]<5]
+         toename = toename.groupby("Datum")[['gem verbruik in kWh 2025',
+                'gem verbruik in kWh 2030', 'gem verbruik in kWh 2035',
+                'gem verbruik in kWh 2040', 'max verbruik in kWh 2025',
+                'max verbruik in kWh 2030', 'max verbruik in kWh 2035',
+                'max verbruik in kWh 2040']].sum().reset_index()
+         toename["Date"] = toename["Datum"].dt.date
+         toename = toename.groupby("Date").max()
+         #toename = toename.drop("Datum", axis = 1)
+         #toename.columns = toename.columns.str.replace(r'verbruik in kWh', '')
+         #toename_mean = pd.DataFrame(toename.mean())
+         #toename_min = pd.DataFrame(toename.min())
+         #toename_max = pd.DataFrame(toename.max())
+         #toename = toename_max.merge(toename_min, left_index = True, right_index = True, suffixes = ["max", "min"])
+         #toename = toename.merge(toename_mean, left_index = True, right_index = True)
+         #toename = toename.rename(columns = {"0max":"max", "0min":"min", 0:"gem"}).reset_index()
+         #toename[['type', 'jaar']] = toename['index'].str.split('  ', expand=True)
+         #toename['jaar'] = pd.to_numeric(toename['jaar'])
+         #toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
+         toename
        
          #toename[['type', 'jaar']] = toename['Date'].str.split('  ', expand=True)
          #toename['jaar'] = pd.to_numeric(toename['jaar'])
