@@ -789,7 +789,7 @@ def vehicle_page():
          df_final['Hour'] = df_final['Datum'].dt.hour
 
          
-         toename = df[df["Weekday"]<5]
+         toename = df_final[df_final["Weekday"]<5]
          toename = toename.groupby("Datum")[['gem verbruik in kWh 2025',
                 'gem verbruik in kWh 2030', 'gem verbruik in kWh 2035',
                 'gem verbruik in kWh 2040', 'max verbruik in kWh 2025',
