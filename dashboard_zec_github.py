@@ -788,7 +788,24 @@ def vehicle_page():
          df_final['Weekday'] = df_final['Datum'].dt.weekday
          df_final['Hour'] = df_final['Datum'].dt.hour
 
-         
+         toename = df[df["Weekday"]<5]
+         toename = toename.groupby("Datum")[['Gem verbruik in kWh 2025',
+                'Gem verbruik in kWh 2030', 'Gem verbruik in kWh 2035',
+                'Gem verbruik in kWh 2040', 'Max verbruik in kWh 2025',
+                'Max verbruik in kWh 2030', 'Max verbruik in kWh 2035',
+                'Max verbruik in kWh 2040']].sum().reset_index()
+         toename["Date"] = toename["Datum"].dt.date
+         toename = toename.groupby("Date").max()
+         toename = toename.drop("Datum", axis = 1)
+         toename.columns = toename.columns.str.replace(r'verbruik in kWh', '')
+         toename_mean = pd.DataFrame(toename.mean())
+         toename_min = pd.DataFrame(toename.min())
+         toename_max = pd.DataFrame(toename.max())
+         toename = toename_max.merge(toename_min, left_index = True, right_index = True, suffixes = ["max", "min"])
+         toename = toename.merge(toename_mean, left_index = True, right_index = True)
+         toename = toename.rename(columns = {"0max":"max", "0min":"min", 0:"gem"}).reset_index()
+         toename[['Type', 'jaar']] = toename['index'].str.split(' ', expand=True)
+         toename
          
 
          toename_df = df_final[df_final["Datum"] == "2022-10-3 17:00:00"]
