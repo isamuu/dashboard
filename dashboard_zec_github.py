@@ -811,14 +811,14 @@ def vehicle_page():
 
 
          # User selects the type
-         selected_type = col1.selectbox('Select type', ['Gem', 'Max'])
+         selected_type = col1.selectbox('Select type', ['gem', 'max'])
        
          # Filter the DataFrame based on the selected type
          filtered_toename = toename[toename['type'] == selected_type]
        
          # Plotting
          fig, ax = plt.subplots()
-         ax.plot(filtered_toename['jaar'], filtered_toename['gem'], label='Gem')
+         ax.plot(filtered_toename['jaar'], filtered_toename['gem'], label='gem')
          ax.fill_between(filtered_toename['jaar'], filtered_toename['min'], filtered_toename['max'], alpha=0.2)
          plt.xlabel('Jaar')
          plt.ylabel('Value')
