@@ -779,7 +779,7 @@ def vehicle_page():
          
        
          # Set to datetime type
-         df_final['Datum'] = pd.to_datetime(df_final['Datum'])
+         #df_final['Datum'] = pd.to_datetime(df_final['Datum'])
          # Extract year and month from 'Datum'
          df_final['Year'] = df_final['Datum'].dt.year
          df_final['Month'] = df_final['Datum'].dt.month
