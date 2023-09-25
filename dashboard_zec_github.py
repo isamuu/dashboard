@@ -823,7 +823,7 @@ def vehicle_page():
          plt.xlabel('Jaar')
          plt.ylabel('Value')
          plt.legend()
-         col2.pyplot(fig)
+         col2.pyplot(fig7)
          
 
          toename_df = df_final[df_final["Datum"] == "2022-10-3 17:00:00"]
