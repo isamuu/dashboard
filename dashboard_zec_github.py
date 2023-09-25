@@ -790,10 +790,10 @@ def vehicle_page():
 
          
          cols = [
-           'Gem verbruik in kWh 2025', 'Gem verbruik in kWh 2030', 
-           'Gem verbruik in kWh 2035', 'Gem verbruik in kWh 2040', 
-           'Max verbruik in kWh 2025', 'Max verbruik in kWh 2030', 
-           'Max verbruik in kWh 2035', 'Max verbruik in kWh 2040'
+           'gem verbruik in kWh 2025', 'gem verbruik in kWh 2030', 
+           'gem verbruik in kWh 2035', 'gem verbruik in kWh 2040', 
+           'max verbruik in kWh 2025', 'max verbruik in kWh 2030', 
+           'max verbruik in kWh 2035', 'max verbruik in kWh 2040'
          ]
        
          toename = (
