@@ -804,8 +804,23 @@ def vehicle_page():
          toename = toename_max.merge(toename_min, left_index = True, right_index = True, suffixes = ["max", "min"])
          toename = toename.merge(toename_mean, left_index = True, right_index = True)
          toename = toename.rename(columns = {"0max":"max", "0min":"min", 0:"gem"}).reset_index()
-         toename[['Type', 'jaar']] = toename['index'].str.split(' ', expand=True)
-         toename
+         toename[['type', 'jaar']] = toename['index'].str.split('  ', expand=True)
+
+
+         # User selects the type
+         selected_type = st.selectbox('Select type', ['Gem', 'Max'])
+       
+         # Filter the DataFrame based on the selected type
+         filtered_df = df[df['type'] == selected_type]
+       
+         # Plotting
+         fig, ax = plt.subplots()
+         ax.plot(filtered_df['jaar'], filtered_df['gem'], label='Gem')
+         ax.fill_between(filtered_df['jaar'], filtered_df['min'], filtered_df['max'], alpha=0.2)
+         plt.xlabel('Jaar')
+         plt.ylabel('Value')
+         plt.legend()
+         st.pyplot(fig)
          
 
          toename_df = df_final[df_final["Datum"] == "2022-10-3 17:00:00"]
