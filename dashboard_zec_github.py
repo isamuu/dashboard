@@ -811,15 +811,15 @@ def vehicle_page():
          toename[['type', 'jaar']] = toename['index'].str.split('  ', expand=True)
          toename['jaar'] = pd.to_numeric(toename['jaar'])
          toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
-         
          toename
+         
 
          # User selects the type
          selected_type = col1.selectbox('Select type', ['gem', 'max'])
        
          # Filter the DataFrame based on the selected type
          filtered_toename = toename[toename['type'] == selected_type]
-         filtered_toename
+         
          # Plotting
          fig7, ax7 = plt.subplots()
          ax7.plot(filtered_toename['jaar'], filtered_toename['min'])
