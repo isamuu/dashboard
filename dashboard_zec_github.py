@@ -796,7 +796,7 @@ def vehicle_page():
                 'max verbruik in kWh 2030', 'max verbruik in kWh 2035',
                 'max verbruik in kWh 2040']].sum().reset_index()
          toename["Date"] = toename["Datum"].dt.date
-         #toename = toename.groupby("Date").max()
+         toename = toename.groupby("Date").max()
          #toename = toename.drop("Datum", axis = 1)
          #toename.columns = toename.columns.str.replace(r'verbruik in kWh', '')
          #toename_mean = pd.DataFrame(toename.mean())
