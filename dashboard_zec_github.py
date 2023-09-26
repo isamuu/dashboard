@@ -218,22 +218,22 @@ df.columns = df.columns.str.replace(r'voorspelling aantal elektrische ', '')
 
 # change company names
 # Extract unique company names
-unique_companies = df["bedrijf"].unique()
+#unique_companies = df["bedrijf"].unique()
 
 # Create a mapping from original company names to new anonymous names
-company_mapping = {company: f"bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
+#company_mapping = {company: f"bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
 
 # Replace the original company names with the new anonymous names
-df["bedrijf"] = df["bedrijf"].replace(company_mapping)
+#df["bedrijf"] = df["bedrijf"].replace(company_mapping)
 
 
-unique_companies = df_prob["Bedrijf"].unique()
+#unique_companies = df_prob["Bedrijf"].unique()
 
 # Create a mapping from original company names to new anonymous names
-company_mapping = {company: f"bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
+#company_mapping = {company: f"bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
 
 # Replace the original company names with the new anonymous names
-df_prob["Bedrijf"] = df_prob["Bedrijf"].replace(company_mapping)
+#df_prob["Bedrijf"] = df_prob["Bedrijf"].replace(company_mapping)
 
 def homepage():
          st.markdown(
