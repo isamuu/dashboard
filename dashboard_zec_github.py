@@ -823,7 +823,7 @@ def vehicle_page():
          # Plotting
          fig7, ax7 = plt.subplots()
          ax7.plot(filtered_toename['jaar'], filtered_toename['min'])
-         ax7.fill_between(filtered_toename['jaar'], filtered_toename['min'], filtered_toename['max'])
+         ax7.fill_between(filtered_toename['jaar'], filtered_toename['min'], filtered_toename['max'], color = "skyblue", alpha = 0.4)
          plt.xlabel('Jaar')
          plt.ylabel('Value')
          plt.legend()
