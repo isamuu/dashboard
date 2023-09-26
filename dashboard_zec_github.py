@@ -810,7 +810,7 @@ def vehicle_page():
          #toename = toename[['jaar', 'type', 'max', 'min', 'gem']]
          toename
          
-         df_prob
+         df_gebruik
          
          
 
