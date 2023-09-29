@@ -1034,7 +1034,7 @@ def company_page():
 
 
          
-         toename_df = df[df["datum"] == "2022-10-3 17:00:00"]
+         toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
          toename_df = toename_df[['bedrijf', 'Verbruik pand in kWh', 'max verbruik in kWh 2025', 'max verbruik in kWh 2030', 'max verbruik in kWh 2035', 'max verbruik in kWh 2040']] 
          toename_df = toename_df.rename(columns={'Verbruik pand in kWh':'Max verbruik in kWh 2023'})
          toename_df.columns = toename_df.columns.str.replace(r'max verbruik ', '')
@@ -1208,7 +1208,7 @@ def ffkijken():
 
 
          
-         toename_df = df[df["Datum"] == "2022-10-3 17:00:00"]
+         toename_df = df_final[df_final["Datum"] == "2022-10-3 17:00:00"]
          toename_df = toename_df[['truck max verbruik 2025 in kWh', 'bakwagen max verbruik 2025 in kWh',
                 'bestelwagen max verbruik 2025 in kWh', 'voertuigen max verbruik 2025 in kWh', 'truck max verbruik 2030 in kWh',
                 'bakwagen max verbruik 2030 in kWh', 'bestelwagen max verbruik 2030 in kWh', 'voertuigen max verbruik 2030 in kWh', 
