@@ -637,10 +637,14 @@ def bsg_page():
          uitleg2.write(df_anv_aansluiting)
          
          uitleg0.title("Voorspelling Wagenpark")
-         uitleg0.write("uitleg over bepalen overstap naar elektrisch \n\nIs bepaald adhv aanschafprijs EV goedkoper dan diesel. truck -> 2030, bakwagen -> 2035, bestelwagen -> 2040")
+         uitleg0.write("""De transitie naar elektrisch transport zal over de komende jaren plaatsvinden. 
+         De gouden en zilveren bedrijven hebben in de enquete zelf aangegeven wanneer en hoeveel voertuigen elektrisch worden. Voor bronze bedrijven
+         is er gebruik gemaakt van het ZET-kompas. Doormiddel van deze tool is het moment van overstap bepaald voor elk voertuig. De tool maakt
+         gebruik van verschillende parameters om te bepalen wanneer de overstap plaatsvind.""")
          
-         
-
+         #df_anv_voorspelling = df[["bedrijf", "kwaliteit data", "vermogen aansluiting in watt (pand)"]]
+         #uitleg2.write(df_anv_aansluiting)
+         df
 
     
 
