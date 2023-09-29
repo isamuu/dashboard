@@ -1278,7 +1278,8 @@ def company_page():
          cols[3].pyplot(fig4)
 
 
-         bedrijven_group = df_final.groupby("bedrijf").sum()[["bedrijf", "max verbruik in kWh 2025", "max verbruik in kWh 2030", "max verbruik in kWh 2035", "max verbruik in kWh 2040"]]
+         bedrijven_group = df_final[["bedrijf", "max verbruik in kWh 2025", "max verbruik in kWh 2030", "max verbruik in kWh 2035", "max verbruik in kWh 2040"]]
+         bedrijven_group = bedrijven_group.groupby("bedrijf").sum()
          bedrijven_group
          #df_final[["bedrijf", "kwaliteit data", "jaarverbruik", "max verbruik in kWh 2025", "max verbruik in kWh 2030", "max verbruik in kWh 2035", "max verbruik in kWh 2040"]]
        
