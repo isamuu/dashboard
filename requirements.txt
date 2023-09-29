@@ -3,3 +3,4 @@ plotly
 geopandas
 pydeck
 openpyxl
+seaborn
