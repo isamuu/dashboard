@@ -836,6 +836,7 @@ def vehicle_page():
          fig7, ax7 = plt.subplots()
          ax7.plot(filtered_toename['jaar'], filtered_toename['gem'])
          ax7.fill_between(filtered_toename['jaar'], filtered_toename['min'], filtered_toename['max'], color = "skyblue", alpha = 0.4)
+         ax7.axhline(y=6000 + adjustment_value, color='black', linestyle='--')
          ax7.set_ylim([0,8000])
          plt.xlabel('Jaar')
          plt.ylabel('Value')
@@ -875,7 +876,7 @@ def vehicle_page():
          # Plotting
          fig5, ax5 = plt.subplots(figsize=(6,3))
          toename_df[columns_to_display].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
-         ax5.axhline(y=8000 + adjustment_value, color='black', linestyle='--')
+         ax5.axhline(y=6000 + adjustment_value, color='black', linestyle='--')
          # Adjusting title font size
          ax5.set_title(f'Toename piek stroomnet', fontsize=6)
          
