@@ -642,9 +642,11 @@ def bsg_page():
          is er gebruik gemaakt van het ZET-kompas. Doormiddel van deze tool is het moment van overstap bepaald voor elk voertuig. De tool maakt
          gebruik van verschillende parameters om te bepalen wanneer de overstap plaatsvind.""")
          
-         #df_anv_voorspelling = df[["bedrijf", "kwaliteit data", "vermogen aansluiting in watt (pand)"]]
-         #uitleg2.write(df_anv_aansluiting)
-         df
+         df_anv_voorspelling = df[["bedrijf", "kwaliteit data", "bestelwagen 2025", "truck 2025", "bakwagen 2025", 
+                                   "bestelwagen 2030", "truck 2030", "bakwagen 2030", "bestelwagen 2035", "truck 2035", "bakwagen 2035",
+                                   "bestelwagen 2040", "truck 2040", "bakwagen 2040"]]
+         uitleg2.write(df_anv_voorspelling)
+         
 
     
 
