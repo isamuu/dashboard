@@ -1170,8 +1170,8 @@ def company_page():
          #ax5.tick_params(axis='both', which='major', labelsize=6)
          
          # Adjusting legend font size
-         #ax5.legend(fontsize=8)
-         col2.pyplot(fig5, use_container_width=True, legend = None)
+         ax5.legend().set_visible(False)
+         col2.pyplot(fig5, use_container_width=True)
          
          
 
