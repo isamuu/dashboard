@@ -1277,7 +1277,7 @@ def company_page():
          cols[2].pyplot(fig3)
          cols[3].pyplot(fig4)
     
-         df_final
+         df_final[["bedrijf", "kwaliteit data", "jaarverbruik", "max verbruik in kWh 2025", "max verbruik in kWh 2030", "max verbruik in kWh 2035", "max verbruik in kWh 2040"]]
        
        
        
