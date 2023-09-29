@@ -1284,19 +1284,19 @@ def company_page():
          bedrijven_verbruik = df_final[["bedrijf", "jaarverbruik"]]
          bedrijven_verbruik = bedrijven_verbruik.groupby("bedrijf").mean()
          bedrijven_verbruik = bedrijven_verbruik.merge(bedrijven_group, on = "bedrijf", how = "inner")
-         bedrijven_verbruik
+         #bedrijven_verbruik
          #df_final[["bedrijf", "kwaliteit data", "jaarverbruik", "max verbruik in kWh 2025", "max verbruik in kWh 2030", "max verbruik in kWh 2035", "max verbruik in kWh 2040"]]
          # Create a matrix to represent whether "jaarverbruik" is surpassed in each year
-         comparison_cols = ["max verbruik in kWh 2025", "max verbruik in kWh 2030", "max verbruik in kWh 2035", "max verbruik in kWh 2040"]
-         matrix = bedrijven_verbruik[comparison_cols].gt(bedrijven_verbruik["jaarverbruik"], axis=0)
+         #comparison_cols = ["max verbruik in kWh 2025", "max verbruik in kWh 2030", "max verbruik in kWh 2035", "max verbruik in kWh 2040"]
+         #matrix = bedrijven_verbruik[comparison_cols].gt(bedrijven_verbruik["jaarverbruik"], axis=0)
 
 # Plot the matrix
-         plt.figure(figsize=(10, 8))
-         sns.heatmap(matrix, cmap=["#00FF00", "#FF0000"], cbar=False)
-         plt.title("Matrix showing when 'jaarverbruik' gets passed")
-         plt.ylabel('bedrijf')
-         plt.xlabel('Year')
-         plt.show()
+         #plt.figure(figsize=(10, 8))
+         #sns.heatmap(matrix, cmap=["#00FF00", "#FF0000"], cbar=False)
+         #plt.title("Matrix showing when 'jaarverbruik' gets passed")
+         #plt.ylabel('bedrijf')
+         #plt.xlabel('Year')
+         #plt.show()
        
        
          
