@@ -603,8 +603,11 @@ def bsg_page():
 
 
          uitleg0.title("Jaarverbruik pand")
-         uitleg0.write("""uitleg over bepalen jaarverbruik pand 
-         \n\n is bepaald adhv gemiddelde zilver en goud, ...kwh per m2""")
+         uitleg0.write("""Om een beeld te geven van het totale stroomverbruik is het van belang om ook het verbruik van de panden op het bedrijventerrein te weten. 
+         Gouden en zilveren bedrijven hebben het jaarverbruik zelf aangeleverd. 
+         Voor de bronzen bedrijven is er a.d.h.v. openbare en eigen data een schatting gemaakt. Er is gekeken naar het aantal m2 per pand van de bronzen bedrijven.
+         Vervolgens is er a.d.h.v. de data van de zilveren en gouden bedrijven een gemiddelde bepaald per m2. Dit gemiddelde per m2 is vervolgens vermenigvuldigd 
+         met het aantal m2 van het pand van de bedrijf.""")
          df_anv_verbruik = df[["bedrijf", "kwaliteit data", "jaarverbruik"]]
          
          st.markdown("""
@@ -620,8 +623,10 @@ def bsg_page():
          uitleg0.write(df_anv_verbruik)
 
          uitleg2.title("Aansluiting pand")
-         uitleg2.write("""uitleg over aansluiting pand
-         \n\n\n\n is bepaald adhv gemiddelde zilver en goud, ...kwh per m2""")
+         uitleg2.write("""De aansluiting van het pand bepaalt hoeveel stroom een bedrijf kan gebruiken. De zilveren en gouden bedrijven hebben dit zelf ingevuld.
+         Voor de bronzen bedrijven is er a.d.h.v. openbare en eigen data een schatting gemaakt. Er is gekeken naar het aantal m2 per pand van de bronzen bedrijven.
+         Vervolgens is er a.d.h.v. de data van de zilveren en gouden bedrijven een gemiddelde bepaald per m2. Dit gemiddelde per m2 is vervolgens vermenigvuldigd 
+         met het aantal m2 van het pand van de bedrijf.""")
          df_anv_aansluiting = df[["bedrijf", "kwaliteit data", "vermogen aansluiting in watt (pand)"]]
          
          st.markdown("""
@@ -645,7 +650,7 @@ def bsg_page():
          df_anv_voorspelling = df[["bedrijf", "kwaliteit data", "bestelwagen 2025", "truck 2025", "bakwagen 2025", 
                                    "bestelwagen 2030", "truck 2030", "bakwagen 2030", "bestelwagen 2035", "truck 2035", "bakwagen 2035",
                                    "bestelwagen 2040", "truck 2040", "bakwagen 2040"]]
-         uitleg2.write(df_anv_voorspelling)
+         uitleg0.write(df_anv_voorspelling)
          
 
     
