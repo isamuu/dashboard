@@ -428,7 +428,7 @@ def bsg_page():
              </table>
              """
 
-         text3.write("Data type Tabel")
+         text3.write("Dit tabel geeft aan welke databronnen zijn geraadpleegd voor de verschillende type")
          text3.markdown(table_html, unsafe_allow_html=True)
 
          
