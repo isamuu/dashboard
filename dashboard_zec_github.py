@@ -693,11 +693,11 @@ def vehicle_page():
          year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
          
          # The user can select between maximum and average
-         value_type = col1.radio('Choose a value type', options=['max', 'gem'])
+         value_type = col1.radio('Kies voor een gemiddeld of maximaal aantal kilometers', options=['max', 'gem'])
 
          patroon_type = col1.radio('Kies een laadscenario', options=['Probability Uur Smart0', 'Probability Uur Smart1'])
 
-         adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
+         adjustment_value = col1.number_input('Kies of en hoeveel je het netwerk wil versterken', value=0.0)
 
 
          
@@ -826,7 +826,7 @@ def vehicle_page():
          
 
          # User selects the type
-         selected_type = col2.radio('Select type', ['gem', 'max'])
+         selected_type = col2.radio('Kies voor een gemiddeld of maximaal aantal kilometers', ['gem', 'max'])
        
          # Filter the DataFrame based on the selected type
          filtered_toename = toename[toename['type'] == selected_type]
