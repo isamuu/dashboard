@@ -1006,7 +1006,8 @@ def vehicle_page():
 
 
          
-         
+         lijn_grafiek = df_final[df_final["Datum"] == "2022-10-3 17:00:00"][["bedrijf", "jaarverbruik"]].sum()
+         lijn_grafiek
        
          
 
