@@ -1186,7 +1186,7 @@ def company_page():
          # Plotting
          fig5, ax5 = plt.subplots(figsize=(6,3))
          toename_df.plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
-         ax5.axhline(y=8000 + adjustment_value, color='black', linestyle='--')
+         #ax5.axhline(y=8000 + adjustment_value, color='black', linestyle='--')
          # Adjusting title font size
          ax5.set_title(f'Toename piek stroomnet', fontsize=6)
          
