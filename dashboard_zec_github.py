@@ -910,11 +910,11 @@ def vehicle_page():
          pand_usage_column = 'Verbruik pand in kWh'
          
          #### Year
-         df_yearly_vehicle = df_final.groupby(['Year', 'Month'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         df_yearly_vehicle = df_final.groupby(['Year', 'Month'])[[pand_usage_column, truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column]].sum()
          
          #### MONTH
          # Group by year, month and calculate the sum of all vehicle types
-         df_monthly_total_vehicle = df_final.groupby(['Year', 'Month'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         df_monthly_total_vehicle = df_final.groupby(['Year', 'Month'])[[pand_usage_column, truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column]].sum()
          df_monthly_total_vehicle['Total'] = df_monthly_total_vehicle.sum(axis=1)
          # Find the month with the highest total usage
          highest_month_vehicle = df_monthly_total_vehicle[df_monthly_total_vehicle['Total'] == df_monthly_total_vehicle['Total'].max()]
@@ -922,12 +922,12 @@ def vehicle_page():
          # Select data for the highest usage month
          df_highest_month_vehicle = df_final[(df_final['Year'] == highest_year_month_vehicle[0]) & (df_final['Month'] == highest_year_month_vehicle[1])]
          # Group by day and calculate the sum of the specified columns
-         df_monthly_highest_vehicle = df_highest_month_vehicle.groupby(['Day'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         df_monthly_highest_vehicle = df_highest_month_vehicle.groupby(['Day'])[[pand_usage_column, truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column]].sum()
          
          
          #### WEEK
          # Group by year, week and calculate the sum of all vehicle types
-         df_weekly_total_vehicle = df_final.groupby(['Year', 'Week'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         df_weekly_total_vehicle = df_final.groupby(['Year', 'Week'])[[pand_usage_column, truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column]].sum()
          df_weekly_total_vehicle['Total'] = df_weekly_total_vehicle.sum(axis=1)
          # Find the week with the highest total usage
          highest_week_vehicle = df_weekly_total_vehicle[df_weekly_total_vehicle['Total'] == df_weekly_total_vehicle['Total'].max()]
@@ -935,13 +935,13 @@ def vehicle_page():
          # Select data for the highest usage week
          df_highest_week_vehicle = df_final[(df_final['Year'] == highest_year_week_vehicle[0]) & (df_final['Week'] == highest_year_week_vehicle[1])]
          # Group by weekday and calculate the sum of the specified columns
-         df_weekly_highest_vehicle = df_highest_week_vehicle.groupby(['Weekday'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         df_weekly_highest_vehicle = df_highest_week_vehicle.groupby(['Weekday'])[[pand_usage_column, truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column]].sum()
          
          
          
          #### DAY
          # Group by year, month, day and calculate the sum of all vehicle types
-         df_daily_total_vehicle = df_final.groupby(['Year', 'Month', 'Day'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         df_daily_total_vehicle = df_final.groupby(['Year', 'Month', 'Day'])[[pand_usage_column, truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column]].sum()
          df_daily_total_vehicle['Total'] = df_daily_total_vehicle.sum(axis=1)
          # Find the day with the highest total usage
          highest_day_vehicle = df_daily_total_vehicle[df_daily_total_vehicle['Total'] == df_daily_total_vehicle['Total'].max()]
@@ -949,7 +949,7 @@ def vehicle_page():
          # Select data for the highest usage day
          df_highest_day_vehicle = df_final[(df_final['Year'] == highest_year_month_day_vehicle[0]) & (df_final['Month'] == highest_year_month_day_vehicle[1]) & (df_final['Day'] == highest_year_month_day_vehicle[2])]
          # Group by hour and calculate the sum of the specified columns
-         df_daily_highest_vehicle = df_highest_day_vehicle.groupby(['Hour'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
+         df_daily_highest_vehicle = df_highest_day_vehicle.groupby(['Hour'])[[pand_usage_column, truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column]].sum()
          
          
          
