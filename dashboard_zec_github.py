@@ -889,6 +889,8 @@ def vehicle_page():
          
          # Adjusting legend font size
          ax5.legend(fontsize=8)
+         handles, labels = ax5.get_legend_handles_labels()
+         ax5.legend(handles[::-1], labels[::-1], loc='upper left')
          col2.pyplot(fig5, use_container_width=True)
          
          
