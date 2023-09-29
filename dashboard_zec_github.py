@@ -1282,8 +1282,8 @@ def company_page():
          bedrijven_group = bedrijven_group.groupby("bedrijf").sum()
          bedrijven_verbruik = df_final[["bedrijf", "jaarverbruik"]]
          bedrijven_verbruik = bedrijven_verbruik.groupby("bedrijf").mean()
+         bedrijven_verbruik = bedrijven_verbruik.merge(bedrijven_group, on = "bedrijf", how = "inner")
          bedrijven_verbruik
-         bedrijven_group
          #df_final[["bedrijf", "kwaliteit data", "jaarverbruik", "max verbruik in kWh 2025", "max verbruik in kWh 2030", "max verbruik in kWh 2035", "max verbruik in kWh 2040"]]
        
        
