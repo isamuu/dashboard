@@ -1011,7 +1011,7 @@ def company_page():
          # add columns
          col1, col2 = st.columns(2)
 
-         df
+         
          
          # Place text in the left column
          col1.text("Tekst over gebruik bedrijven")  # Replace with your desired text
@@ -1154,7 +1154,11 @@ def company_page():
          toename_df.columns = toename_df.columns.str.replace(r'in kWh ', '')
          toename_df = toename_df.set_index("bedrijf").transpose()
          
-         
+
+         df_final["bedrijf", "kwaliteit data", "max verbruik in kWh 2025", "max verbruik in kWh 2030", "max verbruik in kWh 2035", "max verbruik in kWh 2040"]
+
+
+       
          # Plotting
          fig5, ax5 = plt.subplots(figsize=(6,3))
          toename_df.plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
