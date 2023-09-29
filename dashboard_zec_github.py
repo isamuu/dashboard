@@ -826,7 +826,7 @@ def vehicle_page():
          
 
          # User selects the type
-         selected_type = col1.radio('Select type', ['gem', 'max'])
+         selected_type = col2.radio('Select type', ['gem', 'max'])
        
          # Filter the DataFrame based on the selected type
          filtered_toename = toename[toename['type'] == selected_type]
