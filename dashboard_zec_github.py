@@ -846,6 +846,7 @@ def vehicle_page():
          ax7.fill_between(filtered_toename['jaar'], filtered_toename['min'], filtered_toename['max'], color = "skyblue", alpha = 0.4)
          ax7.axhline(y=6000 + adjustment_value, color='black', linestyle='--')
          ax7.set_ylim([0,8000])
+         ax7.set_title(f'Toename piek stroomnet')
          plt.xlabel('Jaar')
          plt.ylabel('Capaciteit in kW')
          plt.legend()
@@ -886,7 +887,7 @@ def vehicle_page():
          toename_df[columns_to_display].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
          ax5.axhline(y=6000 + adjustment_value, color='black', linestyle='--')
          # Adjusting title font size
-         ax5.set_title(f'Toename piek stroomnet', fontsize=6)
+         ax5.set_title(f'Toename piek stroomnet')
          
          # Adjusting axis label font sizes
          plt.xlabel('Jaar')
