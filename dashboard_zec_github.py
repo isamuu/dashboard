@@ -953,6 +953,8 @@ def vehicle_page():
          fig1, ax1 = plt.subplots()
          df_yearly_vehicle.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
          ax1.set_ylim([0, df_final.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
+         handles, labels = ax5.get_legend_handles_labels()
+         ax1.legend(handles[::-1], labels[::-1], loc='upper left')
          # cols[0].pyplot(fig1)
          
          
@@ -961,6 +963,8 @@ def vehicle_page():
          df_monthly_highest_vehicle.plot(kind='area', stacked=True, 
                             title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_vehicle[0]}-{highest_year_month_vehicle[1]})', ax=ax2)
          ax2.set_ylim([0, df_highest_week_vehicle.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
+         handles, labels = ax5.get_legend_handles_labels()
+         ax2.legend(handles[::-1], labels[::-1], loc='upper left')
          
          # cols[1].pyplot(fig2)
          
@@ -969,6 +973,8 @@ def vehicle_page():
          df_weekly_highest_vehicle.plot(kind='area', stacked=True, 
                            title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_vehicle[0]}-Week {highest_year_week_vehicle[1]})', ax=ax3)
          ax3.set_ylim([0, df_highest_week_vehicle.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
+         handles, labels = ax5.get_legend_handles_labels()
+         ax3.legend(handles[::-1], labels[::-1], loc='upper left')
 
          
          # Create the fourth chart
@@ -976,6 +982,8 @@ def vehicle_page():
          df_daily_highest_vehicle.plot(kind='area', stacked=True, 
                           title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_vehicle[0]}-{highest_year_month_day_vehicle[1]}-{highest_year_month_day_vehicle[2]})', ax=ax4)
          ax4.set_ylim([0, df_highest_day_vehicle.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
+         handles, labels = ax5.get_legend_handles_labels()
+         ax4.legend(handles[::-1], labels[::-1], loc='upper left')
 
 
          if show_line:
