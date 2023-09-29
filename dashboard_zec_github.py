@@ -1188,8 +1188,8 @@ def company_page():
          toename_df.plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
          #ax5.axhline(y=8000 + adjustment_value, color='black', linestyle='--')
          # Adjusting title font size
-         ax7.set_ylim([0,8000])
-         ax7.set_title(f'Toename piek stroomnet')
+         ax5.set_ylim([0,8000])
+         ax5.set_title(f'Toename piek stroomnet')
          plt.xlabel('Jaar')
          plt.ylabel('Capaciteit in kW')
          
