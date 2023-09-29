@@ -184,18 +184,25 @@ mask = df['Kwaliteit data'] == 'Brons'
 
 # bakwagen vanf 2033 goedkoper -> 2035
 # Copy values from "Aantal bakwagen" to "Voorspelling aantal elektrische bakwagen 2035"
+df.loc[mask, 'Voorspelling aantal elektrische bakwagen 2025'] = df.loc[mask, 'Aantal bakwagen']*0.143
+df.loc[mask, 'Voorspelling aantal elektrische bakwagen 2030'] = df.loc[mask, 'Aantal bakwagen']*0.857
 df.loc[mask, 'Voorspelling aantal elektrische bakwagen 2035'] = df.loc[mask, 'Aantal bakwagen']
 df.loc[mask, 'Voorspelling aantal elektrische bakwagen 2040'] = df.loc[mask, 'Aantal bakwagen']
 
 # trucks vanaf 2032 goedkoper -> 2030
 # Copy values from "Aantal truck" to "Voorspelling aantal elektrische truck 2030"
-df.loc[mask, 'Voorspelling aantal elektrische truck 2030'] = df.loc[mask, 'Aantal truck']
+df.loc[mask, 'Voorspelling aantal elektrische truck 2025'] = df.loc[mask, 'Aantal truck']*0
+df.loc[mask, 'Voorspelling aantal elektrische truck 2030'] = df.loc[mask, 'Aantal truck']*0.8
 df.loc[mask, 'Voorspelling aantal elektrische truck 2035'] = df.loc[mask, 'Aantal truck']
 df.loc[mask, 'Voorspelling aantal elektrische truck 2040'] = df.loc[mask, 'Aantal truck']
 
 # bestelwagen van 2040 goedkoper -> 2040
 # Copy values from "Aantal bestelwagen" to "Voorspelling aantal elektrische bestelwagen 2040"
+df.loc[mask, 'Voorspelling aantal elektrische bestelwagen 2025'] = df.loc[mask, 'Aantal bestelwagen']*0.143
+df.loc[mask, 'Voorspelling aantal elektrische bestelwagen 2030'] = df.loc[mask, 'Aantal bestelwagen']*0.857
+df.loc[mask, 'Voorspelling aantal elektrische bestelwagen 2035'] = df.loc[mask, 'Aantal bestelwagen']
 df.loc[mask, 'Voorspelling aantal elektrische bestelwagen 2040'] = df.loc[mask, 'Aantal bestelwagen']
+
 
 #######################################
 #######################################
