@@ -834,7 +834,7 @@ def vehicle_page():
          
 
          # User selects the type
-         selected_type = col2.radio('Kies voor een gemiddeld of maximaal aantal kilometers', ['max', 'gem'])
+         selected_type = col2.radio('Kies voor een gemiddeld of maximaal aantal kilometers', ['gem', 'max'])
        
          # Filter the DataFrame based on the selected type
          filtered_toename = toename[toename['type'] == selected_type]
