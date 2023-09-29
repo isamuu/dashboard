@@ -1160,18 +1160,18 @@ def company_page():
          toename_df.plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
          ax5.axhline(y=8000 + adjustment_value, color='black', linestyle='--')
          # Adjusting title font size
-         #ax5.set_title(f'Toename piek stroomnet', fontsize=6)
+         ax5.set_title(f'Toename piek stroomnet', fontsize=6)
          
          # Adjusting axis label font sizes
-         #ax5.set_xlabel('Year', fontsize=6)
-         #ax5.set_ylabel('Value', fontsize=6)
+         ax5.set_xlabel('Year', fontsize=6)
+         ax5.set_ylabel('Value', fontsize=6)
          
          # Adjusting tick font sizes
          #ax5.tick_params(axis='both', which='major', labelsize=6)
          
          # Adjusting legend font size
          #ax5.legend(fontsize=8)
-         col2.pyplot(fig5, use_container_width=True)
+         col2.pyplot(fig5, use_container_width=True, legend = None)
          
          
 
