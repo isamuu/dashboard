@@ -1292,7 +1292,7 @@ def company_page():
 
 # Plot the matrix
          plt.figure(figsize=(10, 8))
-         sns.heatmap(matrix, cmap=["#00FF00", "#FF0000"], cbar=False, yticklabels=bedrijven_verbruik["bedrijf"], xticklabels=comparison_cols)
+         sns.heatmap(matrix, cmap=["#00FF00", "#FF0000"], cbar=False)
          plt.title("Matrix showing when 'jaarverbruik' gets passed")
          plt.ylabel('bedrijf')
          plt.xlabel('Year')
