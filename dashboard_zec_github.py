@@ -1177,17 +1177,17 @@ def company_page():
 
          
          #### Year
-         df_yearly_company = df.groupby(['Year', 'Month', 'bedrijf'])[usage_column].sum().unstack()
+         df_yearly_company = df_final.groupby(['Year', 'Month', 'bedrijf'])[usage_column].sum().unstack()
          
          #### MONTH
          # Group by year, month and calculate the sum of 'Max verbruik in kWh 2040' for all companies
-         df_monthly_total_company = df.groupby(['Year', 'Month'])[usage_column].sum()
+         df_monthly_total_company = df_final.groupby(['Year', 'Month'])[usage_column].sum()
          
          # Find the month with the highest total usage
          highest_month_company = df_monthly_total_company.idxmax()
          
          # Select data for the highest usage month
-         df_highest_month_company = df[(df['Year'] == highest_month_company[0]) & (df['Month'] == highest_month_company[1])]
+         df_highest_month_company = df_final[(df_final['Year'] == highest_month_company[0]) & (df_final['Month'] == highest_month_company[1])]
          
          # Group by day and 'Bedrijf', and calculate the sum of 'Max verbruik in kWh 2040'
          df_monthly_highest_company = df_highest_month_company.groupby(['Day', 'Bedrijf'])[usage_column].sum().unstack()
@@ -1195,13 +1195,13 @@ def company_page():
          
          #### WEEK
          # Group by year, week and calculate the sum of 'Max verbruik in kWh 2040' for all companies
-         df_weekly_total_company = df.groupby(['Year', 'Week'])[usage_column].sum()
+         df_weekly_total_company = df_final.groupby(['Year', 'Week'])[usage_column].sum()
          
          # Find the week with the highest total usage
          highest_week_company = df_weekly_total_company.idxmax()
          
          # Select data for the highest usage week
-         df_highest_week_company = df[(df['Year'] == highest_week_company[0]) & (df['Week'] == highest_week_company[1])]
+         df_highest_week_company = df_final[(df_final['Year'] == highest_week_company[0]) & (df_final['Week'] == highest_week_company[1])]
          
          # Group by weekday and 'Bedrijf', and calculate the sum of 'Max verbruik in kWh 2040'
          df_weekly_highest_company = df_highest_week_company.groupby(['Weekday', 'Bedrijf'])[usage_column].sum().unstack()
@@ -1210,13 +1210,13 @@ def company_page():
          
          #### DAY
         # Group by year, month, day and calculate the sum of 'Max verbruik in kWh 2040' for all companies
-         df_daily_total_company = df.groupby(['Year', 'Month', 'Day'])[usage_column].sum()
+         df_daily_total_company = df_final.groupby(['Year', 'Month', 'Day'])[usage_column].sum()
          
          # Find the day with the highest total usage
          highest_day_company = df_daily_total_company.idxmax()
          
          # Select data for the highest usage day
-         df_highest_day_company = df[(df['Year'] == highest_day_company[0]) & (df['Month'] == highest_day_company[1]) & (df['Day'] == highest_day_company[2])]
+         df_highest_day_company = df_final[(df_final['Year'] == highest_day_company[0]) & (df_final['Month'] == highest_day_company[1]) & (df_final['Day'] == highest_day_company[2])]
          
          # Group by hour and 'Bedrijf', and calculate the sum of 'Max verbruik in kWh 2040'
          df_daily_highest_company = df_highest_day_company.groupby(['Hour', 'Bedrijf'])[usage_column].sum().unstack()
@@ -1231,7 +1231,7 @@ def company_page():
          # Create the first chart
          fig1, ax1 = plt.subplots()
          df_yearly_company.plot(kind='area', stacked=True, title='Yearly Electricity Usage per Company', ax=ax1)
-         ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
+         ax1.set_ylim([0, df_final.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
          ax1.legend().set_visible(False)
          # cols[0].pyplot(fig1)
          
