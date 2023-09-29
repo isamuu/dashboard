@@ -847,7 +847,7 @@ def vehicle_page():
          ax7.axhline(y=6000 + adjustment_value, color='black', linestyle='--')
          ax7.set_ylim([0,8000])
          plt.xlabel('Jaar')
-         plt.ylabel('Value')
+         plt.ylabel('Capaciteit in kW')
          plt.legend()
          col2.pyplot(fig7)
          
@@ -889,8 +889,8 @@ def vehicle_page():
          ax5.set_title(f'Toename piek stroomnet', fontsize=6)
          
          # Adjusting axis label font sizes
-         ax5.set_xlabel('Year', fontsize=6)
-         ax5.set_ylabel('Value', fontsize=6)
+         plt.xlabel('Jaar')
+         plt.ylabel('Capaciteit in kW')
          ax5.set_ylim([0,8000])
          
          # Adjusting tick font sizes
