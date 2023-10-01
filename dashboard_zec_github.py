@@ -11,11 +11,11 @@ import random
 import shapely
 import seaborn as sns
 
-
+#maak pagina breed
 st.set_page_config(layout="wide")
 
-# Load the geopackage file
-#df = pd.read_csv("test_df_bt.csv")
+#Inladen
+
 df_prob = pd.read_csv("df_prob_smart.csv", index_col = 0)
 
 df = pd.read_excel("Data/Data Sander.xlsx")
@@ -224,24 +224,6 @@ df.columns = df.columns.str.replace(r'voorspelling aantal elektrische ', '')
 
 
 
-# change company names
-# Extract unique company names
-#unique_companies = df["bedrijf"].unique()
-
-# Create a mapping from original company names to new anonymous names
-#company_mapping = {company: f"bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
-
-# Replace the original company names with the new anonymous names
-#df["bedrijf"] = df["bedrijf"].replace(company_mapping)
-
-
-#unique_companies = df_prob["Bedrijf"].unique()
-
-# Create a mapping from original company names to new anonymous names
-#company_mapping = {company: f"bedrijf {chr(i+65)}" for i, company in enumerate(unique_companies)}
-
-# Replace the original company names with the new anonymous names
-#df_prob["Bedrijf"] = df_prob["Bedrijf"].replace(company_mapping)
 
 def homepage():
          st.markdown(
@@ -270,9 +252,6 @@ def homepage():
     
 
 
-
-    # Render the map
-         #col2.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=initial_view_state, map_style="mapbox://styles/mapbox/light-v9"))
 
 
     
@@ -313,10 +292,11 @@ def homepage():
          col2.pydeck_chart(map)
 
 
-         # Insights
-
-         cols = st.columns(4)
          
+         #kolommen maken voor pagina
+         cols = st.columns(4)
+
+         #afbeeldingen en getallen voertuigen toevegen
          icon_bakwagen = "https://raw.githubusercontent.com/isamuu/dashboard/main/Icons%20dashboard/db%20bakwagen.jpg"
          aantal_bakwagen = int(df["aantal bakwagen"].sum())
          icon_bakwagen_html = f'''<img src="{icon_bakwagen}" width="150" style="display: block; margin: auto;">'
@@ -367,7 +347,7 @@ def bsg_page():
                       unsafe_allow_html=True)
          st.markdown("<h1 style='text-align: center'>Brons, Zilver of Goud</h1>", unsafe_allow_html=True)
 
-         
+         # kolommen maken
          text1, text2, text3 = st.columns([0.45,0.1,0.45])
 
          text1.write(""" \n\n\n\nOm inzicht te geven in de toekomstige energiegebruik van het bedrijventerrein is het van belang om te weten 
@@ -383,7 +363,7 @@ def bsg_page():
          de data vandaan komt en hoe deze gebruikt is. De tabel recht geeft dit weer.
          \n\n\n\n""")
 
-
+         #tabel maken
          table_html = """
              <style>
                  table {
@@ -546,7 +526,7 @@ def bsg_page():
          
 
 
-         # Create a dataframe
+         # grafiek goud zilver brons percentage
          df_voertuigen = df[['kwaliteit data', 'aantal truck', 'aantal bakwagen', 'aantal bestelwagen']]
          df_voertuigen = df_voertuigen.groupby(by = "kwaliteit data").sum()
          df_voertuigen["aantal"] = df_voertuigen['aantal truck'] + df_voertuigen['aantal bakwagen'] + df_voertuigen['aantal bestelwagen']
@@ -1306,217 +1286,10 @@ def company_page():
          bedrijven_verbruik = df_final[["bedrijf", "jaarverbruik"]]
          bedrijven_verbruik = bedrijven_verbruik.groupby("bedrijf").mean()
          bedrijven_verbruik = bedrijven_verbruik.merge(bedrijven_group, on = "bedrijf", how = "inner")
-         #bedrijven_verbruik
-         #df_final[["bedrijf", "kwaliteit data", "jaarverbruik", "max verbruik in kWh 2025", "max verbruik in kWh 2030", "max verbruik in kWh 2035", "max verbruik in kWh 2040"]]
-         # Create a matrix to represent whether "jaarverbruik" is surpassed in each year
-         #comparison_cols = ["max verbruik in kWh 2025", "max verbruik in kWh 2030", "max verbruik in kWh 2035", "max verbruik in kWh 2040"]
-         #matrix = bedrijven_verbruik[comparison_cols].gt(bedrijven_verbruik["jaarverbruik"], axis=0)
-
-# Plot the matrix
-         #plt.figure(figsize=(10, 8))
-         #sns.heatmap(matrix, cmap=["#00FF00", "#FF0000"], cbar=False)
-         #plt.title("Matrix showing when 'jaarverbruik' gets passed")
-         #plt.ylabel('bedrijf')
-         #plt.xlabel('Year')
-         #plt.show()
+         
        
        
-         
-
-def ffkijken():
-         # Title
-         st.markdown(
-                      """
-                      <style>
-                          .reportview-container .markdown-text-container {
-                              text-align: center;
-                          }
-                      </style>
-                      """,
-                      unsafe_allow_html=True)
-         st.markdown("<h1 style='text-align: center'>Voertuigen en pand</h1>", unsafe_allow_html=True)
-
-         # add columns
-         col1, col2 = st.columns(2)
-
-         # Place text in the left column
-         col1.text(""" aaDit dashboard geeft inzicht over het gebruik van elektriciteit op het bedrijventerrein Schiphol Trade Park. 
-         Met de transitie naar elektrische voertuigen zal er meer gevraagd worden van het netwerk. 
-         Door de ontwikkeling van de bedrijven en hun wagenpark in kaart te brengen kan er voorspeld worden hoe de stroomvraag zich ontwikkeld.
-         
-         \n\n Terwijl de wereld zich richt op duurzame energie, wordt de overstap naar elektrische voertuigen op bedrijventerreinen een groot en complex vraagstuk. 
-         Het is algemeen bekend dat de elektriciteitsinfrastructuur in Nederland op sommige locaties al tegen zijn uiterste loopt.
-         De transitie naar eleketrisch transport zal nog meer druk zetten op onze infrastructuur, zo ook op het bedrijventerrein Schiphol Trade Park.
-         Dit betekent dat we geconfronteerd worden met een complexe puzzel die op de juiste manier moet worden aangepakt. 
-         Dit dashboard biedt inzichten in de huidige situatie, uitdagingen en kansen binnen op het Schiphol Trade Park.""")  # Replace with your desired text
-
-         # capacity line
-         show_line = col1.checkbox('Capaciteit netwerk')
-         
-         # The user can select a year
-         year = col1.selectbox('Select a year', options=[2025, 2030, 2035, 2040])
-         
-         # The user can select between maximum and average
-         value_type = col1.radio('Choose a value type', options=['max', 'gem'])
-
-         adjustment_value = col1.number_input('upgrade netwerk', value=0.0)
-         
-
-
-
-         
-         toename_df = df_final[df_final["Datum"] == "2022-10-3 17:00:00"]
-         toename_df = toename_df[['truck max verbruik 2025 in kWh', 'bakwagen max verbruik 2025 in kWh',
-                'bestelwagen max verbruik 2025 in kWh', 'voertuigen max verbruik 2025 in kWh', 'truck max verbruik 2030 in kWh',
-                'bakwagen max verbruik 2030 in kWh', 'bestelwagen max verbruik 2030 in kWh', 'voertuigen max verbruik 2030 in kWh', 
-                'truck max verbruik 2035 in kWh', 'bakwagen max verbruik 2035 in kWh', 'bestelwagen max verbruik 2035 in kWh',
-                'voertuigen max verbruik 2035 in kWh', 'truck max verbruik 2040 in kWh', 'bakwagen max verbruik 2040 in kWh',
-                'bestelwagen max verbruik 2040 in kWh', 'voertuigen max verbruik 2040 in kWh']] 
-         toename_df.columns = toename_df.columns.str.replace(r'max verbruik ', '')
-         toename_df.columns = toename_df.columns.str.replace(r' in kWh', '')
-         toename_df = pd.DataFrame(toename_df.sum()).reset_index().rename(columns = {"index":"type_year", 0:"value"})
-         
-         # Split the 'type_year' column into 'type' and 'year'
-         toename_df[['type', 'year']] = toename_df['type_year'].str.split(' ', expand=True)
-         
-         # Pivot the DataFrame to the desired shape
-         toename_df = toename_df.pivot(index='year', columns='type', values='value').reset_index()
-         toename_df["pand"] = df[df["Datum"] == "2022-10-3 17:00:00"]['Verbruik pand in kWh'].sum()
-         toename_df.loc[4] = [2023,0,0,0,0,4257.813287]
-         toename_df['year'] = toename_df['year'].astype(int)
-         toename_df = toename_df.sort_values(by = 'year')
-         toename_df = toename_df.set_index('year')[['pand','truck','bakwagen', 'bestelwagen', 'voertuigen']]
-
-         option = col2.radio('Weergave plot', ['Wagenpark', 'Per voertuig'])
-         
-         if option == 'Wagenpark':
-             columns_to_display = ['pand', 'voertuigen']
-         else:
-             columns_to_display = ['pand', 'truck', 'bakwagen', 'bestelwagen']
-         
-         # Plotting
-         fig5, ax5 = plt.subplots(figsize=(6,3))
-         toename_df[columns_to_display].plot(kind='area', stacked=True, title=f'Toename piek stroomnet', ax=ax5)
-         ax5.axhline(y=8000 + adjustment_value, color='black', linestyle='--')
-         # Adjusting title font size
-         ax5.set_title(f'Toename piek stroomnet', fontsize=6)
-         
-         # Adjusting axis label font sizes
-         ax5.set_xlabel('Year', fontsize=6)
-         ax5.set_ylabel('Value', fontsize=6)
-         
-         # Adjusting tick font sizes
-         ax5.tick_params(axis='both', which='major', labelsize=6)
-         
-         # Adjusting legend font size
-         ax5.legend(fontsize=8)
-         col2.pyplot(fig5, use_container_width=True)
-         
-         
-         # Based on the user's selections, choose the appropriate columns
-         truck_usage_column = f'truck {value_type} verbruik {year} in kWh'
-         bakwagen_usage_column = f'bakwagen {value_type} verbruik {year} in kWh'
-         bestelwagen_usage_column = f'bestelwagen {value_type} verbruik {year} in kWh'
-         pand_usage_column = 'Verbruik pand in kWh'
-         
-         #### Year
-         df_yearly_vehicle = df.groupby(['Year', 'Month'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-         
-         #### MONTH
-         # Group by year, month and calculate the sum of all vehicle types
-         df_monthly_total_vehicle = df.groupby(['Year', 'Month'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-         df_monthly_total_vehicle['Total'] = df_monthly_total_vehicle.sum(axis=1)
-         
-         # Find the month with the highest total usage
-         highest_month_vehicle = df_monthly_total_vehicle[df_monthly_total_vehicle['Total'] == df_monthly_total_vehicle['Total'].max()]
-         highest_year_month_vehicle = highest_month_vehicle[['Total']].idxmax()[0]
-         
-         # Select data for the highest usage month
-         df_highest_month_vehicle = df[(df['Year'] == highest_year_month_vehicle[0]) & (df['Month'] == highest_year_month_vehicle[1])]
-         
-         # Group by day and calculate the sum of the specified columns
-         df_monthly_highest_vehicle = df_highest_month_vehicle.groupby(['Day'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-         
-         
-         #### WEEK
-         # Group by year, week and calculate the sum of all vehicle types
-         df_weekly_total_vehicle = df.groupby(['Year', 'Week'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-         df_weekly_total_vehicle['Total'] = df_weekly_total_vehicle.sum(axis=1)
-         
-         # Find the week with the highest total usage
-         highest_week_vehicle = df_weekly_total_vehicle[df_weekly_total_vehicle['Total'] == df_weekly_total_vehicle['Total'].max()]
-         highest_year_week_vehicle = highest_week_vehicle[['Total']].idxmax()[0]
-         
-         # Select data for the highest usage week
-         df_highest_week_vehicle = df[(df['Year'] == highest_year_week_vehicle[0]) & (df['Week'] == highest_year_week_vehicle[1])]
-         
-         # Group by weekday and calculate the sum of the specified columns
-         df_weekly_highest_vehicle = df_highest_week_vehicle.groupby(['Weekday'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-         
-         
-         
-         #### DAY
-         # Group by year, month, day and calculate the sum of all vehicle types
-         df_daily_total_vehicle = df.groupby(['Year', 'Month', 'Day'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-         df_daily_total_vehicle['Total'] = df_daily_total_vehicle.sum(axis=1)
-         
-         # Find the day with the highest total usage
-         highest_day_vehicle = df_daily_total_vehicle[df_daily_total_vehicle['Total'] == df_daily_total_vehicle['Total'].max()]
-         highest_year_month_day_vehicle = highest_day_vehicle[['Total']].idxmax()[0]
-         
-         # Select data for the highest usage day
-         df_highest_day_vehicle = df[(df['Year'] == highest_year_month_day_vehicle[0]) & (df['Month'] == highest_year_month_day_vehicle[1]) & (df['Day'] == highest_year_month_day_vehicle[2])]
-         
-         # Group by hour and calculate the sum of the specified columns
-         df_daily_highest_vehicle = df_highest_day_vehicle.groupby(['Hour'])[[truck_usage_column, bakwagen_usage_column, bestelwagen_usage_column, pand_usage_column]].sum()
-         
-         
-         
-         #### PLOT
-         # Create a 1x4 layout
-         cols = st.columns(4)
-         
-         
-         # Create the first chart
-         fig1, ax1 = plt.subplots()
-         df_yearly_vehicle.plot(kind='area', stacked=True, title='Yearly Electricity Usage', ax=ax1)
-         ax1.set_ylim([0, df.groupby(['Year', 'Month'])["max verbruik in kWh 2040"].sum().max()])
-         # cols[0].pyplot(fig1)
-         
-         
-         # Create the second chart
-         fig2, ax2 = plt.subplots()
-         df_monthly_highest_vehicle.plot(kind='area', stacked=True, 
-                            title=f'Monthly Electricity Usage (Highest Usage Month: {highest_year_month_vehicle[0]}-{highest_year_month_vehicle[1]})', ax=ax2)
-         ax2.set_ylim([0, df_highest_week_vehicle.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
-         
-         # cols[1].pyplot(fig2)
-         
-         # Create the third chart
-         fig3, ax3 = plt.subplots()
-         df_weekly_highest_vehicle.plot(kind='area', stacked=True, 
-                           title=f'Weekly Electricity Usage (Highest Usage Week: {highest_year_week_vehicle[0]}-Week {highest_year_week_vehicle[1]})', ax=ax3)
-         ax3.set_ylim([0, df_highest_week_vehicle.groupby('Weekday')["max verbruik in kWh 2040"].sum().max()])
-
-         
-         # Create the fourth chart
-         fig4, ax4 = plt.subplots()
-         df_daily_highest_vehicle.plot(kind='area', stacked=True, 
-                          title=f'Daily Electricity Usage (Highest Usage Day: {highest_year_month_day_vehicle[0]}-{highest_year_month_day_vehicle[1]}-{highest_year_month_day_vehicle[2]})', ax=ax4)
-         ax4.set_ylim([0, df_highest_day_vehicle.groupby('Hour')["max verbruik in kWh 2040"].sum().max()])
-
-
-         if show_line:
-                  ax1.axhline(y=1500000 + adjustment_value, color='black', linestyle='--')
-                  ax2.axhline(y=50000 + adjustment_value, color='black', linestyle='--')
-                  ax3.axhline(y=40000 + adjustment_value, color='black', linestyle='--')
-                  ax4.axhline(y=7500 + adjustment_value, color='black', linestyle='--')
-
-         # Display the plots
-         cols[0].pyplot(fig1)
-         cols[1].pyplot(fig2)
-         cols[2].pyplot(fig3)
-         cols[3].pyplot(fig4)         
+             
 
 def main():
          page = st.sidebar.selectbox('Navigation', options=['Homepage', '1. Waar is de data op gebaseerd?', '2. Wat gebruikt wat?', '3. Wie gebruikt wat?'])
@@ -1529,8 +1302,6 @@ def main():
                   vehicle_page()
          elif page == '3. Wie gebruikt wat?':
                   company_page()
-         elif page == 'wat gebruikt wat? das2':
-                  ffkijken()
         
 if __name__ == "__main__":
          main()
